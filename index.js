@@ -1,6 +1,8 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
 
 const pasteRouter = require('./paste/routes');
 const rootRouter = require('./root/routes');
@@ -12,8 +14,9 @@ const app = express();
 app.disable('etag');
 
 // For JSON payloads
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({limit:'10mb'}));
+app.use(express.urlencoded({ extended: true , limit: '10mb' }));
+
 app.use(cors());
 
 // Serving static files from /paste/public
