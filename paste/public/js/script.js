@@ -1,5 +1,5 @@
-const POST_API_ENDPOINT = 'http://sunamra.in/paste/api/v1/post';
-const GET_API_ENDPOINT = 'http://sunamra.in/paste/api/v1/get';
+const POST_API_ENDPOINT = 'https://sunamra.in/paste/api/v1/post';
+const GET_API_ENDPOINT = 'https://sunamra.in/paste/api/v1/get';
 
 const toast = new ZephyrToast();
 
