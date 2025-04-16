@@ -8,6 +8,8 @@ chalk.level = 1;
 // Not returning in JSON
 const getAllFiles = async (baseDir, res, userAgent) => {
 	try {
+		const isConsole = /curl|http|python|ruby|perl/i.test(userAgent);
+		const isBrowser = /chrome|firefox|safari|edge|opera|msie|trident/i.test(userAgent);
 
 		// Explicitly setting content-type
 		res.type('text');
@@ -15,12 +17,14 @@ const getAllFiles = async (baseDir, res, userAgent) => {
 		const files = await fs.readdir(baseDir, 'utf-8');
 
 		if (files.length === 0) {
-			return res.status(200).send(chalk.yellowBright("Currently no file exists!"));
+			return res.status(200).send(
+				isConsole ?
+					chalk.yellowBright("Currently no file exists!") :
+					"Currently no file exists!"
+			);
 		}
 
 		let result = '\n';
-		const isConsole = /curl|http|python|ruby|perl/i.test(userAgent);
-		const isBrowser = /chrome|firefox|safari|edge|opera|msie|trident/i.test(userAgent);
 
 		for (const file of files) {
 			try {
