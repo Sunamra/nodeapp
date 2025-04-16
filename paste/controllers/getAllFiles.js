@@ -15,7 +15,7 @@ const getAllFiles = async (baseDir, res, userAgent) => {
 		const files = await fs.readdir(baseDir, 'utf-8');
 
 		if (files.length === 0) {
-			return res.status(200).send("No files exist");
+			return res.status(200).send(chalk.yellowBright("Currently no file exists!"));
 		}
 
 		let result = '\n';
