@@ -9,6 +9,7 @@ const rootRouter = require('./root/routes');
 
 const port = 3000;
 const app = express();
+app.use(cors());
 
 // Disable headers
 app.disable('etag');
@@ -16,10 +17,9 @@ app.disable('etag');
 // For JSON payloads
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
-app.use(express.json({limit:'10mb'}));
-app.use(express.urlencoded({ extended: true , limit: '10mb' }));
+app.use(express.json());
+app.use(express.urlencoded());
 
-app.use(cors());
 
 // Serving static files from /paste/public
 app.use('/paste', express.static(path.join(__dirname, './paste/public/')));
