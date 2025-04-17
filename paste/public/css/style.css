@@ -15,9 +15,8 @@ body {
 }
 
 .main {
-	height: 100vh;
+	height: 100%;
 	flex-direction: column;
-	margin-bottom: 10px;
 }
 
 .switchDiv {
