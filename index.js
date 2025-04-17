@@ -38,3 +38,9 @@ app.use((req, res) => {
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
 });
+
+/**
+ * 		@TODO
+ *   1. Add demo paths for /
+ *   2. Create controller functions for /
+ */
