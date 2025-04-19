@@ -4,7 +4,7 @@ const getFile = require('../controllers/getFile.js')
 
 const router = express.Router();
 
-router.route('/api/v1/post').post(saveToFile);
-router.route('/api/v1/get/:id').get(getFile);
+router.route('/api/v1').post(saveToFile);
+router.route('/api/v1/:id').get(getFile);
 
 module.exports = router;

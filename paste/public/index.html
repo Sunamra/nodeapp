@@ -11,9 +11,9 @@
 	<link rel="stylesheet" href="./ui/zephyr-toast.css">
 	<link rel="stylesheet" href="./ui/zephyr-toast-animate.css">
 
+	<!-- Font Awesome CDN -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-		integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
+		crossorigin="anonymous" />
 
 	<title>Paste</title>
 </head>
@@ -21,18 +21,18 @@
 <body>
 	<div class="main">
 		<div class="switchDiv">
-			<label id="switchText1" class="switchText">Receive</label>
+			<div id="switchText1" class="switchText">Receive</div>
 
-			<label id="switchText2" class="switchText">Send</label>
+			<div id="switchText2" class="switchText">Send</div>
 		</div>
 		<form id="myForm">
 			<div id="codeDiv" class="codeAreaDiv">
-				<label for="codearea" id="codeAreaLabel">Enter code:</label>
-				<textarea id="codearea" rows="1" cols="6" maxlength="3" minlength="3"></textarea>
+				<label for="codeareaFetch" id="codeAreaLabel">Enter code:</label>
+				<textarea id="codeareaFetch" rows="1" cols="6" maxlength="3" minlength="3"></textarea>
 			</div>
-			<label for="textarea" id="textAreaLabel" style="display: none;">Enter text:</label>
-			<textarea id="textarea" rows="10" cols="50"></textarea>
-			<textarea id="textarea2" rows="10" cols="50" style="display: none;"></textarea>
+			<label for="textareaSend" id="textAreaLabel" style="display: none;">Enter text:</label>
+			<textarea id="textareaFetch" rows="10" cols="50"></textarea>
+			<textarea id="textareaSend" rows="10" cols="50" style="display: none;"></textarea>
 			<div class="actionButtons">
 				<h3 id="lastCode"></h3>
 				<button id="resetButton" type="reset">

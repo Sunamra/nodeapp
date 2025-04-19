@@ -1,10 +1,9 @@
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 
-const pasteRouter = require('./paste/routes');
 const rootRouter = require('./root/routes');
+const pasteRouter = require('./paste/routes');
 
 const port = 3000;
 const app = express();
@@ -14,11 +13,8 @@ app.use(cors());
 app.disable('etag');
 
 // For JSON payloads
-app.use(bodyParser.json({ limit: '10mb' }));
-app.use(bodyParser.urlencoded({ extended: true, limit: '10mb' }));
-app.use(express.json());
-app.use(express.urlencoded());
-
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Serving static files from /paste/public
 app.use('/paste', express.static(path.join(__dirname, './paste/public/')));

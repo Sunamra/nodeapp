@@ -1,7 +1,7 @@
 // Script for additional event listeners
 
 // Only allow numbers in this textarea
-document.getElementById("codearea").addEventListener("input", function () {
+document.getElementById("codeareaFetch").addEventListener("input", function () {
 	this.value = this.value.replace(/[^0-9]/g, '');
 });
 
@@ -11,20 +11,19 @@ document.getElementById("copyButton").addEventListener("click", function () {
 	if (window.RECEIVE) {
 		// For mobile copy
 		if (window.MOBILE) {
-			const textarea = document.getElementById("textarea");
-			if (!textarea.value) {
+			const textareaFetch = document.getElementById("textareaFetch");
+			if (!textareaFetch.value) {
 				toast.warning("Nothing to copy", { duration: 1000 });
 				return;
 			}
-			textarea.select();
-			textarea.setSelectionRange(0, 999999);
+			textareaFetch.select();
 			document.execCommand("copy");
 			toast.info("Copied to clipboard");
 		}
 
 		// For desktop copy
 		if (window.DESKTOP) {
-			const text = document.getElementById("textarea").value;
+			const text = document.getElementById("textareaFetch").value;
 
 			if (!text) {
 				toast.warning("Nothing to copy", { duration: 1000 });
@@ -47,13 +46,13 @@ document.getElementById("copyButton").addEventListener("click", function () {
 
 				const text = await navigator.clipboard.readText();
 				if (!text) {
-					toast.warning("Clipboard is empty 1");
+					toast.warning("Clipboard is empty");
 					return;
 				}
-				document.getElementById("textarea2").value = text;
+				document.getElementById("textareaSend").value += text;
 			} catch (err) {
 				console.error("Failed to read clipboard contents: ", err);
-				toast.warning("Clipboard is empty 2");
+				toast.error(err.message || "Clipboard is empty");
 			}
 		})();
 	}
@@ -64,19 +63,19 @@ document.getElementById("copyButton").addEventListener("click", function () {
 let rotation = 0;
 document.getElementById("resetButton").addEventListener("click", function (e) {
 
-	const codearea = document.getElementById("codearea");
-	const textarea = document.getElementById("textarea");
-	const textarea2 = document.getElementById("textarea2");
+	const fetchCodearea = document.getElementById("codeareaFetch");
+	const textareaFetch = document.getElementById("textareaFetch");
+	const textareaSend = document.getElementById("textareaSend");
 
 	// Textarea clear
 	e.preventDefault();
 	if (window.RECEIVE) {
-		textarea.value = codearea.value = '';
-		codearea.focus();
+		textareaFetch.value = fetchCodearea.value = '';
+		fetchCodearea.focus();
 	}
 	if (window.SEND) {
-		textarea2.value = '';
-		textarea2.focus();
+		textareaSend.value = '';
+		textareaSend.focus();
 	}
 
 	// Animation

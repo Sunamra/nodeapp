@@ -17,8 +17,8 @@ if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
 
 const text1 = document.getElementById('switchText1');
 const text2 = document.getElementById('switchText2');
-const textarea = document.getElementById('textarea');
-const textarea2 = document.getElementById('textarea2');
+const textareaFetch = document.getElementById('textareaFetch');
+const textareaSend = document.getElementById('textareaSend');
 const codeDiv = document.getElementById('codeDiv');
 const textAreaLabel = document.getElementById('textAreaLabel');
 const submitButton = document.getElementById('submitButton');
@@ -33,17 +33,16 @@ const receiveUI = () => {
 
 	codeDiv.style.display = '';
 	textAreaLabel.style.display = 'none';
-	document.getElementById("codearea").focus();
+	document.getElementById("codeareaFetch").focus();
 	copyButton.textContent = 'Copy';
 	submitButton.textContent = 'Fetch';
 
-	textarea.readOnly = true;
-	textarea.style.outline = 'none';
-	textarea.placeholder = "Fetched text appears here.";
+	textareaFetch.readOnly = true;
+	textareaFetch.style.outline = 'none';
+	textareaFetch.placeholder = "Fetched text appears here.";
 
-	// 'textarea' visible for fetching
-	textarea.style.display = '';
-	textarea2.style.display = 'none';
+	textareaFetch.style.display = '';
+	textareaSend.style.display = 'none';
 }
 
 const sendUI = () => {
@@ -58,14 +57,13 @@ const sendUI = () => {
 	copyButton.textContent = 'Paste';
 	submitButton.textContent = 'Submit';
 
-	textarea.readOnly = false;
-	textarea.style.outline = 'auto';
-	textarea.placeholder = "";
-	textarea.style.display = 'none';
+	textareaFetch.readOnly = false;
+	textareaFetch.style.outline = 'auto';
+	textareaFetch.placeholder = "";
+	textareaFetch.style.display = 'none';
 	
-	// 'textarea2' visible for posting
-	textarea2.style.display = '';
-	textarea2.focus();
+	textareaSend.style.display = '';
+	textareaSend.focus();
 }
 
 // Change UI based on current tab

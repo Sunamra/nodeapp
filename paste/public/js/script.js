@@ -1,5 +1,4 @@
-const POST_API_ENDPOINT = 'https://sunamra.in/paste/api/v1/post';
-const GET_API_ENDPOINT = 'https://sunamra.in/paste/api/v1/get';
+const API_BASE = 'http://192.168.0.101:3000/paste/api/v1';
 
 const toast = new ZephyrToast();
 
@@ -12,7 +11,7 @@ const executeFunction = () => {
 }
 
 // Submit when enter key pressed
-document.getElementById("codearea").addEventListener("keypress", function (event) {
+document.getElementById("codeareaFetch").addEventListener("keypress", function (event) {
 	if (event.key === "Enter") {
 		event.preventDefault();
 		executeFunction();
@@ -30,15 +29,14 @@ const postContent = () => {
 	// console.log('postContent()');
 	// return;
 
-	// Using 'textarea2' for posting
-	const textContent = document.getElementById('textarea2').value;
+	const textContent = document.getElementById('textareaSend').value;
 
 	if (!textContent) {
 		toast.warning("No content");
 		return;
 	}
 
-	fetch(POST_API_ENDPOINT, {
+	fetch(API_BASE, {
 		method: "POST",
 		headers: {
 			'Content-Type': 'application/json'
@@ -73,23 +71,21 @@ const getContent = () => {
 	// console.log('getContent()');
 	// return;
 
-	const code = document.getElementById('codearea').value;
+	const code = document.getElementById('codeareaFetch').value;
 
 	if (!code) {
 		toast.warning("Please specify code");
 		return;
 	}
 
-	fetch(`${GET_API_ENDPOINT}/${code}`)
+	fetch(`${API_BASE}/${code}`)
 		.then(res => {
 			return res.json()
 		})
 		.then((res) => {
 			if (res.success) {
 				// console.log(res);
-
-				// Using 'textarea' for fetching
-				document.getElementById('textarea').value = res.data;
+				document.getElementById('textareaFetch').value = res.data;
 			}
 			else {
 				throw new Error(`File ${code} doesn't exist`);

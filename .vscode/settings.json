@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"signal.h": "c",
+		"winbase.h": "c",
+		"stdlib.h": "c"
+	}
+}

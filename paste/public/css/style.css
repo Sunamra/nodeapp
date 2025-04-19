@@ -29,6 +29,8 @@ body {
 	padding: 8px 16px;
 	margin: 10px;
 	color: #fff;
+	font-size: 16px;
+	font-weight: bold;
 	border: #fff solid 1px;
 	border-radius: 50px;
 	cursor: pointer;
@@ -38,7 +40,6 @@ body {
 
 .activeSwitchText {
 	border: 1px solid #5468ff;
-	transition: ease-in-out linear 2s;
 	background-color: #5468ff;
 }
 
@@ -65,7 +66,7 @@ form {
 	/* padding: 6px 0; */
 }
 
-#codearea {
+#codeareaFetch {
 	text-align: center;
 	padding: 2px;
 	margin-left: 10px;
@@ -85,9 +86,11 @@ label {
 	padding: 5px 0;
 }
 
-#textarea,
-#textarea2 {
+#textareaFetch,
+#textareaSend {
 	height: 65vh;
+	min-height: 43px;
+	max-height: 70vh;
 	width: 100%;
 	padding: 10px;
 	margin-top: 8px;
@@ -96,7 +99,6 @@ label {
 	border-radius: 5px;
 	resize: vertical;
 	box-sizing: border-box;
-	max-height: 70vh;
 }
 
 #resetButton,
@@ -110,7 +112,6 @@ label {
 	border-radius: 5px;
 	cursor: pointer;
 	font-size: 16px;
-	/* outline: none; */
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -185,8 +186,8 @@ h3 {
 		padding: 15px;
 	}
 
-	#textarea,
-	#textarea2 {
+	#textareaFetch,
+	#textareaSend {
 		font-size: 14px;
 		height: 35vh;
 	}
