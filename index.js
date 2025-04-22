@@ -2,9 +2,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 
-const rootRouter = require('./apps/root/routes');
-const pasteRouter = require('./apps/paste/routes');
-
 const port = 3000;
 const app = express();
 app.use(cors());
@@ -15,6 +12,11 @@ app.disable('etag');
 // For JSON payloads
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
+// Import site routers
+const rootRouter = require('./apps/root/routes');
+const pasteRouter = require('./apps/paste/routes');
+// const sharefileRouter = require('./apps/sharefile/routes');
 
 // Serving static files from /paste/public
 app.use('/', rootRouter);
