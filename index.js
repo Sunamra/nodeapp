@@ -2,8 +2,8 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 
-const rootRouter = require('./root/routes');
-const pasteRouter = require('./paste/routes');
+const rootRouter = require('./apps/root/routes');
+const pasteRouter = require('./apps/paste/routes');
 
 const port = 3000;
 const app = express();
@@ -17,10 +17,12 @@ app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Serving static files from /paste/public
-app.use('/paste', express.static(path.join(__dirname, './paste/public/')));
-
 app.use('/', rootRouter);
+// No static serve for '/' as it intended to serve for console.
+app.use('/paste', express.static(path.join(__dirname, './paste/public/')));
 app.use('/paste', pasteRouter);
+app.use('/sharefile', express.static(path.join(__dirname, './sharefile/public/')));
+app.use('/sharefile', sharefileRouter);
 
 // Global 404 fallback
 app.use((req, res) => {
@@ -37,6 +39,7 @@ app.listen(port, () => {
 
 /**
  * 		@TODO
- *   1. Add demo paths for /
- *   2. Create controller functions for /
+ *   1. Create sharefile/ path to share files
+ *   2. Add demo paths for /
+ *   3. Create controller functions for /
  */
