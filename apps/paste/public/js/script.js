@@ -1,4 +1,4 @@
-const API_BASE = 'http://192.168.0.101:3000/paste/api/v1';
+const API_BASE = 'http://localhost:3000/paste/api/v1';
 
 const toast = new ZephyrToast();
 
@@ -63,7 +63,7 @@ const postContent = () => {
 		})
 		.catch((err) => {
 			console.error('Error Posting: ', err);
-			toast.error(err?.message || err);
+			toast.error('Error Posting');
 		})
 }
 

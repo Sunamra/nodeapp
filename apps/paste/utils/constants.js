@@ -1,3 +1,3 @@
-const storeDir = "./paste/cache";
+const storeDir = "./apps/paste/cache";
 
 module.exports = storeDir;
