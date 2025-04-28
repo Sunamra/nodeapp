@@ -1,8 +1,22 @@
-// Script for additional event listeners
+// Script for event listeners
 
 // Only allow numbers in this textarea
 document.getElementById("codeareaFetch").addEventListener("input", function () {
 	this.value = this.value.replace(/[^0-9]/g, '');
+});
+
+// Submit when enter key pressed
+document.getElementById("codeareaFetch").addEventListener("keypress", function (event) {
+	if (event.key === "Enter") {
+		event.preventDefault();
+		executeFunction();
+	}
+});
+
+// Submit when HTML buttons pressed
+document.getElementById('myForm').addEventListener('submit', (e) => {
+	e.preventDefault()
+	executeFunction();
 });
 
 // Copies/Pastes content to/from clipboard
@@ -40,7 +54,7 @@ document.getElementById("copyButton").addEventListener("click", function () {
 			try {
 				if (!navigator.clipboard) {
 					// Clipboard API not available
-					toast.error("Clipboard API not available");
+					toast.error("Clipboard API not available. Try pasting by default method.");
 					return;
 				}
 

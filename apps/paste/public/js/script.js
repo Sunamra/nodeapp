@@ -2,6 +2,7 @@ const API_BASE = 'http://localhost:3000/paste/api/v1';
 
 const toast = new ZephyrToast();
 
+// This will be called from ./eventListeners.js
 const executeFunction = () => {
 	if (window.SEND) {
 		postContent();
@@ -9,21 +10,6 @@ const executeFunction = () => {
 		getContent();
 	}
 }
-
-// Submit when enter key pressed
-document.getElementById("codeareaFetch").addEventListener("keypress", function (event) {
-	if (event.key === "Enter") {
-		event.preventDefault();
-		executeFunction();
-	}
-});
-
-// Submit when HTML buttons pressed
-document.getElementById('myForm').addEventListener('submit', (e) => {
-	e.preventDefault()
-	executeFunction();
-})
-
 
 const postContent = () => {
 	// console.log('postContent()');

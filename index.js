@@ -16,15 +16,15 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Import site routers
 const rootRouter = require('./apps/root/routes');
 const pasteRouter = require('./apps/paste/routes');
-// const sharefileRouter = require('./apps/sharefile/routes');
+const sharefileRouter = require('./apps/sharefile/routes');
 
-// Serving static files from /paste/public
+// Serving static files
 app.use('/', rootRouter);
 // No static serve for '/' as it intended to serve for console.
 app.use('/paste', express.static(path.join(__dirname, './apps/paste/public/')));
 app.use('/paste', pasteRouter);
-// app.use('/sharefile', express.static(path.join(__dirname, './sharefile/public/')));
-// app.use('/sharefile', sharefileRouter);
+app.use('/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
+app.use('/sharefile', sharefileRouter);
 
 // Global 404 fallback
 app.use((req, res) => {
