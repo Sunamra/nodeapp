@@ -21,8 +21,8 @@ app.use('/', rootRouter);
 // No static serve for '/' as it intended to serve for console.
 app.use('/paste', express.static(path.join(__dirname, './paste/public/')));
 app.use('/paste', pasteRouter);
-app.use('/sharefile', express.static(path.join(__dirname, './sharefile/public/')));
-app.use('/sharefile', sharefileRouter);
+//app.use('/sharefile', express.static(path.join(__dirname, './sharefile/public/')));
+//app.use('/sharefile', sharefileRouter);
 
 // Global 404 fallback
 app.use((req, res) => {
