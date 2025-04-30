@@ -1,20 +1,3 @@
-// Global variables to be used by other scripts
-// Device type
-window.MOBILE = false;
-window.DESKTOP = false;
-// Open tab
-window.RECEIVE = false
-window.SEND = false
-
-// Identify device
-if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-	// console.log("Mobile device detected");
-	window.MOBILE = true;
-} else {
-	// console.log("Desktop device detected");
-	window.DESKTOP = true;
-}
-
 const text1 = document.getElementById('switchText1');
 const text2 = document.getElementById('switchText2');
 const textareaFetch = document.getElementById('textareaFetch');
@@ -61,7 +44,7 @@ const sendUI = () => {
 	textareaFetch.style.outline = 'auto';
 	textareaFetch.placeholder = "";
 	textareaFetch.style.display = 'none';
-	
+
 	textareaSend.style.display = '';
 	textareaSend.focus();
 }

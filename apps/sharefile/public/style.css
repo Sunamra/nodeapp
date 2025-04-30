@@ -28,9 +28,9 @@ body {
 	justify-content: center;
 	background: rgba(0, 0, 0, 0.5);
 	backdrop-filter: blur(3px);
-	font-size: 3.5rem;
+	font-size: 3rem;
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-	/* z-index: 2; */
+	z-index: 2;
 	pointer-events: none;
 }
 
