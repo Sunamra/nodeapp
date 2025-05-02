@@ -4,6 +4,8 @@
 <head>
 	<title>File List</title>
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="ui/zephyr-toast.css">
+	<link rel="stylesheet" href="ui/zephyr-toast-animate.css">
 
 	<!-- Font Awesome CDN -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
@@ -11,53 +13,40 @@
 
 </head>
 
-<body id="drop-zone">
-
-	<!-- Text to show during drag/drop event -->
-	<div id="dragText" style="display: none;">
-		Drop&nbsp;to&nbsp;Upload
-	</div>
-
+<body>
 	<div class="uploadDiv">
-		<button id="uploadBtn">
+		<button id="btn-upload">
 			Upload
 		</button>
 		<!-- Hidden Input field. This will be triggered by the Upload button-->
-		<input type="file" id="fileInput" style="display: none;">
+		<input type="file" id="fileInput" multiple style="display: none;">
 
 	</div>
-	<table id="fileTable">
-		<thead>
-			<tr>
-				<th>Filename</th>
-				<th>Size (KB)</th>
-				<th>Action</th>
-			</tr>
 
-		</thead>
-		<tbody class="tbody-rows">
-			<!-- Files will be listed here -->
-			<tr>
-				<td>report.pdf</td>
-				<td>125</td>
-				<td>
-					<button class="btn-download" title="Download">
-						<i class="fa fa-download" id="downloadIcon"></i>
-					</button>
-				</td>
-			</tr>
-			<tr>
-				<td>essay.pdf</td>
-				<td>265</td>
-				<td>
-					<button class="btn-download" title="Download">
-						<i class="fa fa-download" id="downloadIcon"></i>
-					</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+	<div id="drop-zone" class="tableDiv">
+		<!-- Text to show during drag/drop event -->
+		<div id="dragText" style="display: none;">
+			Drop&nbsp;to&nbsp;Upload
+		</div>
 
+		<table id="fileTable">
+			<thead>
+				<tr>
+					<th>Filename</th>
+					<th>Created</th>
+					<th>Size </th>
+					<th>Download</th>
+				</tr>
+
+			</thead>
+			<tbody class="tbody-rows">
+				<!-- Files will be listed here -->
+			</tbody>
+		</table>
+	</div>
+
+	<script defer src="./ui/zephyr-toast.js"></script>
+	<script defer src="./js/utils.js"></script>
 	<script defer src="./js/script.js"></script>
 	<script defer src="./js/eventListeners.js"></script>
 </body>
@@ -66,9 +55,5 @@
 
 <!-- 
 		@TODO
-	1. Fix drag/drop handler function in script.js
-	2. Upload files
-	3. Show files
-	4. Download files
 
 -->

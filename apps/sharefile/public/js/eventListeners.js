@@ -17,26 +17,63 @@ dropZone.addEventListener('dragleave', e => {
 	if (dragCounter === 0) {
 		dragText.style.display = 'none';
 	}
-
 });
 
 dropZone.addEventListener('dragover', e => {
 	e.preventDefault();
 });
 
+
+const isFolder = (eventDataTransferItems) => {
+	const items = eventDataTransferItems;
+
+	for (let i = 0; i < items.length; i++) {
+
+		const entry = items[i].webkitGetAsEntry?.();
+		if (entry && entry.isDirectory) {
+			console.error("Folder detected:", entry.name);
+			return true;
+		}
+	}
+	return false;
+};
 dropZone.addEventListener('drop', e => {
 	e.preventDefault();
 	dragCounter = 0;
 	dragText.style.display = 'none';
-	(async () => {
-		console.log(await e.dataTransfer.files.item(0).text());		
-	})();
-	postFile();
+	e.preventDefault();
+
+	if (!isFolder(e.dataTransfer.items)) {
+		postFile(e.dataTransfer.files);
+	}
+	else {
+		toast.warning('Folder not supported. Please select a file')
+	}
 });
 
-const uploadBtn = document.getElementById('uploadBtn');
+// Upload button click to take files and upload
+const uploadBtn = document.getElementById('btn-upload');
+const fileInput = document.getElementById('fileInput');
 
 uploadBtn.addEventListener('click', (e) => {
 	e.preventDefault();
-	document.getElementById('fileInput').click();
+	// Input field clicks on button click
+	fileInput.click();
+});
+
+// Upload file(s) when input(s) is taken
+fileInput.addEventListener('change', () => {
+	if (fileInput.files && fileInput.files.length > 0) {
+		postFile(fileInput.files);
+	} else {
+		// No file selected (e.g. user canceled)
+		console.error('No file selected');
+		toast.warning('No file selected');
+	}
+});
+
+// File name scrolling animation trigger on window resize
+window.addEventListener('resize', (e) => {
+	e.preventDefault();
+	applyScrollingWrapToAll(window.nameCellArray);
 });

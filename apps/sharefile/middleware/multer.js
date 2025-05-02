@@ -1,9 +1,9 @@
 const multer = require('multer');
+const { maxFiles, maxFileSize } = require('../utils/constants');
 
-
-const singleUpload = multer({
+const upload = multer({
 	storage: multer.memoryStorage(),
-	limits: { fileSize: 256 * 1024 * 1024 }  // 256 MiB maximum
-}).single("file");
+	limits: { fileSize: maxFileSize }
+}).array("files", maxFiles);
 
-module.exports = singleUpload;
+module.exports = upload;
