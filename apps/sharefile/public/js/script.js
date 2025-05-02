@@ -1,4 +1,4 @@
-const apiBase = 'https://sunamra.in/sharefile/api/v1';
+const apiBase = 'http://192.168.0.104:3000/sharefile/api/v1';
 
 const toast = new ZephyrToast({
 	position: "bottom-left",
@@ -91,6 +91,7 @@ const postFile = (files) => {
 		.then(data => {
 			if (data.success) {
 				toast.success(data.message);
+				setTimeout(getFiles, 100); // Refresh UI
 			} else {
 				console.error(data.statusText || data.message || data);
 				toast.error(data.statusText || data.message || 'Error posting file');
@@ -100,8 +101,6 @@ const postFile = (files) => {
 			console.error(error);
 			toast.error(error.message || error);
 		});
-
-	setTimeout(getFiles, 100); // Refresh UI
 };
 
 const getFiles = () => {
