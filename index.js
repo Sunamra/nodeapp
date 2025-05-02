@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 
+
 const port = 3000;
 const app = express();
 app.use(cors());
@@ -25,6 +26,11 @@ app.use('/paste', express.static(path.join(__dirname, './apps/paste/public/')));
 app.use('/paste', pasteRouter);
 app.use('/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
 app.use('/sharefile', sharefileRouter);
+
+// Global error handler
+const errorHandler = require('./apps/sharefile/middleware/errorHandler');
+app.use(errorHandler);
+
 
 // Global 404 fallback
 app.use((req, res) => {

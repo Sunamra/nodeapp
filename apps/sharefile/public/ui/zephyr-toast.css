@@ -77,23 +77,16 @@
 }
 
 .zephyr-toast-notification-icon {
-    padding: 0 8px 2px 0;
+    margin-right: 12px;
     display: flex;
     align-items: center;
-    scale: 1.2;
-    width: 1.5rem;
 }
 
 .zephyr-toast-notification-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 1000%;
+    flex: 1;
 }
 
-
 .zephyr-toast-notification-title {
-    align-self: flex-start;
     font-weight: bold;
     margin-bottom: 0.25rem;
 }
@@ -101,10 +94,10 @@
 .zephyr-toast-notification-close {
     background: transparent;
     border: 0;
-    padding: 0.4rem 0.5rem;
+    padding: 0 0.5rem;
     cursor: pointer;
     align-self: flex-start;
-    margin: 0.1rem 0.1rem 0.1rem 0;
+    margin-left: 0.5rem;
     font-size: 1.25rem;
     line-height: 1;
     opacity: 0.7;
@@ -112,7 +105,6 @@
 
 .zephyr-toast-notification-close:hover {
     opacity: 1;
-    background-color: #8b8b8b77;
 }
 
 .zephyr-toast-progress-bar {
@@ -149,8 +141,8 @@
     }
 
     .zephyr-toast-notification {
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 50% !important;
+        max-width: 50% !important;
         box-sizing: border-box;
     }
 

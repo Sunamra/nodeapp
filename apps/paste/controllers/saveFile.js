@@ -1,7 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const storeDir = require('../utils/constants');
-const scheduleFileDeletion = require('./deleteFile');
+const scheduleFileDeletion = require('../../../common/utils/deleteFile');
 
 const saveToFile = async (req, res) => {
 	try {
