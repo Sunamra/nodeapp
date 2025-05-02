@@ -10,20 +10,24 @@ const downloadFile = (req, res) => {
 		filename = req?.params?.filename;
 		const filePath = path.join(storeDir, filename);
 
-		// Check if file exists first
-		fs.access(filePath, fs.constants.F_OK, (accessErr) => {
-			if (accessErr) {
+		// Check if file exists
+		fs.stat(filePath, (err, stats) => {
+			if (err || !stats.isFile()) {
 				return res.status(404).json({
 					message: `File '${filename} not found'`,
 					success: false
 				});
 			}
 
-			// Set headers to trigger download
+			// Set headers
 			res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
-			// res.setHeader('Content-Type', 'application/octet-stream');
+			res.setHeader('Content-Type', 'application/octet-stream');
+			res.setHeader('Content-Length', stats.size);
 
-			// Stream the file in chunks
+			// Flush headers to client ASAP
+			res.flushHeaders();
+
+			// Stream the file
 			const stream = fs.createReadStream(filePath);
 			stream.pipe(res);
 
@@ -33,7 +37,7 @@ const downloadFile = (req, res) => {
 					success: false
 				});
 			});
-		});
+		})
 
 	} catch (error) {
 		res.status(500).json({
