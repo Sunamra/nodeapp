@@ -40,8 +40,7 @@ const uploadFile = async (req, res) => {
 			const fileSavePath = path.join(storeDir, fileSaveName);
 			await fs.mkdir(storeDir, { recursive: true });  // Make the dir in case it was not uploaded by git for being empty
 			await fs.writeFile(fileSavePath, file.buffer);
-			// scheduleFileDeletion(fileSavePath, 7 * 24 * 60 * 60 * 1000);  // Delete after 1 week
-			scheduleFileDeletion(fileSavePath, 5 * 1000);  // Delete after 1 week
+			scheduleFileDeletion(fileSavePath, 10 * 24 * 60 * 60 * 1000);  // Delete after 10 days
 		}
 
 		const fileCount = req.files?.length;
