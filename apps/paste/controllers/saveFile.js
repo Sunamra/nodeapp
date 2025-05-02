@@ -40,6 +40,8 @@ const saveToFile = async (req, res) => {
 
 		const filePath = path.join(storeDir, `${random}`);
 
+		// Make the dir in case it was not uploaded by github for being empty
+		await fs.mkdir(storeDir, { recursive: true });
 		// Write content to file
 		await fs.appendFile(filePath, textContent);
 
