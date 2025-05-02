@@ -1,4 +1,4 @@
-const apiBase = 'https://sunamra.in/sharefile/api/v1';
+const apiBase = 'http://192.168.0.104:3000/sharefile/api/v1';
 
 const toast = new ZephyrToast({
 	position: "bottom-left",

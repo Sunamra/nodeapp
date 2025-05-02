@@ -9,6 +9,7 @@ const storageStats = require('../utils/storageStats');
  */
 const uploadFile = async (req, res) => {
 	try {
+		await fs.mkdir(storeDir, { recursive: true }); // Make the dir in case it was not uploaded by git for being empty
 
 		const { count: storeFileCount, size: storeTotalSize } = storageStats(storeDir);
 
@@ -19,7 +20,6 @@ const uploadFile = async (req, res) => {
 			});
 		}
 
-
 		// Basic error handling
 		if (!req.files || !req.files.length) {
 			return res.status(400).json({
@@ -27,6 +27,8 @@ const uploadFile = async (req, res) => {
 				success: false
 			});
 		}
+
+
 		let fileOriginalName = "";
 		let fileSaveName = "";
 		for (const file of req.files) {
@@ -38,7 +40,6 @@ const uploadFile = async (req, res) => {
 			 */
 			fileSaveName = `${Date.now()}-${fileOriginalName}`;
 			const fileSavePath = path.join(storeDir, fileSaveName);
-			await fs.mkdir(storeDir, { recursive: true });  // Make the dir in case it was not uploaded by git for being empty
 			await fs.writeFile(fileSavePath, file.buffer);
 			scheduleFileDeletion(fileSavePath, 10 * 24 * 60 * 60 * 1000);  // Delete after 10 days
 		}
