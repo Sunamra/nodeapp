@@ -1,12 +1,14 @@
 const fs = require('fs').promises;
 const path = require('path');
-const {storeDir} = require('../utils/constants.js')
+const { storeDir } = require('../utils/constants.js')
 const getTimestamp = require('../utils/getTimestamp.js')
 const getFilename = require('../utils/getFilename.js')
 
 
 const getFileList = async (_, res) => {
 	try {
+		fs.mkdir(storeDir, { recursive: true });
+
 		const files = await fs.readdir(storeDir);
 		const fileList = [];
 

@@ -42,14 +42,13 @@ const uploadFile = async (req, res) => {
 			fileSaveName = `${Date.now()}-${fileOriginalName}`;
 			fileSavePath = path.join(storeDir, fileSaveName);
 			await fs.writeFile(fileSavePath, file.buffer);
-			console.log(fileSavePath);
 			scheduleFileDeletion(fileSavePath, 10 * 24 * 60 * 60 * 1000);  // Delete after 10 days
 		}
 
 		const fileCount = req.files?.length;
 		const resMsg =
 			fileCount === 1 ?
-				`File '${fileOriginalName}' uploaded in ${fileSavePath}` :
+				`File '${fileOriginalName}' uploaded` :
 				`${fileCount} ${fileCount === 1 ? "File" : "Files"} uploaded`;
 
 		res.status(200).json({
