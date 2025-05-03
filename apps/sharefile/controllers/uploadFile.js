@@ -31,6 +31,7 @@ const uploadFile = async (req, res) => {
 
 		let fileOriginalName = "";
 		let fileSaveName = "";
+		let fileSavePath = "";
 		for (const file of req.files) {
 			fileOriginalName = `${file.originalname}`;
 
@@ -39,15 +40,16 @@ const uploadFile = async (req, res) => {
 			 * to be removed when fetching file in another function.
 			 */
 			fileSaveName = `${Date.now()}-${fileOriginalName}`;
-			const fileSavePath = path.join(storeDir, fileSaveName);
+			fileSavePath = path.join(storeDir, fileSaveName);
 			await fs.writeFile(fileSavePath, file.buffer);
+			console.log(fileSavePath);
 			scheduleFileDeletion(fileSavePath, 10 * 24 * 60 * 60 * 1000);  // Delete after 10 days
 		}
 
 		const fileCount = req.files?.length;
 		const resMsg =
 			fileCount === 1 ?
-				`File '${fileOriginalName}' uploaded` :
+				`File '${fileOriginalName}' uploaded in ${fileSavePath}` :
 				`${fileCount} ${fileCount === 1 ? "File" : "Files"} uploaded`;
 
 		res.status(200).json({
