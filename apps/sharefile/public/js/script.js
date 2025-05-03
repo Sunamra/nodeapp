@@ -1,7 +1,7 @@
-const domain = 'https://nodeapp-ctvu.onrender.com';
+const DOMAIN = 'http://localhost:3000';
 
-const apiBase = `${domain}/sharefile/api/v1`;
-const publicStore = `${domain}/sharefile/public/storage`;
+const API_BASE = `${DOMAIN}/sharefile/api/v1`;
+const publicStore = `${DOMAIN}/sharefile/tempStore`;
 
 const toast = new ZephyrToast({
 	position: "bottom-left",
@@ -86,7 +86,7 @@ const postFile = (files) => {
 		form.append('files', files[i]);
 	}
 
-	fetch(apiBase, {
+	fetch(API_BASE, {
 		body: form,
 		method: 'POST'
 	})
@@ -107,7 +107,7 @@ const postFile = (files) => {
 };
 
 const getFiles = () => {
-	fetch(apiBase)
+	fetch(API_BASE)
 		.then(res => res.json())
 		.then(data => {
 			if (data.success) {
@@ -178,31 +178,32 @@ const listFiles = (files) => {
 };
 
 const downloadFile = (filename) => {
-	// fetch(`${apiBase}/${filename}`)
-	// 	.then(res => {
-	// 		if (!res.ok) throw new Error(res.statusText);
-	// 		return res.blob();
-	// 	})
-	// 	.then(blob => {
-	// 		const url = window.URL.createObjectURL(blob);
-	// 		const a = document.createElement('a');
-	// 		a.href = url;
-	// 		a.download = getFilename(filename);
-	// 		a.click();
-	// 		a.remove();
-	// 		window.URL.revokeObjectURL(url);
-	// 	})
-	// 	.catch(error => {
-	// 		console.error(error.message || error);
-	// 		toast.error(error.message || error);
-	// 	});
+	fetch(`${API_BASE}/${filename}`)
+		.then(res => {
+			if (!res.ok) {
+				throw new Error(res.statusText)
+			};
 
-	const a = document.createElement('a');
-	a.href = `${publicStore}/${filename}`;
-	a.download = getFilename(filename);
-	console.log('clicked')
-	a.click();
-	a.remove();
+			return res.json();
+		})
+		.then(data => {
+			console.log(data);
+
+			if (data.success) {
+				const a = document.createElement('a');
+				a.href = `${publicStore}/${filename}`;
+				a.download = data.filename;
+				a.click();
+				a.remove();
+			}
+			else {
+				throw new Error(data.message);
+			}
+		})
+		.catch(error => {
+			console.error(error.message || error);
+			toast.error(error.message || error);
+		});
 };
 
 getFiles(); // Initialize list on load

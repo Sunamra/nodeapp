@@ -38,6 +38,6 @@ function formatTime(epoch, options = { sec: true }) {
  */
 const getFilename = (filename) => {
 	// First 13 characters are timestamps, and 1 dash
-	const timestamp = filename.slice(14);
-	return String(timestamp);
+	const name = filename.slice(14);
+	return String(name);
 }
