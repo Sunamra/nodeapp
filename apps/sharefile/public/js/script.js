@@ -1,4 +1,4 @@
-const DOMAIN = 'http://localhost:3000';
+const DOMAIN = 'https://sunamra.in';
 
 const API_BASE = `${DOMAIN}/sharefile/api/v1`;
 const publicStore = `${DOMAIN}/sharefile/tempStore`;
