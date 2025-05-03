@@ -1,4 +1,4 @@
-const API_BASE = 'http://localhost:3000/paste/api/v1';
+const API_BASE = 'https://sunamra.in/paste/api/v1';
 
 const toast = new ZephyrToast();
 
