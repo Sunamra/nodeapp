@@ -1,4 +1,4 @@
-const storeDir = "./apps/sharefile/storage";
+const storeDir = "./apps/sharefile/public/storage";
 /**
  * Concurrent file uploads
  */

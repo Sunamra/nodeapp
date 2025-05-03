@@ -1,4 +1,4 @@
-const apiBase = 'https://sunamra.in/sharefile/api/v1';
+const apiBase = 'http://localhost:3000/sharefile/api/v1';
 
 const toast = new ZephyrToast({
 	position: "bottom-left",
@@ -175,24 +175,31 @@ const listFiles = (files) => {
 };
 
 const downloadFile = (filename) => {
-	fetch(`${apiBase}/${filename}`)
-		.then(res => {
-			if (!res.ok) throw new Error(res.statusText);
-			return res.blob();
-		})
-		.then(blob => {
-			const url = window.URL.createObjectURL(blob);
-			const a = document.createElement('a');
-			a.href = url;
-			a.download = getFilename(filename);
-			a.click();
-			a.remove();
-			window.URL.revokeObjectURL(url);
-		})
-		.catch(error => {
-			console.error(error.message || error);
-			toast.error(error.message || error);
-		});
+	// fetch(`${apiBase}/${filename}`)
+	// 	.then(res => {
+	// 		if (!res.ok) throw new Error(res.statusText);
+	// 		return res.blob();
+	// 	})
+	// 	.then(blob => {
+	// 		const url = window.URL.createObjectURL(blob);
+	// 		const a = document.createElement('a');
+	// 		a.href = url;
+	// 		a.download = getFilename(filename);
+	// 		a.click();
+	// 		a.remove();
+	// 		window.URL.revokeObjectURL(url);
+	// 	})
+	// 	.catch(error => {
+	// 		console.error(error.message || error);
+	// 		toast.error(error.message || error);
+	// 	});
+
+	const a = document.createElement('a');
+	a.href = `http://localhost:3000/sharefile/storage/${filename}`;
+	a.download = getFilename(filename);
+	console.log('clicked')
+	a.click();
+	a.remove();
 };
 
 getFiles(); // Initialize list on load
