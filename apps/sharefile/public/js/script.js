@@ -1,4 +1,7 @@
-const apiBase = 'https://sunamra.in/sharefile/api/v1';
+const domain = 'https://nodeapp-ctvu.onrender.com';
+
+const apiBase = `${domain}/sharefile/api/v1`;
+const publicStore = `${domain}/sharefile/public/storage`;
 
 const toast = new ZephyrToast({
 	position: "bottom-left",
