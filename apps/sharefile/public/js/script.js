@@ -198,7 +198,7 @@ const downloadFile = (filename) => {
 	// 	});
 
 	const a = document.createElement('a');
-	a.href = `http://localhost:3000/sharefile/storage/${filename}`;
+	a.href = `${publicStore}/${filename}`;
 	a.download = getFilename(filename);
 	console.log('clicked')
 	a.click();
