@@ -13,16 +13,30 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
 		crossorigin="anonymous" />
 
+	<!-- Lottie animation CDN -->
+	<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
+
 </head>
 
 <body>
-	<div class="uploadDiv">
-		<button id="btn-upload">
-			Upload
-		</button>
-		<!-- Hidden Input field. This will be triggered by the Upload button-->
-		<input type="file" id="fileInput" multiple style="display: none;">
+	<!-- Hidden Input field. This will be triggered by the Upload button-->
+	<input type="file" id="fileInput" multiple style="display: none;">
 
+	<div class="uploadDiv">
+		<div class="btn-svg-wrapper">
+			<button id="btn-upload">
+				Upload
+			</button>
+			<svg id="progress-bar" viewBox="0 0 100 100">
+				<circle id="progress-bg" cx="50" cy="50" r="30" />
+				<circle id="progress-fg" cx="50" cy="50" r="30" pathLength="100" />
+				<text id="progress-text" x="50" y="50"></text>
+			</svg>
+			<dotlottie-player id="right-tick"
+				src="https://lottie.host/230968f9-47ee-453c-a80f-2f8307630aa6/6tJWJeWgyo.json" background="transparent"
+				speed="0.9">
+			</dotlottie-player>
+		</div>
 	</div>
 
 	<div id="drop-zone" class="tableDiv">
@@ -42,7 +56,9 @@
 
 			</thead>
 			<tbody class="tbody-rows">
-				<!-- Files will be listed here -->
+				<td colspan="4" class="no-files">
+					Files will be listed here
+				</td>
 			</tbody>
 		</table>
 	</div>
@@ -67,8 +83,8 @@
 
 <!-- 
 		@TODO
-	1. Link paste <-> sharefile
-	2. Make sharefile responsive for mobile devices
-	3. Add progress icon after upload button
+	
+	2. Add progress icon after upload button
+	3. Make sharefile responsive for mobile devices
 
 -->
