@@ -16,17 +16,17 @@ const receiveUI = () => {
 
 	codeDiv.style.display = '';
 	textAreaLabel.style.display = 'none';
-	document.getElementById("codeareaFetch").focus();
+	document.getElementById('codeareaFetch').focus();
 	copyButton.textContent = 'Copy';
 	submitButton.textContent = 'Fetch';
 
 	textareaFetch.readOnly = true;
 	textareaFetch.style.outline = 'none';
-	textareaFetch.placeholder = "Fetched text appears here.";
+	textareaFetch.placeholder = 'Fetched text appears here.';
 
 	textareaFetch.style.display = '';
 	textareaSend.style.display = 'none';
-}
+};
 
 const sendUI = () => {
 	window.SEND = true;
@@ -42,12 +42,12 @@ const sendUI = () => {
 
 	textareaFetch.readOnly = false;
 	textareaFetch.style.outline = 'auto';
-	textareaFetch.placeholder = "";
+	textareaFetch.placeholder = '';
 	textareaFetch.style.display = 'none';
 
 	textareaSend.style.display = '';
 	textareaSend.focus();
-}
+};
 
 // Change UI based on current tab
 text1.addEventListener('click', () => {

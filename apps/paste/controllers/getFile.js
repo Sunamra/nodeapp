@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const getAllFiles = require('./getAllFiles');
-const storeDir = require('../utils/constants')
+const storeDir = require('../utils/constants');
 
 const getFile = (req, res) => {
 	const fileID = req?.params?.id;
@@ -16,7 +16,7 @@ const getFile = (req, res) => {
 
 		if (err) {
 			return res.status(500).json({
-				message: "Can't read file",
+				message: 'Can\'t read file',
 				success: false
 			});
 		}
@@ -26,7 +26,7 @@ const getFile = (req, res) => {
 			success: true
 		});
 	});
-}
+};
 
 
 module.exports = getFile;

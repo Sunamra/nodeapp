@@ -1,10 +1,10 @@
 // Formats File or Folder Sizes to a Human Readable Format
 function formatByte(bytes) {
 	if (bytes <= 0) {
-		return "0 B"; // Return 0 bytes if size is zero or negative
+		return '0 B'; // Return 0 bytes if size is zero or negative
 	}
 
-	const units = ["B", "K", "M", "G", "T", "PB", "EB", "ZB", "YB"];
+	const units = ['B', 'K', 'M', 'G', 'T', 'PB', 'EB', 'ZB', 'YB'];
 	const digitGroups = Math.floor(Math.log10(bytes) / Math.log10(1024));
 
 	const unit = units[digitGroups];
@@ -17,8 +17,8 @@ function formatTime(epoch, options = { sec: true }) {
 
 	const date = new Date(epoch);
 	const day = String(date.getDate()).padStart(2, '0');
-	const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
-		"Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+	const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+		'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 	const month = months[date.getMonth()];
 	const year = String(date.getFullYear()).slice(-2);
 	const hours = String(date.getHours()).padStart(2, '0');

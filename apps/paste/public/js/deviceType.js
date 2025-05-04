@@ -4,8 +4,8 @@
 window.MOBILE = false;
 window.DESKTOP = false;
 // Open tab
-window.RECEIVE = false
-window.SEND = false
+window.RECEIVE = false;
+window.SEND = false;
 
 // Identify device
 if (/Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {

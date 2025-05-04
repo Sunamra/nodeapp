@@ -18,8 +18,8 @@ const getAllFiles = async (baseDir, res, userAgent) => {
 
 		if (files.length === 0) {
 			return res.status(200).send(
-				isConsole ? chalk.yellowBright("Currently no file exists!") :
-					isBrowser ? "Currently no file exists!" : ""
+				isConsole ? chalk.yellowBright('Currently no file exists!') :
+					isBrowser ? 'Currently no file exists!' : ''
 			);
 		}
 
@@ -62,7 +62,7 @@ const getAllFiles = async (baseDir, res, userAgent) => {
 		res.status(200).send(result);
 
 	} catch (err) {
-		return res.status(500).send("Error listing files");
+		return res.status(500).send('Error listing files');
 	}
 };
 

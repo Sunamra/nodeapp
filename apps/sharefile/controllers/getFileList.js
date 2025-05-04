@@ -1,8 +1,8 @@
 const fs = require('fs').promises;
 const path = require('path');
-const { storeDir } = require('../utils/constants.js')
-const getTimestamp = require('../utils/getTimestamp.js')
-const getFilename = require('../utils/getFilename.js')
+const { storeDir } = require('../utils/constants.js');
+const getTimestamp = require('../utils/getTimestamp.js');
+const getFilename = require('../utils/getFilename.js');
 
 
 const getFileList = async (_, res) => {
@@ -40,6 +40,6 @@ const getFileList = async (_, res) => {
 			success: false
 		});
 	}
-}
+};
 
 module.exports = getFileList;

@@ -1,6 +1,6 @@
 const express = require('express');
-const saveToFile = require('../controllers/saveFile.js')
-const getFile = require('../controllers/getFile.js')
+const saveToFile = require('../controllers/saveFile.js');
+const getFile = require('../controllers/getFile.js');
 
 const router = express.Router();
 

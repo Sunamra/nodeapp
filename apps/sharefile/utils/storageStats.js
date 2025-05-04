@@ -14,6 +14,6 @@ const storageStats = (dirPath) => {
 	}
 
 	return { count, size: totalSize };
-}
+};
 
 module.exports = storageStats;

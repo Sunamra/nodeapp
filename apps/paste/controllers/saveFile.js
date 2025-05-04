@@ -39,7 +39,7 @@ const saveToFile = async (req, res) => {
 		}
 
 		if (i >= 999) {
-			throw new Error("Maximum iteration reached when generating filename");
+			throw new Error('Maximum iteration reached when generating filename');
 		}
 
 		const filePath = path.join(storeDir, `${random}`);

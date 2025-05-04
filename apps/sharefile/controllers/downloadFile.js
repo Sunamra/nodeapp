@@ -14,7 +14,7 @@ const fileExists = async (path) => {
 	} catch {
 		return false;
 	}
-}
+};
 
 /**
  * When a file is requested, the file is copied from
@@ -32,14 +32,14 @@ const downloadFile = async (req, res) => {
 
 		if (clientHost && !clientHost.startsWith(serverHost)) {
 			const error = new Error(`Client (${clientHost}) does not match Server (${serverHost})`);
-			error.code = 403
+			error.code = 403;
 			throw error;
 		}
 
 		const filename = req?.params?.filename || null;
 
 		if (!filename) {
-			const error = new Error("No filename provided in request");
+			const error = new Error('No filename provided in request');
 			error.code = 400;
 			throw error;
 		}
@@ -61,7 +61,7 @@ const downloadFile = async (req, res) => {
 		scheduleDirDeletion(tempStore, deleteAfter); // Delete after 5 minutes
 
 		res.status(200).json({
-			message: `File ready for download`,
+			message: 'File ready for download',
 			filename: getFilename(filename),
 			expires: (new Date(Date.now() + deleteAfter)).toLocaleTimeString(),
 			success: true
@@ -73,6 +73,6 @@ const downloadFile = async (req, res) => {
 			success: false
 		});
 	}
-}
+};
 
 module.exports = downloadFile;

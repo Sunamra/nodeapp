@@ -1,3 +1,3 @@
-const storeDir = "./apps/paste/storage";
+const storeDir = './apps/paste/storage';
 
 module.exports = storeDir;

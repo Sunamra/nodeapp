@@ -1,11 +1,11 @@
 /**
  * Storing files after upload
  */
-const storeDir = "./apps/sharefile/storage";
+const storeDir = './apps/sharefile/storage';
 /**
  * Copying files here for temporarily when download requested
  */
-const tempStore = "./apps/sharefile/public/tempStore";
+const tempStore = './apps/sharefile/public/tempStore';
 /**
  * Concurrent file uploads
  */
@@ -28,7 +28,7 @@ var dirDeleteTimeout = undefined;
 const setDirDeleteTimeout = (value) => {
 	dirDeleteTimeout = value;
 
-}
+};
 const getDirDeleteTimeout = () => dirDeleteTimeout;
 
 module.exports = { storeDir, tempStore, maxFiles, maxTotalFiles, maxTotalSize, maxFileSize, setDirDeleteTimeout, getDirDeleteTimeout };
