@@ -53,6 +53,8 @@ uploadBtn.addEventListener('click', (e) => {
 fileInput.addEventListener('change', () => {
 	if (fileInput.files && fileInput.files.length > 0) {
 		postFile(fileInput.files);
+		fileInput.value = '';
+
 	} else {
 		// No file selected (e.g. user canceled)
 		console.error('No file selected');

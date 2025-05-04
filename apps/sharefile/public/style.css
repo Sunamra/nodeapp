@@ -1,5 +1,11 @@
 :root {
 	--name-scroll-gap: 3rem;
+
+	/* Upload progress SVG */
+	--accent-color: #EAEAEA;
+	--primary-color: #20ae51;
+	--primary-text-color: #ffffff;
+	--primary-font: "JetBrains Mono", monospace;
 }
 
 body {
@@ -18,6 +24,12 @@ body {
 	margin: 40px 0 20px;
 	display: flex;
 	align-items: center;
+}
+
+.btn-svg-wrapper {
+	position: relative;
+	display: inline-block;
+	/* shrinkwrap to contents */
 }
 
 /* Drag over effect */
@@ -42,6 +54,7 @@ body {
 
 /* Upload button */
 #btn-upload {
+	display: inline-block;
 	min-width: 90px;
 	padding: 10px 20px;
 	border: none;
@@ -278,6 +291,107 @@ body {
 	opacity: 1;
 	transform: translateX(0);
 	transition-delay: 0.1s;
+}
+
+
+/* Upload progress SVG */
+
+/* Container sizing */
+#progress-bar {
+	position: absolute;
+	left: 100%;
+	top: 50%;
+	transform: translate(10px, -50%) rotate(-90deg);
+	height: 80px;
+	width: 80px;
+	margin: auto;
+}
+
+/* Base circle */
+#progress-bg {
+	fill: none;
+	stroke: var(--accent-color);
+	stroke-width: 5.5;
+	stroke-linecap: round;
+	visibility: hidden;
+}
+
+/* Foreground (animated) circle */
+#progress-fg {
+	fill: none;
+	stroke: var(--primary-color);
+	stroke-width: 5.5;
+	stroke-linecap: round;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+}
+
+/* Centered text */
+#progress-text {
+	font-family: var(--primary-font);
+	fill: var(--primary-text-color);
+	font-weight: 750;
+	font-size: 20px;
+	text-anchor: middle;
+	dominant-baseline: middle;
+	/* rotate text back upright */
+	transform-origin: 48.5px 48.5px;
+	transform: rotate(90deg);
+}
+
+/* Fade-in & fade-out animation*/
+
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 1;
+	}
+
+	to {
+		opacity: 0;
+	}
+}
+
+#right-tick.fade-in {
+	visibility: visible;
+	/* show when fading in */
+	animation: fadeIn 0.1s ease-in forwards;
+}
+
+#right-tick.fade-out {
+	animation: fadeOut 0.5s ease-out forwards;
+	/* after fadeOut completes, you can remove the element or reset visibility via JS */
+}
+
+.fade-in {
+	animation: fadeIn 0.01s ease-in forwards;
+}
+
+.fade-out {
+	animation: fadeOut 0.1s ease-out forwards;
+}
+
+#right-tick {
+	position: absolute;
+	left: 100%;
+	/* same anchor as the SVG */
+	top: 50%;
+	transform: translate(10px, -50%);
+	width: 80px;
+	height: 80px;
+
+	opacity: 0;
+	/* start hidden */
+	visibility: hidden;
 }
 
 /* Responsive tweaks */

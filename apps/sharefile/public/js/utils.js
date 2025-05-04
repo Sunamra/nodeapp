@@ -45,3 +45,65 @@ const isFolder = (eventDataTransferItems) => {
 	return false;
 };
 
+
+/**
+* Updates the circular progress.
+* @param {number} value 0–100
+*/
+function setUploadProgress(value) {
+	const v = Math.max(0, Math.min(100, value));
+	const fg = document.getElementById('progress-fg');
+	const txt = document.getElementById('progress-text');
+	fg.style.strokeDashoffset = 100 - v;
+	txt.textContent = v + '%';
+}
+
+// Upload progress bar controllers
+const progressBar = document.getElementById('progress-bar');
+
+function showProgressBar() {
+	progressBar.classList.remove('fade-out');
+	progressBar.classList.add('fade-in');
+	progressBar.style.visibility = 'visible';
+}
+
+function hideProgressBar() {
+	progressBar.classList.remove('fade-in');
+	progressBar.classList.add('fade-out');
+	// Optionally hide the element after the fade-out animation completes
+	setTimeout(() => {
+		progressBar.style.visibility = 'hidden';
+	}, 500); // Duration matches the fade-out animation duration
+
+	setTimeout(() => {
+		setUploadProgress(0);
+	}, 800);
+}
+
+// Right tick controllers
+const right_tick = document.getElementById('right-tick');
+
+function showRightTick() {
+
+	setTimeout(() => {
+		right_tick.classList.add('fade-in');
+		right_tick.style.visibility = 'visible';
+	}, 500);
+
+	setTimeout(() => {
+		right_tick.stop();
+		right_tick.play();
+	}, 800);
+}
+
+function hideRightTick() {
+	setTimeout(() => {
+		right_tick.classList.add('fade-out');
+	}, 2000);
+
+	setTimeout(() => {
+		right_tick.classList.remove('fade-in');
+		right_tick.style.visibility = 'hidden';
+		right_tick.classList.remove('fade-out');
+	}, 3000);
+}
