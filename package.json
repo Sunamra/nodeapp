@@ -5,6 +5,7 @@
 	"scripts": {
 		"start": "npm i && node index.js",
 		"test": "echo \"Error: no test specified\" && exit 1",
+		"push": "git add . && git commit --allow-empty-message && git push",
 		"pull": "pm2 stop 0 && git pull && pm2 start 0"
 	},
 	"keywords": [ ],
