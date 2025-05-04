@@ -81,16 +81,96 @@ const applyScrollingWrapToAll = (cells) => {
 	cells.forEach(cell => applyScrollingWrap(cell));
 };
 
+// const postFile = (files) => {
+// 	const form = new FormData();
+
+// 	for (let i = 0; i < files.length; i++) {
+// 		form.append('files', files[i]);
+// 	}
+
+// 	fetch(API_BASE, {
+// 		body: form,
+// 		method: 'POST'
+// 	})
+// 		.then(res => res.json())
+// 		.then(data => {
+// 			if (data.success) {
+// 				toast.success(data.message);
+// 				setTimeout(getFiles, 100); // Refresh UI
+// 			} else {
+// 				console.error(data.statusText || data.message || data);
+// 				toast.error(data.statusText || data.message || 'Error posting file');
+// 			}
+// 		})
+// 		.catch(error => {
+// 			console.error(error);
+// 			toast.error(error.message || error);
+// 		});
+// };
+
+
+
+
+
 const postFile = (files) => {
-	const form = new FormData();
+	// Calculate total size up front
+	const totalBytes = Array.from(files).reduce((sum, f) => sum + f.size, 0);
+	let uploadedBytes = 0;
 
+	// Build a multipart stream yourself, so we can tap into each chunk
+	const boundary = '----WebKitFormBoundary' + Date.now().toString(16);
+	const encoder = new TextEncoder();
+	const parts = [];
+
+	// Prepend each file’s headers, then its stream, then a CRLF
 	for (let i = 0; i < files.length; i++) {
-		form.append('files', files[i]);
+		const file = files[i];
+		parts.push(
+			encoder.encode(
+				`--${boundary}\r\n` +
+				`Content-Disposition: form-data; name="files"; filename="${file.name}"\r\n` +
+				`Content-Type: ${file.type}\r\n\r\n`
+			)
+		);
+		parts.push(file.stream());
+		parts.push(encoder.encode('\r\n'));
 	}
+	// Closing boundary
+	parts.push(encoder.encode(`--${boundary}--\r\n`));
 
+	// Our custom ReadableStream to monitor bytes as they go out
+	const multipartBody = new ReadableStream({
+		async pull(controller) {
+			if (parts.length === 0) {
+				controller.close();
+				return;
+			}
+			const part = parts.shift();
+			if (part instanceof ReadableStream) {
+				const reader = part.getReader();
+				while (true) {
+					const { done, value } = await reader.read();
+					if (done) break;
+					uploadedBytes += value.length;
+					console.log('Upload Progress:', ((uploadedBytes / totalBytes) * 100).toFixed(2) + '%');
+					controller.enqueue(value);
+				}
+			} else {
+				uploadedBytes += part.length;
+				console.log('Upload Progress:', ((uploadedBytes / totalBytes) * 100).toFixed(2) + '%');
+				controller.enqueue(part);
+			}
+		}
+	});
+
+	// Now fire your original fetch logic, just swapping in our stream + boundary header
 	fetch(API_BASE, {
-		body: form,
-		method: 'POST'
+		method: 'POST',
+		headers: {
+			'Content-Type': `multipart/form-data; boundary=${boundary}`
+		},
+		duplex: 'half',
+		body: multipartBody
 	})
 		.then(res => res.json())
 		.then(data => {
@@ -107,6 +187,13 @@ const postFile = (files) => {
 			toast.error(error.message || error);
 		});
 };
+
+
+
+
+
+
+
 
 const getFiles = () => {
 	fetch(API_BASE)
