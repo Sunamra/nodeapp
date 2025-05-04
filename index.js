@@ -3,7 +3,7 @@ const path = require('path');
 const cors = require('cors');
 
 
-const port = 3000;
+const port = Number(process.argv.slice(2)[0]) || 3000;
 const app = express();
 app.use(cors());
 
