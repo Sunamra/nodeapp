@@ -9,7 +9,7 @@ const tempStore = "./apps/sharefile/public/tempStore";
 /**
  * Concurrent file uploads
  */
-const maxFiles = 10;
+const maxFiles = 20;
 /**
  * Maximum storage files
  */

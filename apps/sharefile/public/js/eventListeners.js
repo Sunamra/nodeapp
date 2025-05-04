@@ -24,19 +24,6 @@ dropZone.addEventListener('dragover', e => {
 });
 
 
-const isFolder = (eventDataTransferItems) => {
-	const items = eventDataTransferItems;
-
-	for (let i = 0; i < items.length; i++) {
-
-		const entry = items[i].webkitGetAsEntry?.();
-		if (entry && entry.isDirectory) {
-			console.error("Folder detected:", entry.name);
-			return true;
-		}
-	}
-	return false;
-};
 dropZone.addEventListener('drop', e => {
 	e.preventDefault();
 	dragCounter = 0;
@@ -47,7 +34,8 @@ dropZone.addEventListener('drop', e => {
 		postFile(e.dataTransfer.files);
 	}
 	else {
-		toast.warning('Folder not supported. Please select a file')
+		toast.warning('Folder not supported. Please select a file');
+		console.warn('Folder not supported. Please select a file');
 	}
 });
 
