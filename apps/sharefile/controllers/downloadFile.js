@@ -23,24 +23,20 @@ const fileExists = async (path) => {
  * The public storage folder will be deleted after some time.
  */
 const downloadFile = async (req, res) => {
-	let filename = "";
-	console.log(req.headers);
 
 	try {
+		// Basic error checkings
 		// If hosts are different, prevent download
 		const clientHost = req.headers.origin || req.headers.referer || null;
 		const serverHost = `${req.protocol}://${req.get('host')}`;
 
-		console.log(clientHost, serverHost);
 		if (clientHost && !clientHost.startsWith(serverHost)) {
-			const error = new Error(`Client (${clientHost}) does not match Server (${serverHost})`)
+			const error = new Error(`Client (${clientHost}) does not match Server (${serverHost})`);
 			error.code = 403
 			throw error;
 		}
 
-
-
-		filename = req?.params?.filename || null;
+		const filename = req?.params?.filename || null;
 
 		if (!filename) {
 			const error = new Error("No filename provided in request");
@@ -56,6 +52,7 @@ const downloadFile = async (req, res) => {
 			throw error;
 		}
 
+		// Main logic starts
 		await fs.mkdir(tempStore, { recursive: true });
 		await fs.copyFile(filePath, path.join(tempStore, filename));
 
@@ -72,7 +69,7 @@ const downloadFile = async (req, res) => {
 
 	} catch (error) {
 		res.status(error.code || 500).json({
-			message: error.message || error,
+			message: error.message,
 			success: false
 		});
 	}

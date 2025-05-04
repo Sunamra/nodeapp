@@ -1,4 +1,4 @@
-const HOST = 'http://localhost:3000';
+const HOST = 'http://localhost:3001';
 
 const API_BASE = `${HOST}/sharefile/api/v1`;
 const publicStore = `${HOST}/sharefile/tempStore`;
@@ -180,26 +180,15 @@ const listFiles = (files) => {
 const downloadFile = (filename) => {
 	fetch(`${API_BASE}/${filename}`)
 		.then(res => {
-			if (!res.ok) {
-				throw new Error(res.statusText)
-			};
-
 			return res.json();
 		})
 		.then(data => {
 			console.log(data);
 
 			if (data.success) {
-				console.log(data.host,HOST);
-				
-				// if (data.host !== HOST) {
-				// 	console.warn("Client and Server");
-
-				// }
 				const a = document.createElement('a');
 				a.href = `${publicStore}/${filename}`;
 				a.download = data.filename;
-				console.log(a);
 				a.click();
 				a.remove();
 			}
@@ -208,8 +197,10 @@ const downloadFile = (filename) => {
 			}
 		})
 		.catch(error => {
-			console.error(error.message || error);
-			toast.error(error.message || error);
+			console.log(error);
+
+			console.error(error.message || 5);
+			toast.error(error.message || 5);
 		});
 };
 
