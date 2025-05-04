@@ -364,7 +364,7 @@ body {
 #right-tick.fade-in {
 	visibility: visible;
 	/* show when fading in */
-	animation: fadeIn 0.1s ease-in forwards;
+	animation: fadeIn 0.01s ease-in forwards;
 }
 
 #right-tick.fade-out {
