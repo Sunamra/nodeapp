@@ -15,8 +15,8 @@ const getFile = (req, res) => {
 	fs.readFile(path.join(storeDir, fileID), 'utf-8', (err, data) => {
 
 		if (err) {
-			return res.status(500).json({
-				message: 'Can\'t read file',
+			return res.status(404).json({
+				message: 'File doesn\'t exist',
 				success: false
 			});
 		}
