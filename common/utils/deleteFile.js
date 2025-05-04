@@ -6,7 +6,7 @@ const fs = require('fs');
  * @param {number} delay - Time in ms after which the file gets deleted. Default time is 3 hours
  * @returns {void}
  */
-function scheduleFileDeletion(filePath, delay = 3 * 60 * 60 * 1000) { // 3 hours
+function scheduleFileDeletion(filePath, delay = 3 * 60 * 60 * 1000) {  // 3 hours
 	setTimeout(() => {
 		fs.unlink(filePath, (err) => {
 			if (err) {
@@ -17,5 +17,5 @@ function scheduleFileDeletion(filePath, delay = 3 * 60 * 60 * 1000) { // 3 hours
 		});
 	}, delay);
 }
-
+ 
 module.exports = scheduleFileDeletion;
