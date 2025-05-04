@@ -8,6 +8,7 @@ const toast = new ZephyrToast({
 	duration: 5000
 });
 
+
 document.getElementById('anotherPageAnchor').href = `${HOST}/paste/`;
 
 // Global array holding all current nameCells in table.
