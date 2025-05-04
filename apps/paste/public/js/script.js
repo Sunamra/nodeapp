@@ -78,7 +78,7 @@ const getContent = () => {
 				document.getElementById('textareaFetch').value = res.data;
 			}
 			else {
-				throw new Error(`File ${code} doesn't exist`);
+				throw new Error(`No File Exist with ID ${code}`);
 			}
 		})
 		.catch((err) => {
