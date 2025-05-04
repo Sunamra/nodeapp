@@ -1,6 +1,10 @@
-const API_BASE = 'https://sunamra.in/paste/api/v1';
+const HOST = 'https://sunamra.in';
+
+const API_BASE = `${HOST}/paste/api/v1`;
 
 const toast = new ZephyrToast();
+
+document.getElementById('anotherPageAnchor').href = `${HOST}/sharefile/`;
 
 // This will be called from ./eventListeners.js
 const executeFunction = () => {
@@ -9,7 +13,7 @@ const executeFunction = () => {
 	} else if (window.RECEIVE) {
 		getContent();
 	}
-}
+};
 
 const postContent = () => {
 	// console.log('postContent()');
@@ -18,24 +22,24 @@ const postContent = () => {
 	const textContent = document.getElementById('textareaSend').value;
 
 	if (!textContent) {
-		toast.warning("No content");
+		toast.warning('No content');
 		return;
 	}
 
 	fetch(API_BASE, {
-		method: "POST",
+		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({ content: textContent })
 	})
 		.then(res => {
-			return res.json()
+			return res.json();
 		})
 		.then((data) => {
 			// console.log(data.success);
 			if (data.success) {
-				toast.success("Posting Successful", { duration: 2000 });
+				toast.success('Posting Successful', { duration: 2000 });
 				setTimeout(() => {
 					toast.info(`Code is ${data.code}`, { duration: 5000 });
 				}, 300);
@@ -44,14 +48,14 @@ const postContent = () => {
 			}
 			else {
 				console.error(data.message);
-				toast.error(data.message || "Error Posting")
+				toast.error(data.message || 'Error Posting');
 			}
 		})
 		.catch((err) => {
 			console.error('Error Posting: ', err);
 			toast.error('Error Posting');
-		})
-}
+		});
+};
 
 const getContent = () => {
 	// console.log('getContent()');
@@ -60,13 +64,13 @@ const getContent = () => {
 	const code = document.getElementById('codeareaFetch').value;
 
 	if (!code) {
-		toast.warning("Please specify code");
+		toast.warning('Please specify code');
 		return;
 	}
 
 	fetch(`${API_BASE}/${code}`)
 		.then(res => {
-			return res.json()
+			return res.json();
 		})
 		.then((res) => {
 			if (res.success) {
@@ -80,6 +84,6 @@ const getContent = () => {
 		.catch((err) => {
 			console.error('Error in GET: ', err);
 			toast.error(err?.message || err);
-		})
-}
+		});
+};
 

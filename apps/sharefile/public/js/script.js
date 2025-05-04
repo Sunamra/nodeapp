@@ -1,12 +1,14 @@
-const HOST = 'http://localhost:3001';
+const HOST = 'http://localhost:3000';
 
 const API_BASE = `${HOST}/sharefile/api/v1`;
 const publicStore = `${HOST}/sharefile/tempStore`;
 
 const toast = new ZephyrToast({
-	position: "bottom-left",
+	position: 'bottom-left',
 	duration: 5000
 });
+
+document.getElementById('anotherPageAnchor').href = `${HOST}/paste/`;
 
 // Global array holding all current nameCells in table.
 // Will be used to reapply scrolling during window resize.
@@ -151,13 +153,14 @@ const listFiles = (files) => {
 			createdCell.innerHTML = formatTime(file.created, false);
 
 			const sizeCell = document.createElement('td');
+			file.size > 1024 ? sizeCell.title = file.size : "";
 			sizeCell.textContent = formatByte(file.size);
 
 			const actionCell = document.createElement('td');
 			const downloadBtn = document.createElement('button');
 			downloadBtn.classList.add('btn-download');
 			downloadBtn.title = 'Download';
-			downloadBtn.innerHTML = `<i class="fa fa-download"></i>`;
+			downloadBtn.innerHTML = '<i class="fa fa-download"></i>';
 			downloadBtn.setAttribute('onclick', `downloadFile('${file.serverName}')`);
 			actionCell.appendChild(downloadBtn);
 

@@ -4,11 +4,12 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "npm i && node index.js",
-		"test": "echo \"Error: no test specified\" && exit 1",
+		"preview": "vite preview",
+		"lint": "eslint . --ext .js",
 		"push": "git add . && git commit --allow-empty-message && git push",
 		"pull": "pm2 stop 0 && git pull && pm2 start 0"
 	},
-	"keywords": [ ],
+	"keywords": [],
 	"author": "Sunamra Das",
 	"license": "ISC",
 	"description": "",
@@ -17,5 +18,8 @@
 		"cors": "^2.8.5",
 		"express": "^5.1.0",
 		"multer": "^1.4.5-lts.2"
+	},
+	"devDependencies": {
+		"eslint": "^9.26.0"
 	}
 }

@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
-const { storeDir, maxTotalFiles, maxTotalSize } = require('../utils/constants')
+const { storeDir, maxTotalFiles, maxTotalSize } = require('../utils/constants');
 const scheduleFileDeletion = require('../../../common/utils/deleteFile');
 const storageStats = require('../utils/storageStats');
 
@@ -30,9 +30,9 @@ const uploadFile = async (req, res) => {
 		}
 
 
-		let fileOriginalName = "";
-		let fileSaveName = "";
-		let fileSavePath = "";
+		let fileOriginalName = '';
+		let fileSaveName = '';
+		let fileSavePath = '';
 		for (const file of req.files) {
 			fileOriginalName = `${file.originalname}`;
 
@@ -50,7 +50,7 @@ const uploadFile = async (req, res) => {
 		const resMsg =
 			fileCount === 1 ?
 				`File '${fileOriginalName}' uploaded` :
-				`${fileCount} ${fileCount === 1 ? "File" : "Files"} uploaded`;
+				`${fileCount} ${fileCount === 1 ? 'File' : 'Files'} uploaded`;
 
 		res.status(200).json({
 			message: resMsg,
@@ -63,6 +63,6 @@ const uploadFile = async (req, res) => {
 			success: false
 		});
 	}
-}
+};
 
 module.exports = uploadFile;
