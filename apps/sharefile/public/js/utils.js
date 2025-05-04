@@ -31,13 +31,17 @@ function formatTime(epoch, options = { sec: true }) {
 		(sec === true ? ':' + seconds : '');
 }
 
-/**
- * Extracts original filename from a Unix timestamp added filename
- * @param {String} filename Filename that contains Unix timestamp at start
- * @returns Original filename
- */
-const getFilename = (filename) => {
-	// First 13 characters are timestamps, and 1 dash
-	const name = filename.slice(14);
-	return String(name);
-}
+const isFolder = (eventDataTransferItems) => {
+	const items = eventDataTransferItems;
+
+	for (let i = 0; i < items.length; i++) {
+
+		const entry = items[i].webkitGetAsEntry?.();
+		if (entry && entry.isDirectory) {
+			// console.warn("Folder detected:", entry.name);
+			return true;
+		}
+	}
+	return false;
+};
+

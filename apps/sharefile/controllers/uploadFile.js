@@ -13,6 +13,7 @@ const uploadFile = async (req, res) => {
 
 		const { count: storeFileCount, size: storeTotalSize } = storageStats(storeDir);
 
+		// Storage checking
 		if (storeFileCount > maxTotalFiles || storeTotalSize > maxTotalSize) {
 			return res.status(507).json({
 				message: 'Storage is full',

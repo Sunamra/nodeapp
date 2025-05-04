@@ -31,7 +31,6 @@ app.use('/sharefile', sharefileRouter);
 const errorHandler = require('./apps/sharefile/middleware/errorHandler');
 app.use(errorHandler);
 
-
 // Global 404 fallback
 app.use((req, res) => {
 	if (/chrome|firefox|safari|edge|opera|msie|trident/i.test(req?.headers['user-agent'] || '')) {

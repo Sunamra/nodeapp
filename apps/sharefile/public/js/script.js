@@ -1,7 +1,7 @@
-const DOMAIN = 'https://sunamra.in';
+const HOST = 'http://localhost:3000';
 
-const API_BASE = `${DOMAIN}/sharefile/api/v1`;
-const publicStore = `${DOMAIN}/sharefile/tempStore`;
+const API_BASE = `${HOST}/sharefile/api/v1`;
+const publicStore = `${HOST}/sharefile/tempStore`;
 
 const toast = new ZephyrToast({
 	position: "bottom-left",
@@ -9,7 +9,7 @@ const toast = new ZephyrToast({
 });
 
 // Global array holding all current nameCells in table.
-// Will be used to reapply scrolling durin window resize.
+// Will be used to reapply scrolling during window resize.
 window.nameCellArray = [];
 
 /**
@@ -190,9 +190,16 @@ const downloadFile = (filename) => {
 			console.log(data);
 
 			if (data.success) {
+				console.log(data.host,HOST);
+				
+				// if (data.host !== HOST) {
+				// 	console.warn("Client and Server");
+
+				// }
 				const a = document.createElement('a');
 				a.href = `${publicStore}/${filename}`;
 				a.download = data.filename;
+				console.log(a);
 				a.click();
 				a.remove();
 			}
