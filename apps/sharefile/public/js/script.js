@@ -109,10 +109,6 @@ const applyScrollingWrapToAll = (cells) => {
 // 		});
 // };
 
-
-
-
-
 const postFile = (files) => {
 	showProgressBar();
 
@@ -121,7 +117,6 @@ const postFile = (files) => {
 	for (let i = 0; i < files.length; i++) {
 		form.append('files', files[i]);
 	}
-
 
 	// new: xhr instead of fetch
 	const xhr = new XMLHttpRequest();
@@ -133,7 +128,6 @@ const postFile = (files) => {
 		const pct = ((e.loaded / e.total) * 100).toFixed(0);
 		// console.log(`Upload Progress: ${pct}%`);
 		setUploadProgress(pct);
-
 	};
 
 	// success / response parsing
@@ -151,6 +145,7 @@ const postFile = (files) => {
 			toast.success(data.message);
 			setTimeout(getFiles, 100); // Refresh UI
 
+			// Show and hide upload anmations
 			hideProgressBar();
 			showRightTick();
 			hideRightTick();
@@ -159,6 +154,9 @@ const postFile = (files) => {
 			console.error(data.statusText || data.message || data);
 			toast.error(data.statusText || data.message || 'Error posting file');
 		}
+
+		// Hide if error occurs
+		hideProgressBar();
 	};
 
 	// network / transport errors
@@ -170,10 +168,6 @@ const postFile = (files) => {
 	// fire it off
 	xhr.send(form);
 };
-
-
-
-
 
 const getFiles = () => {
 	fetch(API_BASE)
@@ -241,7 +235,7 @@ const listFiles = (files) => {
 		const noCell = document.createElement('td');
 		noCell.setAttribute('colspan', '4');
 		noCell.classList.add('no-files');
-		noCell.textContent = files === null ? 'Internal Server Error' : 'No Files Available.';
+		noCell.textContent = files === null ? 'Internal Server Error' : 'No Files Available';
 		noRow.appendChild(noCell);
 		tableBody.appendChild(noRow);
 	}
