@@ -85,25 +85,23 @@ const right_tick = document.getElementById('right-tick');
 
 function showRightTick() {
 
-	setTimeout(() => {
-		right_tick.classList.add('fade-in');
-		right_tick.style.visibility = 'visible';
-	}, 500);
+	right_tick.classList.add('fade-in');
+	right_tick.style.visibility = 'visible';
 
+	right_tick.stop();
 	setTimeout(() => {
-		right_tick.stop();
 		right_tick.play();
-	}, 800);
+	}, 200);
 }
 
 function hideRightTick() {
 	setTimeout(() => {
 		right_tick.classList.add('fade-out');
-	}, 2000);
+	}, 3000);
 
 	setTimeout(() => {
 		right_tick.classList.remove('fade-in');
-		right_tick.style.visibility = 'hidden';
 		right_tick.classList.remove('fade-out');
-	}, 3000);
+		right_tick.style.visibility = 'hidden';
+	}, 4000);
 }

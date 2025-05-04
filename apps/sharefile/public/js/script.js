@@ -133,7 +133,6 @@ const postFile = (files) => {
 		const pct = ((e.loaded / e.total) * 100).toFixed(0);
 		// console.log(`Upload Progress: ${pct}%`);
 		setUploadProgress(pct);
-		document.getElementById('right-tick').classList.add('fade-in');
 
 	};
 
@@ -153,8 +152,8 @@ const postFile = (files) => {
 			setTimeout(getFiles, 100); // Refresh UI
 
 			hideProgressBar();
-			// showRightTick();
-			// hideRightTick();
+			showRightTick();
+			hideRightTick();
 
 		} else {
 			console.error(data.statusText || data.message || data);
@@ -221,7 +220,7 @@ const listFiles = (files) => {
 			createdCell.innerHTML = formatTime(file.created, false);
 
 			const sizeCell = document.createElement('td');
-			file.size > 1024 ? sizeCell.title = file.size : "";
+			file.size > 1024 ? sizeCell.title = file.size : '';
 			sizeCell.textContent = formatByte(file.size);
 
 			const actionCell = document.createElement('td');
