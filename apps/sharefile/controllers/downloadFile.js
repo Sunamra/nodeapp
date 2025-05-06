@@ -28,6 +28,9 @@ const downloadFile = async (req, res) => {
 		// Basic error checkings
 		// If hosts are different, prevent download
 		const clientHost = req.headers.origin || req.headers.referer || null;
+		console.log(clientHost,"\n\n");
+		console.log(req.headers,"\n\n");
+		
 		const serverHost = `${req.protocol}://${req.get('host')}`;
 
 		if (clientHost && !clientHost.startsWith(serverHost)) {
