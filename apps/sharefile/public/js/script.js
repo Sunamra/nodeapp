@@ -1,6 +1,5 @@
 const DOMAIN = 'sunamra.in';
 
-
 const SCHEME = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('192.168.0.') ||
 	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
@@ -16,7 +15,6 @@ const toast = new ZephyrToast({
 	position: 'bottom-left',
 	duration: 5000
 });
-
 
 document.getElementById('anotherPageAnchor').href = `${BASE_URI}/paste/`;
 
@@ -251,7 +249,6 @@ const listFiles = (files) => {
 };
 
 const downloadFile = (filename) => {
-	console.log(`${API_BASE}/${filename}`);
 
 	fetch(`${API_BASE}/${filename}`)
 		.then(res => {
