@@ -27,16 +27,26 @@ const downloadFile = async (req, res) => {
 	try {
 		// Basic error checkings
 		// If hosts are different, prevent download
-		const clientHost = req.headers.origin || req.headers.referer || null;
-		console.log(clientHost,"\n\n");
-		console.log(req.headers,"\n\n");
-		
-		const serverHost = `${req.protocol}://${req.get('host')}`;
+		const ref = req.headers.origin || req.headers.referer;
 
-		if (clientHost && !clientHost.startsWith(serverHost)) {
-			const error = new Error(`Client (${clientHost}) does not match Server (${serverHost})`);
-			error.code = 403;
-			throw error;
+		if (ref) {
+			let clientHost;
+			try {
+				clientHost = new URL(ref).host;      // e.g. "localhost:3000"
+			} catch (e) {
+				// malformed URL – you can decide to reject or ignore
+				const err = new Error(`Invalid Origin/Referer header: ${ref}`);
+				err.code = 400;
+				throw err;
+			}
+
+			const serverHost = req.get('host');    // e.g. "localhost:3001"
+
+			if (clientHost !== serverHost) {
+				const err = new Error(`Client (${clientHost}) does not match Server (${serverHost})`);
+				err.code = 403;
+				throw err;
+			}
 		}
 
 		const filename = req?.params?.filename || null;
