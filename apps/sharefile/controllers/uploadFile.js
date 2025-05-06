@@ -42,8 +42,9 @@ const uploadFile = async (req, res) => {
 			 */
 			fileSaveName = `${Date.now()}-${fileOriginalName}`;
 			fileSavePath = path.join(storeDir, fileSaveName);
+			
 			await fs.writeFile(fileSavePath, file.buffer);
-			scheduleFileDeletion(fileSavePath, 10 * 24 * 60 * 60 * 1000);  // Delete after 10 days
+			scheduleFileDeletion(fileSavePath);
 		}
 
 		const fileCount = req.files?.length;

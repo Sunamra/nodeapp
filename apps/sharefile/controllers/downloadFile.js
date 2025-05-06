@@ -72,9 +72,9 @@ const downloadFile = async (req, res) => {
 		await fs.mkdir(tempStore, { recursive: true });
 		await fs.copyFile(filePath, path.join(tempStore, filename));
 
-		const deleteAfter = 5 * 60 * 1000;
+		const deleteAfter = 10 * 60 * 1000;
 
-		scheduleDirDeletion(tempStore, deleteAfter); // Delete after 5 minutes
+		scheduleDirDeletion(tempStore, deleteAfter); // Delete after 10 minutes
 
 		res.status(200).json({
 			message: 'File ready for download',
