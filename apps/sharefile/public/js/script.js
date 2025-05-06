@@ -1,4 +1,4 @@
-const DOMAIN = 'localhost:3000';
+const DOMAIN = 'sunamra.in';
 
 
 const SCHEME = DOMAIN.startsWith('localhost') ||

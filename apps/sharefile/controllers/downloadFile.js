@@ -28,8 +28,6 @@ const downloadFile = async (req, res) => {
 		// Basic error checkings
 		// If hosts are different, prevent download
 		const ref = req.headers.origin || req.headers.referer;
-		console.log("\n\n", req.headers, "\n\n");
-
 		if (ref) {
 			let clientHost;
 			try {
