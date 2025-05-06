@@ -47,7 +47,12 @@ const downloadFile = async (req, res) => {
 				err.code = 403;
 				throw err;
 			}
+			console.log("\n\n",clientHost, serverHost,"\n\n");
 		}
+
+
+
+
 
 		const filename = req?.params?.filename || null;
 
