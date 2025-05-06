@@ -1,4 +1,4 @@
-const HOST = 'https://sunamra.in';
+const HOST = 'http://localhost:3000';
 
 const API_BASE = `${HOST}/sharefile/api/v1`;
 const publicStore = `${HOST}/sharefile/tempStore`;
