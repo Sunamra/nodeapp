@@ -28,6 +28,7 @@ const downloadFile = async (req, res) => {
 		// Basic error checkings
 		// If hosts are different, prevent download
 		const ref = req.headers.origin || req.headers.referer;
+		console.log("\n\n", req.headers, "\n\n");
 
 		if (ref) {
 			let clientHost;
@@ -47,7 +48,11 @@ const downloadFile = async (req, res) => {
 				err.code = 403;
 				throw err;
 			}
-			console.log("\n\n",clientHost, serverHost,"\n\n");
+			console.log("\n\n", clientHost, '->', serverHost, "\n\n");
+		} else {
+			const err = new Error(`No Origin/Referer header: ${(req.headers).toString()}`);
+			err.code = 400;
+			throw err;
 		}
 
 

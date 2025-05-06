@@ -251,6 +251,8 @@ const listFiles = (files) => {
 };
 
 const downloadFile = (filename) => {
+	console.log(`${API_BASE}/${filename}`);
+
 	fetch(`${API_BASE}/${filename}`)
 		.then(res => {
 			return res.json();
