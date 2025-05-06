@@ -46,16 +46,11 @@ const downloadFile = async (req, res) => {
 				err.code = 403;
 				throw err;
 			}
-			console.log("\n\n", clientHost, '->', serverHost, "\n\n");
 		} else {
 			const err = new Error(`No Origin/Referer header provided ${(req.headers).toString()}`);
 			err.code = 400;
 			throw err;
 		}
-
-
-
-
 
 		const filename = req?.params?.filename || null;
 
