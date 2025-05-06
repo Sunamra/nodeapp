@@ -6,7 +6,7 @@ const { setDirDeleteTimeout, getDirDeleteTimeout } = require('./constants');
  * @param {string} dirPath - Path to the directory
  * @returns {Promise<void>}
  */
-function deleteDirectory(dirPath, delay = 2 * 60 * 60 * 1000) { // Delete dir after 2 hours
+function deleteDirectory(dirPath, delay = 1 * 60 * 60 * 1000) { // Delete dir after 1 hours
 
 	const existingTimeout = getDirDeleteTimeout();
 

@@ -9,7 +9,7 @@ const BASE_URI = `${SCHEME}${DOMAIN}`
 const API_BASE = `${BASE_URI}/sharefile/api/v1`;
 const PUBLIC_STORE = `${BASE_URI}/sharefile/tempStore`;
 
-console.log(`Base URL : ${BASE_URI}`);
+// console.log(`Base URL : ${BASE_URI}`);
 
 const toast = new ZephyrToast({
 	position: 'bottom-left',
@@ -255,7 +255,7 @@ const downloadFile = (filename) => {
 			return res.json();
 		})
 		.then(data => {
-			console.log(data);
+			// console.log(data);
 
 			if (data.success) {
 				const a = document.createElement('a');
