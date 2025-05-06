@@ -1,7 +1,16 @@
-const HOST = 'https://sunamra.in';
+const DOMAIN = 'sunamra.in';
 
-const API_BASE = `${HOST}/sharefile/api/v1`;
-const publicStore = `${HOST}/sharefile/tempStore`;
+
+const SCHEME = DOMAIN.startsWith('localhost') ||
+	DOMAIN.startsWith('192.168.0.') ||
+	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
+	'https://';
+
+const BASE_URI = `${SCHEME}${DOMAIN}`
+const API_BASE = `${BASE_URI}/sharefile/api/v1`;
+const PUBLIC_STORE = `${BASE_URI}/sharefile/tempStore`;
+
+console.log(`Base URL : ${BASE_URI}`);
 
 const toast = new ZephyrToast({
 	position: 'bottom-left',
@@ -9,7 +18,7 @@ const toast = new ZephyrToast({
 });
 
 
-document.getElementById('anotherPageAnchor').href = `${HOST}/paste/`;
+document.getElementById('anotherPageAnchor').href = `${BASE_URI}/paste/`;
 
 // Global array holding all current nameCells in table.
 // Will be used to reapply scrolling during window resize.
@@ -251,7 +260,7 @@ const downloadFile = (filename) => {
 
 			if (data.success) {
 				const a = document.createElement('a');
-				a.href = `${publicStore}/${filename}`;
+				a.href = `${PUBLIC_STORE}/${filename}`;
 				a.download = data.filename;
 				a.click();
 				a.remove();
