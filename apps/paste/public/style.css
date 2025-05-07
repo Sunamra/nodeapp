@@ -63,7 +63,6 @@ form {
 .codeAreaDiv {
 	display: flex;
 	align-items: center;
-	/* padding: 6px 0; */
 }
 
 #codeareaFetch {
@@ -84,6 +83,7 @@ label {
 
 #textAreaLabel {
 	padding: 5px 0;
+	display: none;
 }
 
 #textareaFetch,
@@ -111,7 +111,6 @@ label {
 	margin-left: 10px;
 	border-radius: 5px;
 	cursor: pointer;
-	font-size: 16px;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
@@ -154,7 +153,6 @@ label {
 	background-color: #c54e89;
 }
 
-
 #copyButton:active {
 	background-color: #ca2477;
 }
@@ -176,10 +174,7 @@ h3 {
 }
 
 
-
-
 /* Hypelink to sibling page */
-
 .another-page {
 	position: absolute;
 	right: 40px;
@@ -230,7 +225,6 @@ h3 {
 		transform 0.15s cubic-bezier(.175, .885, .32, 1.275);
 }
 
-/* on hover: expand leftward, then slide/fade text in */
 .another-page:hover {
 	max-width: 180px;
 }
@@ -240,7 +234,6 @@ h3 {
 	transform: translateX(0);
 	transition-delay: 0.1s;
 }
-
 
 
 @media (max-width: 576px) {

@@ -1,3 +1,4 @@
+/* Root Variables */
 :root {
 	--name-scroll-gap: 3rem;
 
@@ -5,9 +6,12 @@
 	--accent-color: #EAEAEA;
 	--primary-color: #20ae51;
 	--primary-text-color: #ffffff;
-	--primary-font: "JetBrains Mono", monospace;
+	--primary-font: monospace;
 }
 
+/*--------------------------------*/
+
+/* Body Styles */
 body {
 	margin: 0;
 	padding: 0;
@@ -20,6 +24,9 @@ body {
 	min-height: 100vh;
 }
 
+/*--------------------------------*/
+
+/* Upload Container and Wrapper */
 .uploadDiv {
 	margin: 40px 0 20px;
 	display: flex;
@@ -32,7 +39,9 @@ body {
 	/* shrinkwrap to contents */
 }
 
-/* Drag over effect */
+/*--------------------------------*/
+
+/* Drag Over Effect */
 #dragText {
 	height: 100%;
 	width: 100%;
@@ -52,7 +61,9 @@ body {
 	pointer-events: none;
 }
 
-/* Upload button */
+/*--------------------------------*/
+
+/* Upload Button */
 #btn-upload {
 	display: inline-block;
 	min-width: 90px;
@@ -77,6 +88,91 @@ body {
 	transition: none;
 }
 
+/*--------------------------------*/
+
+/* Upload Progress SVG */
+#progress-bar {
+	/* Container sizing */
+	position: absolute;
+	left: 100%;
+	top: 50%;
+	transform: translate(10px, -50%) rotate(-90deg);
+	height: 80px;
+	width: 80px;
+	margin: auto;
+}
+
+#progress-bg {
+	/* Base circle */
+	fill: none;
+	stroke: var(--accent-color);
+	stroke-width: 5.5;
+	stroke-linecap: round;
+	visibility: hidden;
+}
+
+#progress-fg {
+	/* Foreground (animated) circle */
+	fill: none;
+	stroke: var(--primary-color);
+	stroke-width: 5.5;
+	stroke-linecap: round;
+	stroke-dasharray: 100;
+	stroke-dashoffset: 100;
+}
+
+#progress-text {
+	/* Centered text */
+	font-family: var(--primary-font);
+	fill: var(--primary-text-color);
+	font-weight: 750;
+	font-size: 20px;
+	text-anchor: middle;
+	dominant-baseline: middle;
+	/* rotate text back upright */
+	transform-origin: 48.5px 48.5px;
+	transform: rotate(90deg);
+}
+
+/*--------------------------------*/
+
+/* Right Tick Animation */
+#right-tick {
+	position: absolute;
+	left: 100%;
+	/* same anchor as the SVG */
+	top: 50%;
+	transform: translate(10px, -50%);
+	width: 80px;
+	height: 80px;
+
+	opacity: 0;
+	/* start hidden */
+	visibility: hidden;
+}
+
+#right-tick.fade-in {
+	visibility: visible;
+	/* show when fading in */
+	animation: fadeIn 0.01s ease-in forwards;
+}
+
+#right-tick.fade-out {
+	animation: fadeOut 0.5s ease-out forwards;
+	/* after fadeOut completes, you can remove the element or reset visibility via JS */
+}
+
+.fade-in {
+	animation: fadeIn 0.01s ease-in forwards;
+}
+
+.fade-out {
+	animation: fadeOut 0.1s ease-out forwards;
+}
+
+/*--------------------------------*/
+
+/* Table Container */
 .tableDiv {
 	height: 80%;
 	min-height: 50px;
@@ -118,7 +214,9 @@ body {
 	background-color: #c4c4c4;
 }
 
-/* Table container as a “card” */
+/*--------------------------------*/
+
+/* File Table Styles */
 #fileTable {
 	height: 100%;
 	width: 100%;
@@ -128,7 +226,6 @@ body {
 	table-layout: auto;
 }
 
-/* Header row */
 #fileTable thead {
 	background: #3A3A3F;
 }
@@ -142,7 +239,6 @@ body {
 	border-bottom: 1px solid #454549;
 }
 
-/* Data rows */
 #fileTable tbody tr {
 	text-align: center;
 	transition: background 0.2s ease;
@@ -163,13 +259,15 @@ body {
 	white-space: nowrap;
 }
 
+/*--------------------------------*/
+
+/* File Name Scrolling */
 .fileName {
 	max-width: 250px;
 	overflow: hidden;
 	position: relative;
 }
 
-/* the scrolling wrapper itself */
 .fileName.scrolling .scroll-content {
 	display: inline-flex;
 	/* so its children sit side by side */
@@ -193,7 +291,9 @@ body {
 	}
 }
 
-/* “Action” buttons */
+/*--------------------------------*/
+
+/* Action Buttons */
 .btn-download {
 	display: inline-block;
 	padding: 6px 12px;
@@ -207,9 +307,7 @@ body {
 	cursor: pointer;
 	transition: background 0.2s ease, transform 0.1s ease;
 	user-select: none;
-
 }
-
 
 .btn-download:hover {
 	color: black;
@@ -221,7 +319,9 @@ body {
 	transition: none;
 }
 
+/*--------------------------------*/
 
+/* No Files Text */
 .no-files {
 	text-align: center;
 	font-style: italic;
@@ -229,9 +329,9 @@ body {
 	padding: 1em 0;
 }
 
+/*--------------------------------*/
 
-/* Hypelink to sibling page */
-
+/* Another Page Link */
 .another-page {
 	position: absolute;
 	right: 40px;
@@ -267,7 +367,6 @@ body {
 	height: 40px;
 }
 
-/* text starts hidden behind the icon to the left */
 .hover-text {
 	margin: 0 10px;
 	/* gap between text & icon */
@@ -282,7 +381,6 @@ body {
 		transform 0.15s cubic-bezier(.175, .885, .32, 1.275);
 }
 
-/* on hover: expand leftward, then slide/fade text in */
 .another-page:hover {
 	max-width: 180px;
 }
@@ -293,54 +391,9 @@ body {
 	transition-delay: 0.1s;
 }
 
+/*--------------------------------*/
 
-/* Upload progress SVG */
-
-/* Container sizing */
-#progress-bar {
-	position: absolute;
-	left: 100%;
-	top: 50%;
-	transform: translate(10px, -50%) rotate(-90deg);
-	height: 80px;
-	width: 80px;
-	margin: auto;
-}
-
-/* Base circle */
-#progress-bg {
-	fill: none;
-	stroke: var(--accent-color);
-	stroke-width: 5.5;
-	stroke-linecap: round;
-	visibility: hidden;
-}
-
-/* Foreground (animated) circle */
-#progress-fg {
-	fill: none;
-	stroke: var(--primary-color);
-	stroke-width: 5.5;
-	stroke-linecap: round;
-	stroke-dasharray: 100;
-	stroke-dashoffset: 100;
-}
-
-/* Centered text */
-#progress-text {
-	font-family: var(--primary-font);
-	fill: var(--primary-text-color);
-	font-weight: 750;
-	font-size: 20px;
-	text-anchor: middle;
-	dominant-baseline: middle;
-	/* rotate text back upright */
-	transform-origin: 48.5px 48.5px;
-	transform: rotate(90deg);
-}
-
-/* Fade-in & fade-out animation*/
-
+/* Fade Animations */
 @keyframes fadeIn {
 	from {
 		opacity: 0;
@@ -358,58 +411,5 @@ body {
 
 	to {
 		opacity: 0;
-	}
-}
-
-#right-tick.fade-in {
-	visibility: visible;
-	/* show when fading in */
-	animation: fadeIn 0.01s ease-in forwards;
-}
-
-#right-tick.fade-out {
-	animation: fadeOut 0.5s ease-out forwards;
-	/* after fadeOut completes, you can remove the element or reset visibility via JS */
-}
-
-.fade-in {
-	animation: fadeIn 0.01s ease-in forwards;
-}
-
-.fade-out {
-	animation: fadeOut 0.1s ease-out forwards;
-}
-
-#right-tick {
-	position: absolute;
-	left: 100%;
-	/* same anchor as the SVG */
-	top: 50%;
-	transform: translate(10px, -50%);
-	width: 80px;
-	height: 80px;
-
-	opacity: 0;
-	/* start hidden */
-	visibility: hidden;
-}
-
-/* Responsive tweaks */
-@media (max-width: 576px) {
-
-	#dragText {
-		font-size: 2rem;
-		min-width: 100%;
-	}
-
-	#fileTable th,
-	#fileTable td {
-		padding: 8px 10px;
-		font-size: 0.85rem;
-	}
-
-	.btn-download {
-		padding: 4px 8px;
-		font-size: 0.8rem;
 	}
 }
