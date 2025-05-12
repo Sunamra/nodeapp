@@ -73,7 +73,7 @@ const applyScrollingWrap = (cell) => {
 	const availableWidth = cell.clientWidth;
 	const neededWidth = cell.scrollWidth;
 
-	// console.log(`${cell.innerText} ->\n avail : ${availableWidth}\n needed : ${neededWidth}\n spanNeeded : ${spanClientWidth}`);
+	console.log(`${cell.innerText} ->\n avail : ${availableWidth}\n needed : ${neededWidth}\n spanNeeded : ${spanClientWidth}`);
 
 	if (spanClientWidth) {
 		if (spanClientWidth < availableWidth) {
