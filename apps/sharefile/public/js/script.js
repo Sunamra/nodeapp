@@ -1,4 +1,4 @@
-const DOMAIN = 'localhost:3000';
+const DOMAIN = 'sunamra.in';
 
 const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('192.168.0.') ||
