@@ -78,7 +78,6 @@ const applyScrollingWrap = (cell) => {
 	if (spanClientWidth) {
 		if (spanClientWidth < availableWidth) {
 			removeAnimation(cell);
-
 		}
 	}
 	else if (neededWidth > availableWidth && !cell.classList.contains('scrolling')) {
