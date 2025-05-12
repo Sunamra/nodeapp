@@ -16,6 +16,9 @@ const toast = new ZephyrToast({
 	duration: 5000
 });
 
+// Change the hyperlink to sibling page based on current page
+document.getElementById('anotherPageAnchor').href = `${BASE_URI}/paste/`;
+
 // Global array holding all current nameCells in table.
 // Will be used to reapply scrolling during window resize.
 window.nameCellArray = [];
