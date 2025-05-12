@@ -1,11 +1,11 @@
-const DOMAIN = 'sunamra.in';
+const DOMAIN = 'localhost:3000';
 
-const SCHEME = DOMAIN.startsWith('localhost') ||
+const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('192.168.0.') ||
 	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
 	'https://';
 
-const BASE_URI = `${SCHEME}${DOMAIN}`
+const BASE_URI = `${PROTOCOL}${DOMAIN}`
 const API_BASE = `${BASE_URI}/sharefile/api/v1`;
 const PUBLIC_STORE = `${BASE_URI}/sharefile/tempStore`;
 
@@ -15,8 +15,6 @@ const toast = new ZephyrToast({
 	position: 'bottom-left',
 	duration: 5000
 });
-
-document.getElementById('anotherPageAnchor').href = `${BASE_URI}/paste/`;
 
 // Global array holding all current nameCells in table.
 // Will be used to reapply scrolling during window resize.
@@ -122,7 +120,7 @@ const postFile = (files) => {
 	// build the form just like you already do
 	const form = new FormData();
 	for (let i = 0; i < files.length; i++) {
-		form.append('files', files[i]);
+		form.append('file', files[i]);
 	}
 
 	// new: xhr instead of fetch

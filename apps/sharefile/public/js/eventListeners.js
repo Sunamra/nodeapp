@@ -1,4 +1,4 @@
-
+// Drag, drop events
 const dropZone = document.getElementById('drop-zone');
 const dragText = document.getElementById('dragText');
 let dragCounter = 0;
@@ -39,17 +39,17 @@ dropZone.addEventListener('drop', e => {
 	}
 });
 
-// Upload button click to take files and upload
 const uploadBtn = document.getElementById('btn-upload');
 const fileInput = document.getElementById('fileInput');
 
+// Upload button click inputs file(s) and upload
 uploadBtn.addEventListener('click', (e) => {
 	e.preventDefault();
 	// Input field clicks on button click
 	fileInput.click();
 });
 
-// Upload file(s) when input(s) is taken
+// Upload file(s) when input(s) taken
 fileInput.addEventListener('change', () => {
 	if (fileInput.files && fileInput.files.length > 0) {
 		postFile(fileInput.files);

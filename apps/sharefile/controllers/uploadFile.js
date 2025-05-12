@@ -9,6 +9,7 @@ const storageStats = require('../utils/storageStats');
  */
 const uploadFile = async (req, res) => {
 	try {
+
 		await fs.mkdir(storeDir, { recursive: true }); // Make the dir in case it was not uploaded by git for being empty
 
 		const { count: storeFileCount, size: storeTotalSize } = storageStats(storeDir);
@@ -24,7 +25,7 @@ const uploadFile = async (req, res) => {
 		// Basic error handling
 		if (!req.files || !req.files.length) {
 			return res.status(400).json({
-				message: 'No files uploaded',
+				message: 'No files provided',
 				success: false
 			});
 		}
@@ -42,7 +43,7 @@ const uploadFile = async (req, res) => {
 			 */
 			fileSaveName = `${Date.now()}-${fileOriginalName}`;
 			fileSavePath = path.join(storeDir, fileSaveName);
-			
+
 			await fs.writeFile(fileSavePath, file.buffer);
 			scheduleFileDeletion(fileSavePath);
 		}
