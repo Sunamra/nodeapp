@@ -5,7 +5,7 @@ const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
 	'https://';
 
-const BASE_URI = `${PROTOCOL}${DOMAIN}`
+const BASE_URI = `${PROTOCOL}${DOMAIN}`;
 const API_BASE = `${BASE_URI}/sharefile/api/v1`;
 const PUBLIC_STORE = `${BASE_URI}/sharefile/tempStore`;
 
@@ -71,14 +71,13 @@ const applyScrollingWrap = (cell) => {
 	}
 
 	const availableWidth = cell.clientWidth;
+
 	const neededWidth = cell.scrollWidth;
 
-	console.log(`${cell.innerText} ->\n avail : ${availableWidth}\n needed : ${neededWidth}\n spanNeeded : ${spanClientWidth}`);
+	// console.log(`${cell.innerText} ->\n avail : ${availableWidth}\n needed : ${neededWidth}\n spanNeeded : ${spanClientWidth}`);
 
-	if (spanClientWidth) {
-		if (spanClientWidth < availableWidth) {
-			removeAnimation(cell);
-		}
+	if (spanClientWidth && spanClientWidth < availableWidth) {
+		removeAnimation(cell);
 	}
 	else if (neededWidth > availableWidth && !cell.classList.contains('scrolling')) {
 		addAnimation(cell);
@@ -206,24 +205,22 @@ const listFiles = (files) => {
 		files.forEach(file => {
 			const row = document.createElement('tr');
 
+			// Name
 			const nameCell = document.createElement('td');
 			nameCell.classList.add('fileName');
 			nameCell.textContent = nameCell.title = file.name;
 
-			// Temporary append for measurement and wrap
-			row.appendChild(nameCell);
-			tableBody.appendChild(row);
-			applyScrollingWrap(nameCell);
-			tableBody.removeChild(row);
+			// Uploaded
+			const uploadedCell = document.createElement('td');
+			uploadedCell.title = file.created;
+			uploadedCell.innerHTML = formatTime(file.created, false);
 
-			const createdCell = document.createElement('td');
-			createdCell.title = file.created;
-			createdCell.innerHTML = formatTime(file.created, false);
-
+			// Size
 			const sizeCell = document.createElement('td');
 			file.size > 1024 ? sizeCell.title = file.size : '';
 			sizeCell.textContent = formatByte(file.size);
 
+			// Download
 			const actionCell = document.createElement('td');
 			const downloadBtn = document.createElement('button');
 			downloadBtn.classList.add('btn-download');
@@ -234,7 +231,7 @@ const listFiles = (files) => {
 
 			window.nameCellArray.push(nameCell);
 
-			row.append(nameCell, createdCell, sizeCell, actionCell);
+			row.append(nameCell, uploadedCell, sizeCell, actionCell);
 			tableBody.prepend(row);
 		});
 	} else {
@@ -246,6 +243,8 @@ const listFiles = (files) => {
 		noRow.appendChild(noCell);
 		tableBody.appendChild(noRow);
 	}
+
+	applyScrollingWrapToAll(window.nameCellArray);
 };
 
 const downloadFile = (filename) => {

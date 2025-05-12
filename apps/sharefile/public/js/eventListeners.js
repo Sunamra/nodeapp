@@ -30,6 +30,9 @@ dropZone.addEventListener('drop', e => {
 	dragText.style.display = 'none';
 	e.preventDefault();
 
+	console.log(e.dataTransfer.files);
+	
+
 	if (!isFolder(e.dataTransfer.items)) {
 		postFile(e.dataTransfer.files);
 	}
