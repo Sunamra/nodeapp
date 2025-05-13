@@ -25,7 +25,6 @@ const getFileList = async (_, res) => {
 					modified: new Date(stat.mtime).getTime()
 				});
 				// console.log(file, " file ", new Date(getTimestamp(file)).toLocaleString(), ", mtime ", new Date(new Date(stat.mtime).getTime()).toLocaleString());
-
 			}
 		}
 

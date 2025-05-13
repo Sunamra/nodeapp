@@ -32,8 +32,6 @@ const uploadFile = async (req, res) => {
 
 
 		let fileOriginalName = '';
-		let fileSaveName = '';
-		let fileSavePath = '';
 		for (const file of req.files) {
 			fileOriginalName = `${file.originalname}`;
 
@@ -41,8 +39,8 @@ const uploadFile = async (req, res) => {
 			 * 13 digit timestamp + 1 dash = 14 character string
 			 * to be removed when fetching file in another function.
 			 */
-			fileSaveName = `${Date.now()}-${fileOriginalName}`;
-			fileSavePath = path.join(storeDir, fileSaveName);
+			const fileSaveName = `${Date.now()}-${fileOriginalName}`;
+			const fileSavePath = path.join(storeDir, fileSaveName);
 
 			await fs.writeFile(fileSavePath, file.buffer);
 			scheduleFileDeletion(fileSavePath);
