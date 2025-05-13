@@ -1,6 +1,5 @@
-const getAll = (req, res) => {
-	const i = Number(req.params?.num) || 1;
-	res.send(Array(i).fill("Hello ").map((s, i) => s + (i + 1)).join("\n"));
+const getAll = (_, res) => {
+	res.status(200).send('Hello from Express!');
 };
 
 module.exports = getAll;

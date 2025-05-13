@@ -1,12 +1,12 @@
 const router = require('express').Router();
 const { getAll } = require('../controllers');
 
-router.route('/a').get((_, res) => {
-	res.type('text');
-	res.status(200).send('Hello from Express');
-});
+// router.route('/').get((_, res) => {
+// 	res.type('text');
+// 	res.status(200).send('Hello from Express');
+// });
 
-router.route('/:num').get(getAll);
+router.route('/').get(getAll);
 
 
 // Temporary, not part of the project
