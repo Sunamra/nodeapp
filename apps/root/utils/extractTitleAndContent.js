@@ -15,7 +15,7 @@ const extractTitle = (lines) => {
 
 		if (line.startsWith('@#')) {
 			titleSignPresent = true;
-			title = line.replace(/[@#]/g, '');
+			title = line.replace(/[@#]/g, '').trim();
 		}
 
 		break;
@@ -32,7 +32,7 @@ const extractTitle = (lines) => {
 
 const extractContent = (lines) => {
 	let content = '';
-
+	let lineWritten = 0;
 	for (let i = lineIndex; i < lines.length; i++) {
 
 		const line = lines[i].replace(/[\r\n]/g, '').trim();
@@ -41,21 +41,23 @@ const extractContent = (lines) => {
 			continue;
 		}
 
+		// Precisely add `line`s to `content` with no leading/trailing whitespace
 		if (line) {
-			content += `${line}`;
-
-			if (i !== lines.length - 1) {
-				content += '\n';
+			if (lineWritten) {
+				content += '\n' + line.trim();
 			}
+			else {
+				content += `${line}`;
+			}
+			lineWritten++;
 		}
-
 	}
 
 	// console.log(`'${content}'`);
 	return content;
 };
 
-module.exports = (filename, data) => {
+module.exports = (data, filename = null) => {
 
 	if (!data) {
 		throw new Error('No content provided to getTitle()');
