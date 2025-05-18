@@ -1,12 +1,9 @@
 const router = require('express').Router();
-const { getAll } = require('../controllers');
+const { getAll, getSingle } = require('../controllers');
+const { logRequest } = require('../middleware');
 
-// router.route('/').get((_, res) => {
-// 	res.type('text');
-// 	res.status(200).send('Hello from Express');
-// });
-
-router.route('/').get(getAll);
+router.route('/').get(logRequest, getAll);
+router.route('/:file').get(logRequest, getSingle);
 
 
 // Temporary, not part of the project

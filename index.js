@@ -11,8 +11,8 @@ app.use(cors());
 app.disable('etag');
 
 // For JSON payloads
-app.use(express.json({ limit: '10mb' }));
-app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+app.use(express.json({ limit: '100mb' }));
+app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 
 // Import site routers
 const rootRouter = require('./apps/root/routes');
@@ -21,15 +21,16 @@ const sharefileRouter = require('./apps/sharefile/routes');
 
 // Serving static files
 app.use('/', rootRouter);
-// No static serve for '/' as it intended to serve for console.
-app.use('/paste', express.static(path.join(__dirname, './apps/paste/public/')));
-app.use('/paste', pasteRouter);
-app.use('/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
-app.use('/sharefile', sharefileRouter);
+/**
+ * No static serve for '/' as it is intended to work as API.
+ */
+app.use('/apps/paste', express.static(path.join(__dirname, './apps/paste/public/')));
+app.use('/apps/paste', pasteRouter);
+app.use('/apps/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
+app.use('/apps/sharefile', sharefileRouter);
 
 // Global error handler
-const errorHandler = require('./apps/sharefile/middleware/errorHandler');
-app.use(errorHandler);
+app.use(require('./common/middleware/errorHandler'));
 
 // Global 404 fallback
 app.use((req, res) => {
@@ -43,10 +44,3 @@ app.use((req, res) => {
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
 });
-
-/**
- * 		@TODO
- *   1. Create sharefile/ path to share files
- *   2. Add demo paths for /
- *   3. Create controller functions for /
- */

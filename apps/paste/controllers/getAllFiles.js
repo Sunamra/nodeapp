@@ -4,9 +4,9 @@ const chalk = require('chalk');
 
 chalk.level = 1;
 
-// Directly print all files in a human readable format in console/browser
+// Return raw text in a human readable format
 // Not returning in JSON
-const getAllFiles = async (baseDir, res, userAgent) => {
+module.exports = async (baseDir, res, userAgent) => {
 	try {
 		const isConsole = /curl|http|python|ruby|perl/i.test(userAgent);
 		const isBrowser = /chrome|firefox|safari|edge|opera|msie|trident/i.test(userAgent);
@@ -66,4 +66,3 @@ const getAllFiles = async (baseDir, res, userAgent) => {
 	}
 };
 
-module.exports = getAllFiles;

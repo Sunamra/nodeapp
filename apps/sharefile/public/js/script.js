@@ -6,8 +6,8 @@ const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	'https://';
 
 const BASE_URI = `${PROTOCOL}${DOMAIN}`;
-const API_BASE = `${BASE_URI}/sharefile/api/v1`;
-const PUBLIC_STORE = `${BASE_URI}/sharefile/tempStore`;
+const API_BASE = `${BASE_URI}/apps/sharefile/api/v1`;
+const PUBLIC_STORE = `${BASE_URI}/apps/sharefile/tempStore`;
 
 // console.log(`Base URL : ${BASE_URI}`);
 
@@ -17,7 +17,7 @@ const toast = new ZephyrToast({
 });
 
 // Change the hyperlink to sibling page based on current page
-document.getElementById('anotherPageAnchor').href = `${BASE_URI}/paste/`;
+document.getElementById('anotherPageAnchor').href = `${BASE_URI}/apps/paste/`;
 
 // Global array holding all current nameCells in table.
 // Will be used to reapply scrolling during window resize.
