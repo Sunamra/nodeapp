@@ -3,7 +3,7 @@ const path = require('path');
 const storeDir = require('../utils/constants');
 const scheduleFileDeletion = require('../../../common/utils/deleteFile');
 
-const saveToFile = async (req, res) => {
+module.exports = async (req, res) => {
 	try {
 
 		// Make the dir in case it was not uploaded by git for being empty
@@ -66,5 +66,3 @@ const saveToFile = async (req, res) => {
 		});
 	}
 };
-
-module.exports = saveToFile;

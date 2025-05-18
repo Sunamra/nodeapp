@@ -1,3 +1,4 @@
-const getAll = require('./getAll.js');
+const getAll = require('./getAll');
+const getSingle = require('./getSingle');
 
-module.exports = { getAll };
+module.exports = { getAll, getSingle };

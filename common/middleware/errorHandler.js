@@ -1,6 +1,6 @@
 const multer = require('multer');
 
-const errorHandler = (err, req, res, next) => {
+const errorHandler = (err, _, res, next) => {
 	if (err instanceof multer.MulterError) {
 		// Multer-specific errors
 		return res.status(400).json({
