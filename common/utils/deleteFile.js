@@ -10,9 +10,9 @@ function scheduleFileDeletion(filePath, delay = 3 * 60 * 60 * 1000) {  // 3 hour
 	setTimeout(() => {
 		fs.unlink(filePath, (err) => {
 			if (err) {
-				console.error(`${(new Date()).toLocaleString()}  Failed to delete ${filePath}:`, err.message);
+				console.error(`${(new Date()).toLocaleString()}  Failed to delete '${filePath}':`, err.message);
 			} else {
-				console.log(`${(new Date()).toLocaleString()}  File deleted: ${filePath}`);
+				console.log(`${(new Date()).toLocaleString()}  File deleted: '${filePath}'`);
 			}
 		});
 	}, delay);

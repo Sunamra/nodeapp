@@ -4,31 +4,28 @@ const { storeDir } = require('../utils/constants');
 const { extractTitleAndContent, formatResponse_All } = require('../utils');
 
 module.exports = async (_, res) => {
-	res.type('text');
-
 	try {
+		res.type('text');
+
 		const files = await fs.readdir(storeDir, 'utf-8');
+
+		if (files.length == 0) {
+			return res.send('Currently no file exists');
+		}
 
 		const separatedData = [];
 		for (const file of files) {
 			// Read file content
 			const data = await fs.readFile(path.join(storeDir, file), 'utf-8');
 
-			// Separate title & content from file data and store in a array
+			// Separate title & content from each file data and store in a array
 			separatedData.push(extractTitleAndContent(data, file));
 		}
 
-		// Send final data
-		res.status(200).send(formatResponse_All(separatedData));
+		// Respond formatted data
+		res.send(formatResponse_All(separatedData));
 
 	} catch (error) {
 		res.status(500).send('Internal Server Error');
 	}
 };
-
-/**
- * @TODO 
- * 1. Single file fetch
- * 2. Error handling
- * 3. Clean up
- */
