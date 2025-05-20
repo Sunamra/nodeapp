@@ -1,3 +1,4 @@
 module.exports = {
-	storeDir: './apps/root/store'
+	storeDir: './apps/root/store',
+	rootLogDir:'./common/logs/root'
 };

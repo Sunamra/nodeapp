@@ -17,9 +17,9 @@ function deleteDirectory(dirPath, delay = 1 * 60 * 60 * 1000) { // Delete dir af
 	const timeout = setTimeout(() => {
 		try {
 			fs.rmSync(dirPath, { recursive: true, force: true });
-			console.log(`${(new Date()).toLocaleString()}  Directory deleted: ${dirPath}`);
+			console.log(`${(new Date()).toLocaleString()}  Directory deleted: '${dirPath}'`);
 		} catch (err) {
-			console.error(`${(new Date()).toLocaleString()}  Failed to delete directory ${dirPath}:`, err.message);
+			console.error(`${(new Date()).toLocaleString()}  Failed to delete directory '${dirPath}':`, err.message);
 		}
 	}, delay);
 

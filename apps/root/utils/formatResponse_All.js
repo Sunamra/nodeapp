@@ -16,6 +16,7 @@ module.exports = (extractedData) => {
 		const borderLen = finalTitle.length + (padLen * 2);
 
 		// Title
+		result += '\n';
 		result += borderChar.repeat(borderLen) + '\n';
 		result += borderChar + ' '.repeat(padLen - 1) + finalTitle + ' '.repeat(padLen - 1) + borderChar + '\n';
 		result += borderChar.repeat(borderLen) + '\n\n';
