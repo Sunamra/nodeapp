@@ -10,7 +10,7 @@ app.use(cors());
 // Disable headers
 app.disable('etag');
 // Show original client’s address in proxied server (for cloud deploy)
-app.set('trust proxy', true);
+app.set('trust proxy', 1);
 
 
 // For JSON payloads
