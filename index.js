@@ -11,8 +11,6 @@ app.use(cors());
 app.disable('etag');
 // Show original client’s address in proxied server (for cloud deploy)
 app.set('trust proxy', true);
-app.set('trust proxy', 3);
-
 
 // For JSON payloads
 app.use(express.json({ limit: '100mb' }));
