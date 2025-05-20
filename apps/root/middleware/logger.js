@@ -2,9 +2,9 @@ const fs = require('fs').promises;
 const path = require('path');
 const { rootLogDir } = require('../utils/constants');
 
-const writeLog = (req, timestamp) => {
+const writeLog = async (req, timestamp) => {
 
-	fs.mkdir(rootLogDir, { recursive: true })
+	await fs.mkdir(rootLogDir, { recursive: true })
 		.catch(err => {
 			console.error('Log directory creation error:', err);
 		});
@@ -13,7 +13,7 @@ const writeLog = (req, timestamp) => {
 		hour12: false,
 	})}  -  ${req.ip}  -  ${req.method} ${req.url} ${(req.protocol).toUpperCase()}/${req.httpVersion}  -  ${req.headers['user-agent']}\n`;
 
-	fs.appendFile(path.join(rootLogDir, 'access.log'), log)
+	await fs.appendFile(path.join(rootLogDir, 'access.log'), log)
 		.catch(err => {
 			console.error('Logging error:', err);
 		});
