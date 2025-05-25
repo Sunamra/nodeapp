@@ -7,7 +7,7 @@ router.route('/:file').get(logRequest, getSingle);
 
 
 // Temporary, not part of the project
-router.route('/videotools').get((_, res) => {
+router.route('/redirect/videotools').get((_, res) => {
 	res.redirect('https://www.dropbox.com/scl/fi/8x9gn69ja0ah4lsv37rct/VideoTools.zip?rlkey=gi7bubvd8aapjue6g8togy6he');
 });
 
