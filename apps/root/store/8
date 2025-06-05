@@ -1,0 +1,31 @@
+#@ All Armstrong Number in Range
+#!/usr/bin/env bash
+
+echo -n "Start : "
+read start
+echo -n "End   : "
+read end
+
+echo -n "Armstrong numbers between $start & $end are : "
+
+for ((num = start; num <= end; num++)); do
+    # Determine how many digits num has
+    count=${#num}
+
+    sum=0
+    temp=$num
+
+    # Peel off each digit, raise to 'count', and accumulate
+    while ((temp > 0)); do
+        digit=$((temp % 10))
+        ((sum += digit ** count))
+        ((temp /= 10))
+    done
+
+    # If the sum of powers equals the original number, it's an Armstrong number
+    if ((sum == num)); then
+        echo -n "$num "
+    fi
+done
+
+echo

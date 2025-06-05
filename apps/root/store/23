@@ -1,0 +1,8 @@
+#@ Check User Validity
+
+read -p "Enter the username : " user
+if grep -q "^$user:" /etc/passwd; then
+    echo "User '$user' is valid."
+else
+    echo "User '$user' is not valid."
+fi

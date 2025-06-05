@@ -1,0 +1,14 @@
+#@ Maximum of Two
+
+echo -n "Enter first number  : "
+read a
+echo -n "Enter second number : "
+read b
+
+if [ $a -gt $b ]; then
+    echo "Maximum value is $a"
+elif [ $a -eq $b ]; then
+    echo "Both values are same"
+else
+    echo "Maximum value is $b"
+fi

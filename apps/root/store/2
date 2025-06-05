@@ -1,3 +1,24 @@
-@# Title 2
-Content 2 line 1
-Content 2 line 2
+#@ All Prime Number in Range
+
+read -p "Start : " start
+read -p "End   : " end
+
+echo -n "Prime numbers from $start to $end are : "
+
+for ((i = "$start"; i <= "$end"; i++)); do
+    num="$i"
+    flag=0
+
+    for ((j = 2; j <= num / 2; j++)); do
+        if (("$num" % $j == 0)); then
+            flag=1
+            break
+        fi
+    done
+
+    if [ "$flag" -eq 0 ] && [ "$num" -gt 0 ]; then
+        echo -n "$num "
+    fi
+done
+
+echo

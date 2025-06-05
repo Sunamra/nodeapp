@@ -1,0 +1,9 @@
+#@ Search Pattern in File
+
+read -p "Enter the pattern to search : " pattern
+read -p "Enter the filename : " filename
+if [ -f "$filename" ]; then
+    grep "$pattern" "$filename"
+else
+    echo "Error: File '$filename' does not exist."
+fi

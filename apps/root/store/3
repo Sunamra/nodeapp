@@ -1,7 +1,21 @@
+#@ Check Palindrome Number
 
-Content 3 line 1
-Content 3 line 2
+read -p "Enter a number to check : " num
 
+temp=$num
+rem=0
+rev=0
 
-Content 3 line 3
-Content 3 line 4
+while ((temp > 0)); do
+    rem=$(expr $temp \% 10)
+    rev=$(expr $rev \* 10 + $rem)
+    temp=$(expr $temp / 10)
+done
+
+echo "Reversed number : $rev"
+
+if [ $num -eq $rev ]; then
+    echo "$num is a palindrome"
+else
+    echo "$num is a not palindrome"
+fi

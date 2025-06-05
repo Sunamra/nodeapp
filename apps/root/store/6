@@ -1,0 +1,14 @@
+#@ Nth Fibonacci Number
+
+read -p "Fibonacci Number Position : " n
+
+a=0
+b=1
+
+for ((i = 0; i < n; i++)); do
+    ((nxt = a + b))
+    a=$b
+    b=$nxt
+done
+
+echo "${n}th Fibonacci Number is : $a"

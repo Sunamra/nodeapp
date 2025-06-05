@@ -1,4 +1,5 @@
-const getAll = require('./getAll');
-const getSingle = require('./getSingle');
+// const getAll = require('./getAll');
+const getFileList = require('./getFileList');
+const getFile = require('./getFile');
 
-module.exports = { getAll, getSingle };
+module.exports = { getFileList, getFile };

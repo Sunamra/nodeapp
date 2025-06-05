@@ -1,0 +1,19 @@
+#@ First N Fibonacci Series
+
+a=0
+b=1
+count=1
+# n=${1:-10}
+read -p "How many Fibonacci Numbers : " n
+
+echo -n "First $n Fibonacci Numbers : "
+
+while ((count <= n)); do
+    echo -n "$a "
+    ((next = a + b))
+    a=$b
+    b=$next
+    ((count++))
+done
+
+echo

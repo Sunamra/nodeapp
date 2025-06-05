@@ -1,4 +1,5 @@
 let lineIndex = 0;
+const prefixChars = '#@';
 
 const extractTitle = (lines) => {
 	lineIndex = 0;
@@ -13,9 +14,11 @@ const extractTitle = (lines) => {
 			continue;
 		}
 
-		if (line.startsWith('@#')) {
+		if (line.startsWith(prefixChars)) {
 			titleSignPresent = true;
-			title = line.replace(/[@#]/g, '').trim();
+
+			let regex = new RegExp(`[${prefixChars}]`, 'g');
+			title = line.replace(regex, '').trim();
 		}
 
 		break;
@@ -35,16 +38,17 @@ const extractContent = (lines) => {
 	let lineWritten = 0;
 	for (let i = lineIndex; i < lines.length; i++) {
 
-		const line = lines[i].replace(/[\r\n]/g, '').trim();
+		 // Remove trailing whitespace 
+		const line = lines[i].replace(/\s+$/, '');
 
-		if (line.startsWith('@#')) {
+		if (line.startsWith(prefixChars)) {
 			continue;
 		}
 
-		// Precisely add `line`s to `content` with no leading/trailing whitespace
+		// Precisely add `line`s to `content` with no blank(whitespce only) lines
 		if (line) {
 			if (lineWritten) {
-				content += '\n' + line.trim();
+				content += '\n' + line;
 			}
 			else {
 				content += `${line}`;

@@ -1,0 +1,11 @@
+#@ Implement execlp() System Call
+
+#include <stdio.h>
+#include <unistd.h>
+int main()
+{
+    printf("This line is printed before execlp()\n\n");
+    execlp("ls", "ls", "-al", NULL);
+    printf("This won't print if execlp() is successful\n");
+    return 0;
+}
