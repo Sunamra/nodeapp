@@ -1,0 +1,17 @@
+#@ Compare Files and Delete/Keep (Command Line)
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 <file1> <file2>"
+    exit 1
+fi
+
+file1=$1
+file2=$2
+
+cmp -s $file1 $file2
+if [ $? -eq 0 ]; then
+    echo "Files are same, deleting file '$file2'"
+    rm $2
+else
+    echo "Files are different, keeping both"
+fi

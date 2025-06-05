@@ -3,6 +3,8 @@ module.exports = (extractedData) => {
 	let result = '';
 
 	const borderChar = '-';
+	const cornerChar = '+';
+	const sideChar = '|';
 	const endChar = '*';
 	const padLen = 8;
 	const endBorderLen = 50;
@@ -16,10 +18,16 @@ module.exports = (extractedData) => {
 		const borderLen = finalTitle.length + (padLen * 2);
 
 		// Title
+		// result += '\n';
+		// result += borderChar.repeat(borderLen) + '\n';
+		// result += borderChar + ' '.repeat(padLen - 1) + finalTitle + ' '.repeat(padLen - 1) + borderChar + '\n';
+		// result += borderChar.repeat(borderLen) + '\n\n';
+
+		// Chatgpt ASCII Diagram Style Title Box
 		result += '\n';
-		result += borderChar.repeat(borderLen) + '\n';
-		result += borderChar + ' '.repeat(padLen - 1) + finalTitle + ' '.repeat(padLen - 1) + borderChar + '\n';
-		result += borderChar.repeat(borderLen) + '\n\n';
+		result += cornerChar + borderChar.repeat(borderLen - 2) + cornerChar + '\n';
+		result += sideChar + ' '.repeat(padLen - 1) + finalTitle + ' '.repeat(padLen - 1) + sideChar + '\n';
+		result += cornerChar + borderChar.repeat(borderLen - 2) + cornerChar + '\n\n';
 
 		// Content
 		result += content + '\n\n';

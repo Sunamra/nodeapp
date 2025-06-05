@@ -1,0 +1,9 @@
+#@ Total Digits in a Number
+
+read -p "Enter a number : " num
+count=0
+while [ $num -gt 0 ]; do
+	num=$(expr $num / 10)
+	count=$(expr $count + 1)
+done
+echo "Total number of digits : $count"

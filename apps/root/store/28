@@ -1,0 +1,11 @@
+#@ Display UID, PID, and PPID of a Current Process
+
+#include <stdio.h>
+#include <unistd.h>
+int main()
+{
+    printf("UID  : %d\n", getuid());
+    printf("PID  : %d\n", getpid());
+    printf("PPID : %d\n", getppid());
+    return 0;
+}

@@ -1,3 +1,17 @@
-@# Title 4
-Content 4 line 1
-Content 4 line 2
+#@ Check Palindrome String
+
+read -p "Enter a string : " str
+rev_str=""
+str_length=${#str}
+
+for ((i = str_length; i >= 0; i--)); do
+    rev_str+="${str:$i:1}"
+done
+
+echo "Reversed string : $rev_str"
+
+if [ $str == $rev_str ]; then
+    echo "String '$str' is a palindrome"
+else
+    echo "String '$str' is not a paindrome"
+fi

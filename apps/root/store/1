@@ -1,9 +1,24 @@
+#@ Check Prime Number
 
-		  @# Check Palindrome using user input
-@# Check Palindrome using user input
+read -p "Enter a number to check : " num
 
+if [ $num -lt 2 ]; then
+    echo "$num is Not a Prime Number"
+    exit 0
+fi
 
+flag=0
 
+for ((i = 2; i <= num / 2; i++)); do
+    if (($num % $i == 0)); then
+        flag=1
+        break
+    fi
 
-Content 1 line 1
-Content 1 line 2
+done
+
+if [ $flag -eq 1 ]; then
+    echo "$num is Not a Prime Number"
+else
+    echo "$num is a Prime Number"
+fi

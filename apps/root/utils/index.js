@@ -1,6 +1,5 @@
-const extractTitleAndContent = require('./extractTitleAndContent');
-const formatResponse_All = require('./formatResponse_All');
-const formatResponse_Single = require('./formatResponse_Single');
-const listAll = require('./listAll');
+const listAllFiles = require('./listAllFiles');
+const prepareAllFiles = require('./prepareAllFiles');
+const prepareSingleFile = require('./prepareSingleFile');
 
-module.exports = { extractTitleAndContent, formatResponse_All, formatResponse_Single, listAll };
+module.exports = { prepareAllFiles, listAllFiles, prepareSingleFile };

@@ -1,0 +1,9 @@
+#@ All Combinations of 1 2
+
+for i in 1 2; do
+    for j in 1 2; do
+        echo -n "$i$j "
+    done
+done
+
+echo

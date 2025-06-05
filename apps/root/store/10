@@ -1,0 +1,15 @@
+#@ Two numbers Add, Sub, Mul, Div
+
+read -p "Enter first number  : " a
+read -p "Enter second number : " b
+sum=$(expr $a + $b)
+sub=$(expr $a - $b)
+mul=$(expr $a \* $b)
+div=$(expr $a / $b)
+rem=$(expr $a % $b)
+echo
+echo "Addition: $sum"
+echo "Subtraction: $sub"
+echo "Multiplication: $mul"
+echo "Division: $div"
+echo "Remainder: $rem"
