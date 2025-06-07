@@ -1,5 +1,7 @@
 /* Root Variables */
 :root {
+	color-scheme: dark;
+
 	--name-scroll-gap: 3rem;
 
 	/* Upload progress SVG */
@@ -144,26 +146,21 @@ body {
 #right-tick {
 	position: absolute;
 	left: 100%;
-	/* same anchor as the SVG */
 	top: 50%;
 	transform: translate(10px, -50%);
 	width: 80px;
 	height: 80px;
-
 	opacity: 0;
-	/* start hidden */
 	visibility: hidden;
 }
 
 #right-tick.fade-in {
 	visibility: visible;
-	/* show when fading in */
 	animation: fadeIn 0.01s ease-in forwards;
 }
 
 #right-tick.fade-out {
 	animation: fadeOut 0.5s ease-out forwards;
-	/* after fadeOut completes, you can remove the element or reset visibility via JS */
 }
 
 .fade-in {
@@ -178,44 +175,16 @@ body {
 
 /* Table Container */
 .tableDiv {
-	height: 80%;
-	min-height: 50px;
-	max-height: 80vh;
 	width: 80%;
-	/* min-width: 500px; */
-	max-width: 1000px;
-	margin-bottom: 15px;
-	position: relative;
-	isolation: isolate;
-	align-items: center;
-	overflow: auto;
+	max-width: 1200px;
 	border: 2px solid rgb(146, 146, 146);
 	border-radius: 10px;
+	overflow: hidden;
 }
 
-.tableDiv::-webkit-scrollbar-track {
-	display: none;
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-	background-color: #2c2c2c;
-	border-radius: 15px;
-}
-
-.tableDiv::-webkit-scrollbar {
-	display: none;
-	border-radius: 15px;
-	width: 10px;
-	background-color: #2c2c2c;
-}
-
-.tableDiv::-webkit-scrollbar-thumb {
-	display: none;
-	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
-	border-radius: 15px;
-	background-color: #9f9f9f;
-}
-
-.tableDiv::-webkit-scrollbar-thumb:hover {
-	background-color: #c4c4c4;
+.scrollInner {
+	max-height: 70vh;
+	overflow: auto;
 }
 
 /*--------------------------------*/
@@ -274,7 +243,6 @@ body {
 
 .fileName.scrolling .scroll-content {
 	display: inline-flex;
-	/* so its children sit side by side */
 	white-space: nowrap;
 	animation: scroll-left var(--duration) linear infinite;
 	/* add a little gap between repeats*/
@@ -340,19 +308,17 @@ body {
 	position: absolute;
 	right: 40px;
 	bottom: 35px;
-
-	/* same purple “button” look */
 	display: inline-flex;
 	align-items: center;
-	justify-content: flex-end;
 	/* push content to the right */
+	justify-content: flex-end;
 	background: transparent;
 	border: 2px solid white;
 	border-radius: 50px;
-	overflow: hidden;
 	/* hide the text off to the left */
-	max-width: 56px;
+	overflow: hidden;
 	/* icon (40px) + 2×8px padding */
+	max-width: 56px;
 	transition: max-width 0.35s ease;
 	box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
 }
@@ -373,7 +339,6 @@ body {
 
 .hover-text {
 	margin: 0 10px;
-	/* gap between text & icon */
 	font-weight: bold;
 	/* text-transform: uppercase; */
 	white-space: nowrap;
@@ -415,5 +380,22 @@ body {
 
 	to {
 		opacity: 0;
+	}
+}
+
+/*--------------------------------*/
+
+/* Media Queries */
+@media (max-width:980px) {
+	.uploadDiv {
+		margin: 20px 0 20px;
+	}
+
+	.tableDiv {
+		width: 97%;
+	}
+
+	.fileName {
+		max-width: 100px;
 	}
 }

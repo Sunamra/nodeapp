@@ -17,7 +17,6 @@
 
 	<!-- Lottie animation module -->
 	<script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs" type="module"></script>
-
 </head>
 
 <body>
@@ -42,27 +41,29 @@
 	</div>
 
 	<div id="drop-zone" class="tableDiv">
-		<!-- Text to show during drag/drop event -->
-		<div id="dragText" style="display: none;">
-			Drop&nbsp;to&nbsp;Upload
+		<div class="scrollInner">
+			<!-- Text to show during drag/drop event -->
+			<div id="dragText" style="display: none;">
+				Drop&nbsp;to&nbsp;Upload
+			</div>
+
+			<table id="fileTable">
+				<thead>
+					<tr>
+						<th>Filename</th>
+						<th>Uploaded</th>
+						<th>Size</th>
+						<th>Download</th>
+					</tr>
+
+				</thead>
+				<tbody class="tbody-rows">
+					<td colspan="4" class="no-files">
+						Files will be listed here
+					</td>
+				</tbody>
+			</table>
 		</div>
-
-		<table id="fileTable">
-			<thead>
-				<tr>
-					<th>Filename</th>
-					<th>Uploaded</th>
-					<th>Size</th>
-					<th>Download</th>
-				</tr>
-
-			</thead>
-			<tbody class="tbody-rows">
-				<td colspan="4" class="no-files">
-					Files will be listed here
-				</td>
-			</tbody>
-		</table>
 	</div>
 
 	<div class="another-page">
