@@ -182,7 +182,7 @@ body {
 	min-height: 50px;
 	max-height: 80vh;
 	width: 80%;
-	min-width: 500px;
+	/* min-width: 500px; */
 	max-width: 1000px;
 	margin-bottom: 15px;
 	position: relative;
