@@ -10,7 +10,7 @@ const writeLog = async (req, timestamp) => {
 		});
 
 	const log = `${(new Date(timestamp)).toLocaleString('en-IN', {
-		hour12: false,
+		hourCycle: 'h23'
 	})}  -  ${req.ip}  -  ${req.method} ${req.url} ${(req.protocol).toUpperCase()}/${req.httpVersion}  -  ${req.headers['user-agent']}\n`;
 
 	await fs.appendFile(path.join(rootLogDir, 'access.log'), log)
