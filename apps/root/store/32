@@ -1,0 +1,20 @@
+#@ Fibonacci Series in Range
+
+read -p "Start : " low
+read -p "End : " high
+
+a=0
+b=1
+
+while [ $a -le $high ]
+do
+    if [ $a -ge $low ]; then
+        echo -n "$a "
+    fi
+    fn=$((a + b))
+    a=$b
+    b=$fn
+done
+
+echo
+
