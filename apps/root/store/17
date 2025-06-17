@@ -7,7 +7,7 @@ read b
 echo -n "Enter third number  : "
 read c
 
-if [ $a -eq $b ] && [ $b -eq $c ] || [ $c -eq $a ]; then
+if [ $a -eq $b ] && [ $b -eq $c ] && [ $c -eq $a ]; then
     echo "Error : Values must not be same"
     exit 1
 fi
