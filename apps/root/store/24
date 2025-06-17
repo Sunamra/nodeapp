@@ -1,8 +1,11 @@
-#@ Check User Validity
+#@ Compare Files and Delete/Keep
 
-read -p "Enter the username : " user
-if grep -q "^$user:" /etc/passwd; then
-    echo "User '$user' is valid."
+read -p "Name of file 1 : " file1
+read -p "Name of file 2 : " file2
+
+if cmp -s $file1 $file2; then
+    echo "Files are same, deleting file '$file2'"
+    rm $file2
 else
-    echo "User '$user' is not valid."
+    echo "Files are not same, keeping both"
 fi

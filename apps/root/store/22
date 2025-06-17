@@ -1,11 +1,12 @@
-#@ Compare Files and Delete/Keep
+#@ All Positional Parameters
 
-read -p "Name of file 1 : " file1
-read -p "Name of file 2 : " file2
-
-if cmp -s $file1 $file2; then
-    echo "Files are same, deleting file '$file2'"
-    rm $file2
-else
-    echo "Files are not same, keeping both"
-fi
+echo "Script Name : $0"
+echo "First Argument : $1"
+echo "Second Argument : $2"
+echo "Third Argument : $3"
+echo "Total Number of Arguments : $#"
+echo "All Arguments as a Single String : $*"
+echo "All Arguments as Separate Strings : $@"
+echo "Current Process ID : $$"
+ls /invalidpath
+echo "Exit Status of Last Command : $?"

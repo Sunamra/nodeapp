@@ -1,11 +1,21 @@
-#@ Factorial of a Number
+#@ Maximum of Three
 
-echo -n "Enter a number : "
-read n
-temp=$n
-fact=1
-while [ $n -gt 1 ]; do
-	fact=$(expr $fact \* $n)
-	n=$(expr $n - 1)
-done
-echo "Factorial of $temp is $fact"
+echo -n "Enter first number  : "
+read a
+echo -n "Enter second number : "
+read b
+echo -n "Enter third number  : "
+read c
+
+if [ $a -eq $b ] && [ $b -eq $c ] || [ $c -eq $a ]; then
+    echo "Error : Values must not be same"
+    exit 1
+fi
+
+if [ $a -gt $b ] && [ $a -gt $c ]; then
+    echo "Maximum value is $a"
+elif [ $b -gt $c ]; then
+    echo "Maximum value is $b"
+else
+    echo "Maximum value is $c"
+fi

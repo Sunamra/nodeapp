@@ -1,17 +1,21 @@
-#@ Compare Files and Delete/Keep (Command Line)
+#@ Bubble Sort
 
-if [ $# -ne 2 ]; then
-    echo "Usage: $0 <file1> <file2>"
-    exit 1
-fi
+# array=( $@ )
+array=(3 1 2 5 4)
 
-file1=$1
-file2=$2
+len=${#array[@]}
 
-cmp -s $file1 $file2
-if [ $? -eq 0 ]; then
-    echo "Files are same, deleting file '$file2'"
-    rm $2
-else
-    echo "Files are different, keeping both"
-fi
+for ((i = 0; i < len - 1; i++)); do
+    for ((j = 0; j < len - 1 - i; j++)); do
+
+        if ((array[$j] > array[$j + 1])); then
+
+            temp=${array[$j]}
+            array[$j]=${array[(($j + 1))]}
+            array[(($j + 1))]=$temp
+
+        fi
+    done
+done
+
+echo "Sorted array : ${array[@]}"

@@ -1,14 +1,19 @@
-#@ Maximum of Two
+#@ Swap Two Numbers
 
-echo -n "Enter first number  : "
+echo -n "Enter first number (a)  : "
 read a
-echo -n "Enter second number : "
+echo -n "Enter second number (b) : "
 read b
-
-if [ $a -gt $b ]; then
-    echo "Maximum value is $a"
-elif [ $a -eq $b ]; then
-    echo "Both values are same"
-else
-    echo "Maximum value is $b"
-fi
+temp=$a
+a=$b
+b=$temp
+echo "Swapped using third variable : a = $a, b = $b"
+echo
+echo -n "Enter third number (c)  : "
+read c
+echo -n "Enter fourth number (d) : "
+read d
+c=$(expr $c + $d)
+d=$(expr $c - $d)
+c=$(expr $c - $d)
+echo "Swapped without using third variable : c = $c, d = $d"

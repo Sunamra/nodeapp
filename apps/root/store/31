@@ -1,11 +1,11 @@
-#@ Implement execl() System Call
+#@ Display UID, PID, and PPID of a Current Process
 
 #include <stdio.h>
 #include <unistd.h>
 int main()
 {
-    printf("This line is printed before execl()\n\n");
-    execl("/bin/ls", "ls", "-l", NULL);
-    printf("This line won't print if execl is successful\n");
+    printf("UID  : %d\n", getuid());
+    printf("PID  : %d\n", getpid());
+    printf("PPID : %d\n", getppid());
     return 0;
 }
