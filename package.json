@@ -6,7 +6,7 @@
 		"start": "npm i && node index.js",
 		"preview": "vite preview",
 		"lint": "eslint . --ext .js",
-		"push": "git add . && git commit --allow-empty-message && git push",
+		"push": "git add . && git commit && git push",
 		"pull": "pm2 stop 0 && git pull && pm2 start 0"
 	},
 	"keywords": [],
