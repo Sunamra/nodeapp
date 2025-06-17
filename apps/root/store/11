@@ -1,4 +1,4 @@
-#### All Krishnamurthy Numbers in Range ####
+#@ All Krishnamurthy Numbers in Range
 
 #!/usr/bin/env bash
 read -p "Start : " start
