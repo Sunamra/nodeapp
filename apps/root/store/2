@@ -1,4 +1,4 @@
-#@ All Prime Number in Range
+#@ All Prime Numbers in Range
 
 read -p "Start : " start
 read -p "End   : " end
