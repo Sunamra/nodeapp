@@ -1,4 +1,4 @@
-#@ Fibonacci Series in Range
+#@ Fibonacci Numbers in Range
 
 read -p "Start : " low
 read -p "End : " high
