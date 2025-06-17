@@ -1,15 +1,36 @@
-#@ Two numbers Add, Sub, Mul, Div
+#### All Krishnamurthy Numbers in Range ####
 
-read -p "Enter first number  : " a
-read -p "Enter second number : " b
-sum=$(expr $a + $b)
-sub=$(expr $a - $b)
-mul=$(expr $a \* $b)
-div=$(expr $a / $b)
-rem=$(expr $a % $b)
+#!/usr/bin/env bash
+read -p "Start : " start
+read -p "End   : " end
+echo -n "Krishnamurthy numbers between $start & $end are : "
+
+# Function to calculate factorial
+factorial() {
+	local n=$1
+	local fact=1
+	for ((i = 1; i <= n; i++)); do
+		fact=$((fact * i))
+	done
+	echo $fact
+}
+
+for ((num = start; num <= end; num++)); do
+
+	if ((num < 1)); then
+		continue
+	fi
+
+	sum=0
+	temp=$num
+	while ((temp > 0)); do
+		digit=$((temp % 10))
+		fact=$(factorial $digit)
+		((sum += fact))
+		((temp /= 10))
+	done
+	if ((sum == num)); then
+		echo -n "$num "
+	fi
+done
 echo
-echo "Addition: $sum"
-echo "Subtraction: $sub"
-echo "Multiplication: $mul"
-echo "Division: $div"
-echo "Remainder: $rem"

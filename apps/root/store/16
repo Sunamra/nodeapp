@@ -1,31 +1,14 @@
-#@ Sum, Avg, Grade of 3 Subjects
+#@ Maximum of Two
 
-echo -n "Enter marks of Subject 1 : "
-read s1
-echo -n "Enter marks of Subject 2 : "
-read s2
-echo -n "Enter marks of Subject 3 : "
-read s3
+echo -n "Enter first number  : "
+read a
+echo -n "Enter second number : "
+read b
 
-sum=$(expr $s1 + $s2 + $s3)
-avg=$(expr $sum / 3)
-
-if [ $avg -ge 90 ]; then
-    grade="O"
-elif [ $avg -ge 80 ]; then
-    grade="E"
-elif [ $avg -ge 70 ]; then
-    grade="A"
-elif [ $avg -ge 60 ]; then
-    grade="B"
-elif [ $avg -ge 50 ]; then
-    grade="C"
-elif [ $avg -ge 40 ]; then
-    grade="D"
+if [ $a -gt $b ]; then
+    echo "Maximum value is $a"
+elif [ $a -eq $b ]; then
+    echo "Both values are same"
 else
-    grade="F"
+    echo "Maximum value is $b"
 fi
-
-echo "Total Marks: $sum"
-echo "Average Marks: $avg"
-echo "Grade: $grade"

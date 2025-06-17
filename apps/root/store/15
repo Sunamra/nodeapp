@@ -1,21 +1,9 @@
-#@ Maximum of Three
+#@ Check Even Odd
 
-echo -n "Enter first number  : "
-read a
-echo -n "Enter second number : "
-read b
-echo -n "Enter third number  : "
-read c
-
-if [ $a -eq $b ] && [ $b -eq $c ] || [ $c -eq $a ]; then
-    echo "Error : Values must not be same"
-    exit 1
-fi
-
-if [ $a -gt $b ] && [ $a -gt $c ]; then
-    echo "Maximum value is $a"
-elif [ $b -gt $c ]; then
-    echo "Maximum value is $b"
+read -p "Enter a number : " num
+rem=$(expr $num % 2)
+if [ $rem -eq 0 ]; then
+	echo "$num is Even"
 else
-    echo "Maximum value is $c"
+	echo "$num is Odd"
 fi

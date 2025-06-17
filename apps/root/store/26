@@ -1,16 +1,8 @@
-#@ Array Input and Display
+#@ Check User Validity
 
-read -p "Number of array elements : " n
-i=0
-while [ $i -lt $n ]; do
-	read -p "Element $i : " a[$i]
-	((i++))
-done
-echo -ne "\nArray elements are : "
-i=0
-while [ $i -lt $n ]; do
-	echo -n "${a[$i]} "
-	((i++))
-done
-
-echo
+read -p "Enter the username : " user
+if grep -q "^$user:" /etc/passwd; then
+    echo "User '$user' is valid."
+else
+    echo "User '$user' is not valid."
+fi

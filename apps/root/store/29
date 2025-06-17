@@ -1,11 +1,9 @@
-#@ Display UID, PID, and PPID of a Current Process
+#@ All Combinations of 1 2
 
-#include <stdio.h>
-#include <unistd.h>
-int main()
-{
-    printf("UID  : %d\n", getuid());
-    printf("PID  : %d\n", getpid());
-    printf("PPID : %d\n", getppid());
-    return 0;
-}
+for i in 1 2; do
+    for j in 1 2; do
+        echo -n "$i$j "
+    done
+done
+
+echo

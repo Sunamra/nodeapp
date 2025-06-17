@@ -1,9 +1,9 @@
-#@ All Combinations of 1 2
+#@ Search Pattern in File
 
-for i in 1 2; do
-    for j in 1 2; do
-        echo -n "$i$j "
-    done
-done
-
-echo
+read -p "Enter the pattern to search : " pattern
+read -p "Enter the filename : " filename
+if [ -f "$filename" ]; then
+    grep "$pattern" "$filename"
+else
+    echo "Error: File '$filename' does not exist."
+fi

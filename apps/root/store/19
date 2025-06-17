@@ -1,11 +1,11 @@
-#@ Sum of Digits in a Number
+#@ Factorial of a Number
 
 echo -n "Enter a number : "
-read num
-sum=0
-while [ $num -gt 0 ]; do
-	digit=$(expr $num % 10)
-	sum=$(expr $sum + $digit)
-	num=$(expr $num / 10)
+read n
+temp=$n
+fact=1
+while [ $n -gt 1 ]; do
+	fact=$(expr $fact \* $n)
+	n=$(expr $n - 1)
 done
-echo "Sum of digits : $sum"
+echo "Factorial of $temp is $fact"

@@ -1,12 +1,9 @@
-#@ All Positional Parameters
+#@ Total Digits in a Number
 
-echo "Script Name : $0"
-echo "First Argument : $1"
-echo "Second Argument : $2"
-echo "Third Argument : $3"
-echo "Total Number of Arguments : $#"
-echo "All Arguments as a Single String : $*"
-echo "All Arguments as Separate Strings : $@"
-echo "Current Process ID : $$"
-ls /invalidpath
-echo "Exit Status of Last Command : $?"
+read -p "Enter a number : " num
+count=0
+while [ $num -gt 0 ]; do
+	num=$(expr $num / 10)
+	count=$(expr $count + 1)
+done
+echo "Total number of digits : $count"
