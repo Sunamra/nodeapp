@@ -1,11 +1,21 @@
-#@ Compare Files and Delete/Keep
+#@ Bubble Sort
 
-read -p "Name of file 1 : " file1
-read -p "Name of file 2 : " file2
+# array=( $@ )
+array=(3 1 2 5 4)
 
-if cmp -s $file1 $file2; then
-    echo "Files are same, deleting file '$file2'"
-    rm $file2
-else
-    echo "Files are not same, keeping both"
-fi
+len=${#array[@]}
+
+for ((i = 0; i < len - 1; i++)); do
+    for ((j = 0; j < len - 1 - i; j++)); do
+
+        if ((array[$j] > array[$j + 1])); then
+
+            temp=${array[$j]}
+            array[$j]=${array[(($j + 1))]}
+            array[(($j + 1))]=$temp
+
+        fi
+    done
+done
+
+echo "Sorted array : ${array[@]}"

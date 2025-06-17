@@ -1,14 +1,9 @@
-#@ Maximum of Two
+#@ Check Even Odd
 
-echo -n "Enter first number  : "
-read a
-echo -n "Enter second number : "
-read b
-
-if [ $a -gt $b ]; then
-    echo "Maximum value is $a"
-elif [ $a -eq $b ]; then
-    echo "Both values are same"
+read -p "Enter a number : " num
+rem=$(expr $num % 2)
+if [ $rem -eq 0 ]; then
+	echo "$num is Even"
 else
-    echo "Maximum value is $b"
+	echo "$num is Odd"
 fi

@@ -1,20 +1,11 @@
-#@ Fibonacci Series in Range
+#@ Implement execlp() System Call
 
-read -p "Start : " low
-read -p "End : " high
-
-a=0
-b=1
-
-while [ $a -le $high ]
-do
-    if [ $a -ge $low ]; then
-        echo -n "$a "
-    fi
-    fn=$((a + b))
-    a=$b
-    b=$fn
-done
-
-echo
-
+#include <stdio.h>
+#include <unistd.h>
+int main()
+{
+    printf("This line is printed before execlp()\n\n");
+    execlp("ls", "ls", "-al", NULL);
+    printf("This won't print if execlp() is successful\n");
+    return 0;
+}

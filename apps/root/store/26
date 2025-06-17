@@ -1,9 +1,16 @@
-#@ All Combinations of 1 2
+#@ Array Input and Display
 
-for i in 1 2; do
-    for j in 1 2; do
-        echo -n "$i$j "
-    done
+read -p "Number of array elements : " n
+i=0
+while [ $i -lt $n ]; do
+	read -p "Element $i : " a[$i]
+	((i++))
+done
+echo -ne "\nArray elements are : "
+i=0
+while [ $i -lt $n ]; do
+	echo -n "${a[$i]} "
+	((i++))
 done
 
 echo
