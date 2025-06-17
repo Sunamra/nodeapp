@@ -1,9 +1,19 @@
-#@ Check Even Odd
+#@ Swap Two Numbers
 
-read -p "Enter a number : " num
-rem=$(expr $num % 2)
-if [ $rem -eq 0 ]; then
-	echo "$num is Even"
-else
-	echo "$num is Odd"
-fi
+echo -n "Enter first number (a)  : "
+read a
+echo -n "Enter second number (b) : "
+read b
+temp=$a
+a=$b
+b=$temp
+echo "Swapped using third variable : a = $a, b = $b"
+echo
+echo -n "Enter third number (c)  : "
+read c
+echo -n "Enter fourth number (d) : "
+read d
+c=$(expr $c + $d)
+d=$(expr $c - $d)
+c=$(expr $c - $d)
+echo "Swapped without using third variable : c = $c, d = $d"

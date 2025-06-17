@@ -1,26 +1,20 @@
-#@ Check Armstrong Number
+#@ Fibonacci Series in Range
 
-read -p "Enter a number : " num
+read -p "Start : " low
+read -p "End : " high
 
-temp=$num
-sum=0
-count=0
+a=0
+b=1
 
-# Count digits
-count=${#num}
-
-temp=$num
-
-# Calculate Armstrong sum
-while ((temp > 0)); do
-    digit=$((temp % 10))
-    power=$((digit ** count))
-    sum=$((sum + power))
-    temp=$((temp / 10))
+while [ $a -le $high ]
+do
+    if [ $a -ge $low ]; then
+        echo -n "$a "
+    fi
+    fn=$((a + b))
+    a=$b
+    b=$fn
 done
 
-if [ $num -gt 0 ] && [ $sum -eq $num ]; then
-    echo "$num is an Armstrong number"
-else
-    echo "$num is not an Armstrong number"
-fi
+echo
+

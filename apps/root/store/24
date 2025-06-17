@@ -1,9 +1,8 @@
-#@ Search Pattern in File
+#@ Check User Validity
 
-read -p "Enter the pattern to search : " pattern
-read -p "Enter the filename : " filename
-if [ -f "$filename" ]; then
-    grep "$pattern" "$filename"
+read -p "Enter the username : " user
+if grep -q "^$user:" /etc/passwd; then
+    echo "User '$user' is valid."
 else
-    echo "Error: File '$filename' does not exist."
+    echo "User '$user' is not valid."
 fi

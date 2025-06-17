@@ -1,15 +1,68 @@
-#@ Two numbers Add, Sub, Mul, Div
+#@ Basic Calculator using bc
 
-read -p "Enter first number  : " a
-read -p "Enter second number : " b
-sum=$(expr $a + $b)
-sub=$(expr $a - $b)
-mul=$(expr $a \* $b)
-div=$(expr $a / $b)
-rem=$(expr $a % $b)
-echo
-echo "Addition: $sum"
-echo "Subtraction: $sub"
-echo "Multiplication: $mul"
-echo "Division: $div"
-echo "Remainder: $rem"
+while true; do
+    echo
+    echo "==== Calculator Menu ===="
+    echo "1. Addition"
+    echo "2. Subtraction"
+    echo "3. Multiplication"
+    echo "4. Division"
+    echo "5. Remainder"
+    echo "6. Square Root"
+    echo "7. Power"
+    echo "0. Exit"
+    echo "========================="
+    read -p "Enter your choice: " choice
+
+    case $choice in
+    1)
+        read -p "Enter first number: " a
+        read -p "Enter second number: " b
+        echo -e "\nResult: $(echo "$a + $b" | bc)\n"
+        ;;
+    2)
+        read -p "Enter first number: " a
+        read -p "Enter second number: " b
+        echo -e "\nResult: $(echo "$a - $b" | bc)\n"
+        ;;
+    3)
+        read -p "Enter first number: " a
+        read -p "Enter second number: " b
+        echo -e "\nResult: $(echo "$a * $b" | bc)\n"
+        ;;
+    4)
+        read -p "Enter dividend: " a
+        read -p "Enter divisor: " b
+        if [ "$b" == "0" ]; then
+            echo -e "\nError: Division by zero\n"
+        else
+            echo -e "\nResult: $(echo "scale=2; $a / $b" | bc)\n"
+        fi
+        ;;
+    5)
+        read -p "Enter first number: " a
+        read -p "Enter second number: " b
+        echo -e "\nResult: $(echo "$a % $b" | bc)\n"
+        ;;
+    6)
+        read -p "Enter number: " a
+        if (($(echo "$a < 0" | bc -l))); then
+            echo -e "\nError: Cannot compute square root of negative number\n"
+        else
+            echo -e "\nResult: $(echo "scale=4; sqrt($a)" | bc -l)\n"
+        fi
+        ;;
+    7)
+        read -p "Enter base: " a
+        read -p "Enter exponent: " b
+        echo -e "\nResult: $(echo "$a^$b" | bc)\n"
+        ;;
+    0)
+        echo -e "\nExited.\n"
+        break
+        ;;
+    *)
+        echo -e "\nInvalid choice\n"
+        ;;
+    esac
+done

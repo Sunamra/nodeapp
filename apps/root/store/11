@@ -1,19 +1,15 @@
-#@ Swap Two Numbers
+#@ Two numbers Add, Sub, Mul, Div
 
-echo -n "Enter first number (a)  : "
-read a
-echo -n "Enter second number (b) : "
-read b
-temp=$a
-a=$b
-b=$temp
-echo "Swapped using third variable : a = $a, b = $b"
+read -p "Enter first number  : " a
+read -p "Enter second number : " b
+sum=$(expr $a + $b)
+sub=$(expr $a - $b)
+mul=$(expr $a \* $b)
+div=$(expr $a / $b)
+rem=$(expr $a % $b)
 echo
-echo -n "Enter third number (c)  : "
-read c
-echo -n "Enter fourth number (d) : "
-read d
-c=$(expr $c + $d)
-d=$(expr $c - $d)
-c=$(expr $c - $d)
-echo "Swapped without using third variable : c = $c, d = $d"
+echo "Addition: $sum"
+echo "Subtraction: $sub"
+echo "Multiplication: $mul"
+echo "Division: $div"
+echo "Remainder: $rem"
