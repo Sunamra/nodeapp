@@ -1,4 +1,4 @@
-#@ All Armstrong Number in Range
+#@ All Armstrong Numbers in Range
 #!/usr/bin/env bash
 
 echo -n "Start : "
