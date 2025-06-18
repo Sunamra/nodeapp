@@ -1,4 +1,4 @@
-#@ Two numbers Add, Sub, Mul, Div
+#@ Two numbers Add, Sub, Mul, Div, Rem
 
 read -p "Enter first number  : " a
 read -p "Enter second number : " b

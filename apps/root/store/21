@@ -1,11 +1,24 @@
-#@ Sum of Digits in a Number
+#@ Count, Sum of Digits of a Number
 
-echo -n "Enter a number : "
-read num
+read -p "Enter a number : " num
+temp=$num
+
+count=0
+if [ $num -eq 0 ]; then
+    count=1
+else
+    while [ $num -gt 0 ]; do
+        num=$(expr $num / 10)
+        count=$(expr $count + 1)
+    done
+fi
+echo "Total number of digits : $count"
+
+num=$temp
 sum=0
 while [ $num -gt 0 ]; do
-	digit=$(expr $num % 10)
-	sum=$(expr $sum + $digit)
-	num=$(expr $num / 10)
+    digit=$(expr $num % 10)
+    sum=$(expr $sum + $digit)
+    num=$(expr $num / 10)
 done
 echo "Sum of digits : $sum"
