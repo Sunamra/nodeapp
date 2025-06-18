@@ -1,0 +1,11 @@
+#@ Implement execl() System Call
+
+#include <stdio.h>
+#include <unistd.h>
+int main()
+{
+    printf("This line is printed before execl()\n\n");
+    execl("/bin/ls", "ls", "-l", NULL);
+    printf("This line won't print if execl() is successful\n");
+    return 0;
+}

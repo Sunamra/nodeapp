@@ -1,13 +1,11 @@
-#@ Total Digits in a Number
+#@ Factorial of a Number
 
-read -p "Enter a number : " num
-count=0
-if [ $num -eq 0 ]; then
-	count=1
-else
-	while [ $num -gt 0 ]; do
-		num=$(expr $num / 10)
-		count=$(expr $count + 1)
-	done
-fi
-echo "Total number of digits : $count"
+echo -n "Enter a number : "
+read n
+temp=$n
+fact=1
+while [ $n -gt 1 ]; do
+    fact=$(expr $fact \* $n)
+    n=$(expr $n - 1)
+done
+echo "Factorial of $temp is $fact"

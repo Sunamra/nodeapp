@@ -6,24 +6,24 @@ sum=0
 
 # Function to calculate factorial
 factorial() {
-	local n=$1
-	local fact=1
-	for ((i = 1; i <= n; i++)); do
-		fact=$((fact * i))
-	done
-	echo $fact
+    local n=$1
+    local fact=1
+    for ((i = 1; i <= n; i++)); do
+        fact=$((fact * i))
+    done
+    echo $fact
 }
 
 # Calculate sum of factorial of digits
 while ((temp > 0)); do
-	digit=$((temp % 10))
-	fact=$(factorial $digit)
-	sum=$((sum + fact))
-	temp=$((temp / 10))
+    digit=$((temp % 10))
+    fact=$(factorial $digit)
+    sum=$((sum + fact))
+    temp=$((temp / 10))
 done
 
 if [ $num -gt 0 ] && [ $sum -eq $num ]; then
-	echo "$num is a Krishnamurthy number"
+    echo "$num is a Krishnamurthy number"
 else
-	echo "$num is not a Krishnamurthy number"
+    echo "$num is not a Krishnamurthy number"
 fi
