@@ -19,9 +19,9 @@ const maxTotalFiles = 100;
  */
 const maxTotalSize = 3 * 1024 * 1024 * 1024;
 /**
- * Maximum single file : 128 MiB
+ * Maximum single file : 800 MiB
  */
-const maxFileSize = 128 * 1024 * 1024;
+const maxFileSize = 800 * 1024 * 1024;
 
 var dirDeleteTimeout = undefined;
 
