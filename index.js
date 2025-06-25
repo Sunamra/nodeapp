@@ -31,6 +31,11 @@ app.use('/apps/paste', pasteRouter);
 app.use('/apps/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
 app.use('/apps/sharefile', sharefileRouter);
 
+// Temporary feature Start
+const uploadRouter = require('./apps/upload/routes');
+app.use('/apps/upload', uploadRouter);
+// Temporary feature End
+
 // Global error handler
 app.use(require('./common/middleware/errorHandler'));
 
