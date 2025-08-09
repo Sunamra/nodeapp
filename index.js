@@ -6,6 +6,10 @@ const cors = require('cors');
 const port = Number(process.argv.slice(2)[0]) || 3000;
 const app = express();
 app.use(cors());
+app.use((_, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
 
 // Disable headers
 app.disable('etag');
