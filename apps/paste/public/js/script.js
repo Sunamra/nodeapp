@@ -5,7 +5,7 @@ const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
 	'https://';
 
-const BASE_URI = `${PROTOCOL}${DOMAIN}`;
+const BASE_URI = `${PROTOCOL}www.${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/paste/api/v1`;
 
 const toast = new ZephyrToast();
