@@ -16,3 +16,7 @@ router.route('/').post((req, res) => {
 });
 
 module.exports = router;
+
+// Upload using curl : 
+// curl -X POST -F "file=@<file.ext>" sunamra.in/apps/upload/ -o nul
+// N.B. Using `-o nul` is must to show progress.
