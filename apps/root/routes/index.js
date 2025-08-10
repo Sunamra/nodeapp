@@ -1,6 +1,7 @@
 const fs = require('fs');
 const os = require('os');
 const checkDiskSpace = require('check-disk-space');
+const { execSync } = require('child_process');
 const router = require('express').Router();
 const { getAll, getFileList, getFile } = require('../controllers');
 const { logRequest } = require('../middleware');
@@ -16,19 +17,30 @@ router.route('/redirect/videotools').get((_, res) => {
 
 router.route('/details/storage').get(async (_, res) => {
 	try {
-		// Determine root base ("/" for Linux/Mac, drive letters for Windows)
-		let roots;
+		let roots = [];
+
 		if (os.platform() === 'win32') {
-			// Get all mounted drives (simplified)
-			roots = fs.readdirSync('A:/../').filter(d => /[A-Z]:/.test(d)); // may need adjustment for full drive detection
+			// Detect drives on Windows via wmic
+			try {
+				const output = execSync('wmic logicaldisk get name', { encoding: 'utf8' });
+				roots = output.split(/\r?\n/)
+					.map(line => line.trim())
+					.filter(line => /^[A-Z]:$/i.test(line));
+			} catch { }
 		} else {
-			roots = fs.readdirSync('/', { withFileTypes: true })
-				.filter(dirent => dirent.isDirectory())
-				.map(dirent => '/' + dirent.name);
-			roots.unshift('/'); // Ensure root "/" is included
+			// On Linux/macOS, detect mount points from `df`
+			try {
+				const output = execSync('df --output=target', { encoding: 'utf8' });
+				roots = output.split(/\r?\n/)
+					.slice(1) // remove header
+					.map(line => line.trim())
+					.filter(line => line.startsWith('/'));
+			} catch { }
 		}
 
-		// Build result array with each root's size info
+		// Remove duplicates
+		roots = [...new Set(roots)];
+
 		const rootInfo = [];
 		for (const root of roots) {
 			try {
@@ -43,12 +55,8 @@ router.route('/details/storage').get(async (_, res) => {
 			}
 		}
 
-		const result = {
-			roots: rootInfo
-		};
-
 		res.setHeader('Content-Type', 'application/json');
-		res.end(JSON.stringify(result));
+		res.end(JSON.stringify({ roots: rootInfo }));
 	} catch (err) {
 		res.statusCode = 500;
 		res.end(JSON.stringify({ error: err.message }));
