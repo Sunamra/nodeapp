@@ -21,11 +21,14 @@ const rootRouter = require('./apps/root/routes');
 const pasteRouter = require('./apps/paste/routes');
 const sharefileRouter = require('./apps/sharefile/routes');
 
+const diskinfoRouter = require('./apps/details/routes');
+
 // Only express.static serve*
 app.use('/static-assets/', express.static(path.join(__dirname, './public')));
 
 // Serving static files
 app.use('/', rootRouter);
+app.use('/', diskinfoRouter);
 /**
  * No static serve for '/' as it is intended to work as API.
  */
