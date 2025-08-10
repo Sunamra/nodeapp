@@ -7,7 +7,7 @@ const getFilename = require('../utils/getFilename.js');
 
 const getFileList = async (_, res) => {
 	try {
-		fs.mkdir(storeDir, { recursive: true });
+		await fs.mkdir(storeDir, { recursive: true });
 
 		const files = await fs.readdir(storeDir);
 		const fileList = [];

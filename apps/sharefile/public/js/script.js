@@ -5,7 +5,7 @@ const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
 	'https://';
 
-const BASE_URI = `${PROTOCOL}www.${DOMAIN}`;
+const BASE_URI = `${PROTOCOL}${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/sharefile/api/v1`;
 const PUBLIC_STORE = `${BASE_URI}/apps/sharefile/tempStore`;
 

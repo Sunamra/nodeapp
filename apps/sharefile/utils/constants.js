@@ -5,7 +5,7 @@ const storeDir = './apps/sharefile/storage';
 /**
  * Copying files here for temporarily when download requested
  */
-const tempStore = './apps/sharefile/public/tempStore';
+const tempStore = '/public/tempStore';
 /**
  * Concurrent file uploads
  */
@@ -15,13 +15,13 @@ const maxFiles = 20;
  */
 const maxTotalFiles = 100;
 /**
- * Maximum Storage size : 3 GiB
+ * Maximum Storage size : 400 MiB
  */
-const maxTotalSize = 3 * 1024 * 1024 * 1024;
+const maxTotalSize = 300 * 1024 * 1024;
 /**
- * Maximum single file : 800 MiB
+ * Maximum single file : 50 MiB
  */
-const maxFileSize = 800 * 1024 * 1024;
+const maxFileSize = 50 * 1024 * 1024;
 
 var dirDeleteTimeout = undefined;
 
