@@ -98,6 +98,7 @@ label {
 	border-radius: 5px;
 	resize: vertical;
 	box-sizing: border-box;
+	/* resize: none; */
 }
 
 #resetButton,
@@ -175,6 +176,7 @@ h3 {
 
 /* Hypelink to sibling page */
 .another-page {
+	height: 56px;
 	position: absolute;
 	right: 40px;
 	bottom: 35px;
@@ -235,13 +237,13 @@ h3 {
 }
 
 
-@media (max-width: 576px) {
+@media (max-width: 800px) {
 	body {
 		height: 90vh;
 	}
 
 	form {
-		height: 50%;
+		/* height: 70%; */
 		width: 95%;
 		padding: 15px;
 	}
@@ -249,10 +251,21 @@ h3 {
 	#textareaFetch,
 	#textareaSend {
 		font-size: 14px;
-		height: 35vh;
+		height: 50vh;
+		max-height: 400px;
 	}
 
 	h3 {
 		margin: 0 0 2px 0;
+	}
+}
+
+@media (max-width: 576px) {
+
+	#textareaFetch,
+	#textareaSend {
+		font-size: 14px;
+		height: 30vh;
+		max-height: 400px;
 	}
 }
