@@ -1,3 +1,5 @@
+const fs = require('fs');
+const os = require('os');
 const router = require('express').Router();
 const { getAll, getFileList, getFile } = require('../controllers');
 const { logRequest } = require('../middleware');
