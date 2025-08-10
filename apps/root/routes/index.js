@@ -1,7 +1,6 @@
 const fs = require('fs');
 const os = require('os');
 const path = require('path');
-const checkDiskSpace = require('check-disk-space');
 const { execSync } = require('child_process');
 
 const router = require('express').Router();
@@ -16,8 +15,16 @@ router.route('/:file').get(logRequest, getFile);
 router.route('/redirect/videotools').get((_, res) => {
 	res.redirect('https://www.dropbox.com/scl/fi/8x9gn69ja0ah4lsv37rct/VideoTools.zip?rlkey=gi7bubvd8aapjue6g8togy6he');
 });
+// ==================================================== //
+// ==================================================== //
+// Ensure correct import for CommonJS/ESM compatibility 
+try {
+	const mod = require('check-disk-space');
+	checkDiskSpace = typeof mod === 'function' ? mod : mod.default;
+} catch (err) {
+	throw new Error('Failed to load check-disk-space module: ' + err.message);
+}
 
-// Helper: push a debug entry
 function pushDebug(arr, step, ok, details, data) {
 	const e = { step, ok: !!ok, details: details || '' };
 	if (data !== undefined) e.data = data;
@@ -30,6 +37,7 @@ function truncate(s, n = 2000) {
 	if (s.length > n) return s.slice(0, n) + '... (truncated)';
 	return s;
 }
+
 
 router.route('/details/storage').get(async (_, res) => {
 	const debug = [];
@@ -45,15 +53,13 @@ router.route('/details/storage').get(async (_, res) => {
 		try {
 			const out = execSync('wmic logicaldisk get name', { encoding: 'utf8' });
 			pushDebug(debug, 'wmic-output', true, 'raw wmic output', truncate(out));
-			candidates = out.split(/\r?\n/).map(l => l.trim()).filter(Boolean).filter(l => /^[A-Z]:$/i.test(l)).map(l => l + '\\\\');
-			pushDebug(debug, 'wmic-parsed', true, `parsed ${candidates.length} drives`, candidates.slice(0, 50));
+			candidates = out.split(/\r?\n/).map(l => l.trim()).filter(Boolean).filter(l => /^[A-Z]:$/i.test(l)).map(l => l + '\\');
+			pushDebug(debug, 'wmic-parsed', true, `parsed ${candidates.length} drives`, candidates);
 		} catch (err) {
 			pushDebug(debug, 'wmic-fail', false, 'wmic detection failed', err.message || String(err));
-			// fallback common drive
 			candidates = ['C:\\'];
 		}
 	} else {
-		// Try reading /proc/mounts (works on most Linux hosts incl. containers on Render)
 		pushDebug(debug, 'unix', true, 'attempting /proc/mounts');
 		try {
 			const mountsRaw = fs.readFileSync('/proc/mounts', 'utf8');
@@ -66,20 +72,18 @@ router.route('/details/storage').get(async (_, res) => {
 			for (const line of lines) {
 				const parts = line.split(' ');
 				if (parts.length < 3) continue;
-				const device = parts[0];
 				const mnt = parts[1];
 				const fstype = parts[2];
 				if (!mnt || !mnt.startsWith('/')) continue;
-				if (blacklist.has(fstype)) continue; // skip pseudo fs types
+				if (blacklist.has(fstype)) continue;
 				candidates.push(mnt);
 			}
 			candidates = [...new Set(candidates)];
-			pushDebug(debug, 'proc-mounts-parsed', true, `found ${candidates.length} mount points`, candidates.slice(0, 100));
+			pushDebug(debug, 'proc-mounts-parsed', true, `found ${candidates.length} mount points`, candidates);
 		} catch (err) {
 			pushDebug(debug, 'proc-mounts-fail', false, 'reading /proc/mounts failed', err.message || String(err));
 		}
 
-		// Fallback: try df -P to extract mount points (POSIX output)
 		if (candidates.length === 0) {
 			pushDebug(debug, 'df-fallback', true, 'attempting `df -P`');
 			try {
@@ -92,34 +96,30 @@ router.route('/details/storage').get(async (_, res) => {
 					if (mnt && mnt.startsWith('/')) candidates.push(mnt);
 				}
 				candidates = [...new Set(candidates)];
-				pushDebug(debug, 'df-parsed', true, `found ${candidates.length} mount points from df`, candidates.slice(0, 100));
+				pushDebug(debug, 'df-parsed', true, `found ${candidates.length} mount points from df`, candidates);
 			} catch (err) {
 				pushDebug(debug, 'df-fail', false, 'df fallback failed', err.message || String(err));
 			}
 		}
 
-		// Final fallback: list top-level directories under '/'
 		if (candidates.length === 0) {
-			pushDebug(debug, 'ls-root-fallback', true, 'falling back to listing / top-level directories');
+			pushDebug(debug, 'ls-root-fallback', true, 'listing / top-level directories');
 			try {
 				const dirents = fs.readdirSync('/', { withFileTypes: true });
 				let topDirs = dirents.filter(d => d.isDirectory()).map(d => path.join('/', d.name));
 				topDirs.unshift('/');
-				topDirs = [...new Set(topDirs)];
-				candidates = topDirs;
-				pushDebug(debug, 'ls-root-parsed', true, `found ${candidates.length} top-level directories`, candidates.slice(0, 100));
+				candidates = [...new Set(topDirs)];
+				pushDebug(debug, 'ls-root-parsed', true, `found ${candidates.length} top-level directories`, candidates);
 			} catch (err) {
 				pushDebug(debug, 'ls-root-fail', false, 'listing / failed', err.message || String(err));
 			}
 		}
 	}
 
-	// Ensure '/' is present and deduplicate
 	if (!candidates.includes('/')) candidates.unshift('/');
 	candidates = [...new Set(candidates)];
-	pushDebug(debug, 'summary-candidates', true, `final candidate list length=${candidates.length}`, candidates.slice(0, 200));
+	pushDebug(debug, 'summary-candidates', true, `final candidate list length=${candidates.length}`, candidates);
 
-	// For each candidate, attempt to read disk space. Collect both successes and failures.
 	const roots = [];
 	for (const c of candidates) {
 		const item = { path: c };
