@@ -1,29 +1,12 @@
 const path = require('path');
 const { execSync } = require('child_process');
+const app = require('../../../index');
 
 function launchShell(req, res) {
 	try {
 		if (process.platform === 'win32') {
 			res.status(500).send('<pre>ERROR: node-pty is not supported on Windows.</pre>');
 			return;
-		}
-
-		// Try to auto-detect the Express app from the require cache
-		let app;
-		for (const modulePath of Object.keys(require.cache)) {
-			const exported = require.cache[modulePath].exports;
-			if (exported && typeof exported === 'function' && exported.name === 'app') {
-				app = exported;
-				break;
-			}
-			if (exported && exported.settings && exported._router) {
-				// Looks like an Express app instance
-				app = exported;
-				break;
-			}
-		}
-		if (!app) {
-			throw new Error('Could not automatically locate the Express app instance.');
 		}
 
 		function installPackage(pkg) {
