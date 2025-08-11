@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const { execSync } = require('child_process');
+// const { execSync } = require('child_process');
 const WebSocket = require('ws');
 
 // Configuration
@@ -13,8 +13,6 @@ let wssInstance = null;
 let started = false;
 let installing = false;
 
-// app2 kept local and isolated to avoid mutating main app
-const app = require('../../../index');
 
 function cleanupServer() {
 	try { if (wssInstance) { wssInstance.clients.forEach((c) => { try { c.terminate(); } catch (e) { } }); wssInstance.close(); wssInstance = null; } } catch (e) { }
@@ -22,7 +20,7 @@ function cleanupServer() {
 	started = false;
 }
 
-function launchShell(req, res) {
+function launchShell(app, req, res) {
 	// This implementation binds to HOST (may be 0.0.0.0) and uses module-level singletons
 	try {
 		if (process.platform === 'win32') {
