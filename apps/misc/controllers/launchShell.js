@@ -28,10 +28,8 @@ function launchShell(app, req, res) {
 		}
 
 		if (started) {
-			res.setHeader('Content-Type', 'text/html');
-			res.write(`<pre>Shell server already started on http://localhost:${PORT}</pre>`);
-			res.end();
-			return;
+			// Server already running — send the client HTML so caller gets the page
+			return res.sendFile(path.join(__dirname, '../client/index.html'));
 		}
 
 		// Ensure we don't race multiple installs/starts
@@ -174,10 +172,10 @@ function launchShell(app, req, res) {
 		serverInstance.listen(PORT, () => {
 			started = true;
 			installing = false;
-			res.setHeader('Content-Type', 'text/html');
-			res.write(`<pre>Shell server started on http://localhost:${PORT}</pre>`);
-			res.end();
+			// Send client HTML directly to the original requester
+			res.sendFile(path.join(__dirname, '../client/index.html'));
 		});
+		;
 
 		serverInstance.on('error', (err) => {
 			installing = false;
