@@ -5,6 +5,7 @@ const http = require('http');
 const pty = require('node-pty');
 
 const PORT = 3001;
+const HOST = '0.0.0.0';
 
 let serverInstance = null;
 let wssInstance = null;
@@ -78,7 +79,7 @@ function launchShell(app, req, res) {
         });
     });
 
-    serverInstance.listen(PORT, () => {
+    serverInstance.listen(PORT, HOST, () => {
         started = true;
         res.sendFile(path.join(__dirname, '../client/index.html'));
     });
