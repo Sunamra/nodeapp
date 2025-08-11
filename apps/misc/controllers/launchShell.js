@@ -48,7 +48,7 @@ function launchShell(req, res) {
 		installing = true;
 
 		// Safely require-or-install ws and node-pty. Use require.resolve to check availability.
-		let, pty;
+		let pty;
 		try {
 			try {
 				// require.resolve('node-pty');
