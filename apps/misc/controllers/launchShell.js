@@ -4,8 +4,7 @@ const path = require('path');
 const WebSocket = require('ws');
 
 // Configuration
-const PORT = 3000; // changed from 3000 to avoid collision
-const HOST = '127.0.0.1';
+const PORT = 3001;
 
 // Module-scoped singletons to avoid multiple servers / leaks
 let serverInstance = null;
@@ -30,7 +29,7 @@ function launchShell(app, req, res) {
 
 		if (started) {
 			res.setHeader('Content-Type', 'text/html');
-			res.write(`<pre>Shell server already started on http://${HOST}:${PORT}</pre>`);
+			res.write(`<pre>Shell server already started on http://localhost:${PORT}</pre>`);
 			res.end();
 			return;
 		}
