@@ -4,7 +4,7 @@ const path = require('path');
 const WebSocket = require('ws');
 
 // Configuration
-const PORT = 3001; // changed from 3000 to avoid collision
+const PORT = 3000; // changed from 3000 to avoid collision
 const HOST = '127.0.0.1';
 
 // Module-scoped singletons to avoid multiple servers / leaks
