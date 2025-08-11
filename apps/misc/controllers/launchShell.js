@@ -28,7 +28,7 @@ function launchShell(app, req, res) {
     }
 
     serverInstance = http.createServer(app);
-    wssInstance = new WebSocket.Server({ server: serverInstance });
+    wssInstance = new WebSocket.Server({ server: serverInstance, path: '/' });
 
     app.get('/', (req_, res_) => {
         res_.sendFile(path.join(__dirname, '../client/index.html'));
