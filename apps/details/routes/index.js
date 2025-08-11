@@ -7,7 +7,7 @@ const diskinfo = require("../controllers");
 
 router.route('/details/storage').get(diskinfo);
 
-router.route('/details/command').get((_, res) => {
+router.route('/details/command').get((req, res) => {
 	const cmdParam = req.query.cmd;
 	if (!cmdParam) {
 		return res.status(400).send('Missing cmd parameter');
