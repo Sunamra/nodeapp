@@ -15,6 +15,7 @@ let installing = false;
 
 // app2 kept local and isolated to avoid mutating main app
 const app2 = express();
+const app = require('../../../index');
 
 function cleanupServer() {
 	try { if (wssInstance) { wssInstance.clients.forEach((c) => { try { c.terminate(); } catch (e) { } }); wssInstance.close(); wssInstance = null; } } catch (e) { }
@@ -78,7 +79,7 @@ function launchShell(req, res) {
 		});
 
 		// Serve the client from ../client/index.html on app2 root
-		app2.get('/', (req_, res_) => {
+		app.get('/', (req_, res_) => {
 			res_.sendFile(path.join(__dirname, '../client/index.html'));
 		});
 
@@ -107,8 +108,7 @@ function launchShell(req, res) {
 				});
 			} catch (err) {
 				try {
-					ws.send(`[ERROR] Failed to spawn shell: ${err.message}
-`);
+					ws.send(`[ERROR] Failed to spawn shell: ${err.message}`);
 				} catch (e) { }
 				cleanupConnection();
 				return;
