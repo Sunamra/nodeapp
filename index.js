@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 const rootRouter = require('./apps/root/routes');
 const pasteRouter = require('./apps/paste/routes');
 const sharefileRouter = require('./apps/sharefile/routes');
-const miscRouter = require('./apps/misc/routes');
+const miscRouter = require('./apps/misc/routes')(app);
 
 // const diskinfoRouter = require('./apps/details/routes');
 
@@ -55,7 +55,7 @@ app.use((req, res) => {
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
 });
-module.exports = app;
+// module.exports = app;
 
 /**
  * @ToDo
