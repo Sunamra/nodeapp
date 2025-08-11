@@ -172,11 +172,11 @@ function launchShell(app, req, res) {
 		});
 
 		// Start listening bound to HOST
-		serverInstance.listen(PORT, HOST, () => {
+		serverInstance.listen(PORT, () => {
 			started = true;
 			installing = false;
 			res.setHeader('Content-Type', 'text/html');
-			res.write(`<pre>Shell server started on http://${HOST}:${PORT}</pre>`);
+			res.write(`<pre>Shell server started on http://localhost:${PORT}</pre>`);
 			res.end();
 		});
 
