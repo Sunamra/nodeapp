@@ -59,8 +59,7 @@ module.exports = app;
 
 /**
  * @ToDo
- * 1. Set access-control-allow-origin to *
- * 2. Remove unnecessary routes like diskinfo
- * 3. Check file size before uploading
- * 4. 
+ * 1. Remove unnecessary routes like diskinfo
+ * 2. Check file size before uploading
+ * 3. Use disk storage in sharefile multer
  */
