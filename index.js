@@ -4,12 +4,9 @@ const cors = require('cors');
 
 const port = Number(process.argv.slice(2)[0]) || 3000;
 const app = express();
-// Exporting specifically for apps/misc/controllers/launchShell.js
-module.exports = app; 
-
 app.use(cors());
 
-// Disable header
+// Disable headers
 app.disable('etag');
 // Show original client’s address in `req.ip` (for GCP deploy)
 // app.set('trust proxy', true);
