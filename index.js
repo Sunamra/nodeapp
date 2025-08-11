@@ -2,7 +2,6 @@ const express = require('express');
 const path = require('path');
 const cors = require('cors');
 
-
 const port = Number(process.argv.slice(2)[0]) || 3000;
 const app = express();
 app.use(cors());
@@ -20,27 +19,26 @@ app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 const rootRouter = require('./apps/root/routes');
 const pasteRouter = require('./apps/paste/routes');
 const sharefileRouter = require('./apps/sharefile/routes');
+const miscRouter = require('./apps/misc/routes');
 
-const diskinfoRouter = require('./apps/details/routes');
+// const diskinfoRouter = require('./apps/details/routes');
 
 // Only express.static serve*
 app.use('/static-assets/', express.static(path.join(__dirname, './public')));
 
 // Serving static files
 app.use('/', rootRouter);
-app.use('/', diskinfoRouter);
 /**
  * No static serve for '/' as it is intended to work as API.
- */
+*/
 app.use('/apps/paste', express.static(path.join(__dirname, './apps/paste/public/')));
 app.use('/apps/paste', pasteRouter);
 app.use('/apps/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
 app.use('/apps/sharefile', sharefileRouter);
 
-// Temporary feature Start
-const uploadRouter = require('./apps/upload/routes');
-app.use('/apps/upload', uploadRouter);
-// Temporary feature End
+// Miscellaneous APIs
+app.use('/api', miscRouter);
+
 
 // Global error handler
 app.use(require('./common/middleware/errorHandler'));
@@ -61,4 +59,7 @@ app.listen(port, () => {
 /**
  * @ToDo
  * 1. Set access-control-allow-origin to *
+ * 2. Remove unnecessary routes like diskinfo
+ * 3. Check file size before uploading
+ * 4. 
  */
