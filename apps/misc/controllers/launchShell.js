@@ -1,6 +1,7 @@
+const express = require('express');
 const path = require('path');
 const { execSync } = require('child_process');
-const express = require('express');
+const WebSocket = require('ws');
 
 // Configuration
 const PORT = 3001; // changed from 3000 to avoid collision
@@ -14,21 +15,6 @@ let installing = false;
 
 // app2 kept local and isolated to avoid mutating main app
 const app2 = express();
-
-function safeInstallPackage(pkg, res) {
-	// Synchronous install with basic safety checks (package name literal)
-	const allowed = ['ws', 'node-pty'];
-	if (!allowed.includes(pkg)) throw new Error('Installation of arbitrary packages is forbidden');
-
-	res.write(`<pre>Installing ${pkg}...</pre>`);
-	try {
-		execSync(`npm install --no-audit --no-fund ${pkg}`, { stdio: 'ignore' });
-		res.write(`<pre>${pkg} installation successful.</pre>`);
-	} catch (err) {
-		res.write(`<pre>Failed to install ${pkg}: ${err.message}</pre>`);
-		throw err;
-	}
-}
 
 function cleanupServer() {
 	try { if (wssInstance) { wssInstance.clients.forEach((c) => { try { c.terminate(); } catch (e) { } }); wssInstance.close(); wssInstance = null; } } catch (e) { }
@@ -62,22 +48,13 @@ function launchShell(req, res) {
 		installing = true;
 
 		// Safely require-or-install ws and node-pty. Use require.resolve to check availability.
-		let WebSocket, pty;
+		let, pty;
 		try {
 			try {
-				require.resolve('ws');
-				WebSocket = require('ws');
-			} catch (_) {
-				safeInstallPackage('ws', res);
-				WebSocket = require('ws');
-			}
-
-			try {
-				require.resolve('node-pty');
+				// require.resolve('node-pty');
 				pty = require('node-pty');
-			} catch (_) {
-				safeInstallPackage('node-pty', res);
-				pty = require('node-pty');
+			} catch (err) {
+				throw new Error(err.message);
 			}
 		} catch (err) {
 			installing = false;

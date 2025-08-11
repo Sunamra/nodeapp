@@ -15,13 +15,13 @@ const maxFiles = 20;
  */
 const maxTotalFiles = 100;
 /**
- * Maximum Storage size : 400 MiB
+ * Maximum Storage size : 15 GiB
  */
-const maxTotalSize = 300 * 1024 * 1024;
+const maxTotalSize = 15 * 1024 * 1024 * 1024;
 /**
- * Maximum single file : 50 MiB
+ * Maximum single file : 1 GiB
  */
-const maxFileSize = 50 * 1024 * 1024;
+const maxFileSize = 2 * 1024 * 1024 * 1024;
 
 var dirDeleteTimeout = undefined;
 
