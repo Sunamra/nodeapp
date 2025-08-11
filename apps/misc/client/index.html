@@ -51,7 +51,7 @@
 		term.write('\x1b[90mConnecting...\x1b[0m\r\n');
 
 		const protocol = (location.protocol === 'https:') ? 'wss' : 'ws';
-		const ws = new WebSocket(`${protocol}://${location.host}`);
+		const ws = new WebSocket(`${protocol}://${location.hostname}:3001`);
 		// keep text messages (not binary); xterm emits strings with control codes
 		ws.onopen = () => {
 			term.clear();
