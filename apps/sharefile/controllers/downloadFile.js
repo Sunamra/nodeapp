@@ -47,7 +47,7 @@ const downloadFile = async (req, res) => {
 				throw err;
 			}
 		} else {
-			const err = new Error(`No Origin/Referer header provided ${(req.headers).toString()}`);
+			const err = new Error(`No Origin/Referer header provided`);
 			err.code = 400;
 			throw err;
 		}
@@ -79,6 +79,7 @@ const downloadFile = async (req, res) => {
 		res.status(200).json({
 			message: 'File ready for download',
 			filename: getFilename(filename),
+			publicStore: tempStore.replace('./public', './static-assets'), // './static-asset/tempStore'
 			expires: (new Date(Date.now() + deleteAfter)).toLocaleTimeString(),
 			success: true
 		});

@@ -1,7 +1,7 @@
 /**
  * Discard whatever is sent here
  */
-const discardUpload = (req, res) => {
+module.exports = (req, res) => {
 	res.type('text');
 	req.on('data', chunk => {
 		// Discard the chunk
@@ -14,5 +14,3 @@ const discardUpload = (req, res) => {
 	// res.send('ok\n');
 
 };
-
-module.exports = discardUpload;
