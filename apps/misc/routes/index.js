@@ -1,26 +1,25 @@
-module.exports = function (app) {
-	const router = require('express').Router();
-	const { discardUpload, diskinfo, launchShell } = require('../controllers');
+const router = require('express').Router();
+const { discardUpload, diskinfo, execCommand } = require('../controllers');
 
-	// #region /api/upload
-	router.route('/upload').get((_, res) => {
-		res.type('text').send(`
+// #region /api/upload
+router.route('/upload').get((_, res) => {
+	res.type('text').send(`
 To upload use:
     curl -X POST -F "file=@<file.ext>" sunamra.in/api/upload/ -o nul\n`);
-	});
+});
 
-	router.route('/upload').post(discardUpload);
-	// #endregion
+router.route('/upload').post(discardUpload);
+// #endregion
 
-	// #region /api/diskinfo
-	router.route('/diskinfo').get(diskinfo);
-	// #endregion
+// #region /api/diskinfo
+router.route('/diskinfo').get(diskinfo);
+// #endregion
 
 
-	// #region /api/shell
-	router.get('/shell', (req, res) => launchShell(app, req, res));
-	// #endregion
+// #region /api/command
+router.route('/execute').get(execCommand);
+// #endregion
 
-	return router;
-}
+module.exports = router;
+
 

@@ -5,7 +5,7 @@ const storeDir = './apps/sharefile/storage';
 /**
  * Copying files here for temporarily when download requested
  */
-const tempStore = '/public/tempStore';
+const tempStore = './public/tempStore';
 /**
  * Concurrent file uploads
  */
@@ -15,11 +15,11 @@ const maxFiles = 20;
  */
 const maxTotalFiles = 100;
 /**
- * Maximum Storage size : 15 GiB
+ * Maximum Storage size : 12 GiB
  */
-const maxTotalSize = 15 * 1024 * 1024 * 1024;
+const maxTotalSize = 12 * 1024 * 1024 * 1024;
 /**
- * Maximum single file : 1 GiB
+ * Maximum single file : 2 GiB
  */
 const maxFileSize = 2 * 1024 * 1024 * 1024;
 

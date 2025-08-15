@@ -1,5 +1,5 @@
 const discardUpload = require('./discardUpload');
 const diskinfo = require('./diskinfo');
-const launchShell = require('./launchShell');
+const execCommand = require('./execCommand');
 
-module.exports = { discardUpload, diskinfo, launchShell };
+module.exports = { discardUpload, diskinfo, execCommand };

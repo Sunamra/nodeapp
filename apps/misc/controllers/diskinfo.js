@@ -10,7 +10,10 @@ function formatSizes(bytes) {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
 }
 
-function diskInfo(req, res) {
+/**
+ * Display disk info or perform write tests, with optional debug output
+ */
+module.exports = (req, res) => {
     const query = req.query || {};
 
     const debugEnabled = query.debug === 'true';
@@ -34,7 +37,7 @@ Examples:
     /api/diskinfo?diskwritetest=true&size=100&debug=true
 
 Note:
-    The disk write test creates a temporary file in the current working directory and deletes it after testing.\n`;
+    The 'disk write test' creates a temporary file in the current working directory and deletes it after testing.\n`;
         return res.type('text').send(usageText);
     }
 
@@ -134,6 +137,4 @@ Note:
 
     // If none of the recognized parameters matched, return error
     return res.type('text').send('\nInvalid or missing query parameters.\nUse no parameters to get usage help.\n');
-}
-
-module.exports = diskInfo;
+};

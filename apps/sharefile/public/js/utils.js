@@ -105,3 +105,6 @@ function hideRightTick() {
 		right_tick.style.visibility = 'hidden';
 	}, 4000);
 }
+ 
+
+const filterFiles = (files) => {return files};

@@ -1,12 +1,12 @@
 const express = require('express');
 const path = require('path');
-const cors = require('cors');
+require('dotenv').config({ quiet: true });
 
-const port = Number(process.argv.slice(2)[0]) || 3000;
 const app = express();
-app.use(cors());
+const port = Number(process.argv.slice(2)[0]) || process.env.PORT || 3000;
+app.use(require('cors')());
 
-// Disable headers
+// Disable header
 app.disable('etag');
 // Show original client’s address in `req.ip` (for GCP deploy)
 // app.set('trust proxy', true);
@@ -19,14 +19,12 @@ app.use(express.urlencoded({ extended: true, limit: '100mb' }));
 const rootRouter = require('./apps/root/routes');
 const pasteRouter = require('./apps/paste/routes');
 const sharefileRouter = require('./apps/sharefile/routes');
-const miscRouter = require('./apps/misc/routes')(app);
-
-// const diskinfoRouter = require('./apps/details/routes');
+const miscRouter = require('./apps/misc/routes');
 
 // Only express.static serve*
 app.use('/static-assets/', express.static(path.join(__dirname, './public')));
 
-// Serving static files
+// Defining routes
 app.use('/', rootRouter);
 /**
  * No static serve for '/' as it is intended to work as API.
@@ -39,27 +37,23 @@ app.use('/apps/sharefile', sharefileRouter);
 // Miscellaneous APIs
 app.use('/api', miscRouter);
 
+// Global 404 fallback
+app.use(require('./common/middleware/404Fallback'));
 
 // Global error handler
 app.use(require('./common/middleware/errorHandler'));
 
-// Global 404 fallback
-app.use((req, res) => {
-	if (/chrome|firefox|safari|edge|opera|msie|trident/i.test(req?.headers['user-agent'] || '')) {
-		res.status(404).sendFile(path.join(__dirname, './public/404 Not Found.html'));
-	} else {
-		res.status(404).send('404 Not Found');
-	}
-});
 
 app.listen(port, () => {
 	console.log(`Server running at http://localhost:${port}`);
 });
-// module.exports = app;
 
 /**
  * @ToDo
- * 1. Remove unnecessary routes like diskinfo
- * 2. Check file size before uploading
- * 3. Use disk storage in sharefile multer
+ * 1. New sharefile/api/v1/storage-stats path
+ *    to fetch storage rules before uploading file.
+ * 2. If file(s) doesn't comply with rules, reject
+ *    those files only.
+ * 3. If number of files exceed, upload first
+ *    valid number of files.
  */

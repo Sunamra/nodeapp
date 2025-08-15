@@ -1,4 +1,4 @@
-const DOMAIN = 'sunamra.in';
+const DOMAIN = 'localhost:3000';
 
 const PROTOCOL = DOMAIN.startsWith('localhost') ||
 	DOMAIN.startsWith('192.168.0.') ||
@@ -7,7 +7,7 @@ const PROTOCOL = DOMAIN.startsWith('localhost') ||
 
 const BASE_URI = `${PROTOCOL}${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/sharefile/api/v1`;
-const PUBLIC_STORE = `${BASE_URI}/apps/sharefile/tempStore`;
+const PUBLIC_STORE = `${BASE_URI}/public/tempStore`;
 
 // console.log(`Base URL : ${BASE_URI}`);
 
@@ -116,15 +116,18 @@ const applyScrollingWrapToAll = (cells) => {
 // };
 
 const postFile = (files) => {
+	// Filter files based on size / total numbers
+	files = filterFiles(files);
+
 	showProgressBar();
 
-	// build the form just like you already do
+	// Build the form
 	const form = new FormData();
 	for (let i = 0; i < files.length; i++) {
 		form.append('file', files[i]);
 	}
 
-	// new: xhr instead of fetch
+	// xhr instead of fetch for upload progress
 	const xhr = new XMLHttpRequest();
 	xhr.open('POST', API_BASE);
 
@@ -136,7 +139,7 @@ const postFile = (files) => {
 		setUploadProgress(pct);
 	};
 
-	// success / response parsing
+	// Success / response parsing
 	xhr.onload = () => {
 		let data;
 		try {
@@ -258,7 +261,7 @@ const downloadFile = (filename) => {
 
 			if (data.success) {
 				const a = document.createElement('a');
-				a.href = `${PUBLIC_STORE}/${filename}`;
+				a.href = `${BASE_URI}/${data.publicStore}/${filename}`;
 				a.download = data.filename;
 				a.click();
 				a.remove();
