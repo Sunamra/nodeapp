@@ -152,7 +152,6 @@ const postFile = (files) => {
 
 		if (data.success) {
 			toast.success(data.message);
-			setTimeout(getFiles, 100); // Refresh UI
 
 			// Show and hide upload anmations
 			hideProgressBar();
@@ -278,4 +277,14 @@ const downloadFile = (filename) => {
 		});
 };
 
-getFiles(); // Initialize list on load
+// WebSocket receives message on changes in sharefile/storage/
+// It refreshes file list by calling getFiles()
+// whenever a change (e.g. Create, Delete) is detected.
+const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
+const ws = new WebSocket(`${wsProtocol}://${window.location.host}`);
+
+ws.onmessage = (message) => {
+	getFiles(); // Refresh file list on changes
+	// console.log(JSON.parse(message.data));
+};
+
