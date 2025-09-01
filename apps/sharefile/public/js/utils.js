@@ -124,7 +124,44 @@ function hideRightTick() {
 }
 
 const filterFiles = (files) => {
-	console.log(window.storageStats);
 
-	return files;
+	const stats = window.storageStats;
+	let maxSingleFileSize = stats.rule.maxTotalSize - stats.current.totalSize;
+
+	const modifiedFiles = [];
+	const rejectedFiles = [];
+	let totalModifiedSize = 0;
+
+	for (let i = 0; i < files?.length; i++) {
+		const file = files[i];
+		if (file.size > maxSingleFileSize) {
+			rejectedFiles.push(file);
+			continue
+		}
+
+		maxSingleFileSize -= file.size;
+		totalModifiedSize += file.size;
+
+		if (totalModifiedSize > stats.rule.maxTotalSize) {
+			if (modifiedFiles.length > 0) {
+				// info() declared first 'cuz new toast comes on top
+				toast.info(`Uploading first ${modifiedFiles.length} file${modifiedFiles.length > 1 ? 's' : ''}`, { duration: 0 });
+				toast.warning(`Total file size exceeded storage capacity`, { duration: 0 });
+			}
+			return modifiedFiles;
+		}
+
+		modifiedFiles.push(file);
+	}
+
+	if (rejectedFiles.length) {
+		if (rejectedFiles.length > 1) {
+			toast.warning(`${rejectedFiles.length} files not uploaded: exceeds maximum allowed size`, { duration: 0 });
+		}
+		else {
+			toast.warning(`File '${rejectedFiles[0].name}' not uploaded: exceeds maximum allowed size`, { duration: 0 });
+		}
+	}
+
+	return modifiedFiles;
 };

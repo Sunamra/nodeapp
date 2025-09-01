@@ -1,8 +1,11 @@
 const multer = require('multer');
 const os = require('os');
-const { maxFiles, maxFileSize } = require('../utils/constants');
+const { storeDir, maxFiles, maxTotalSize } = require('../utils/constants');
+const storageStats = require('../utils/storageStats');
 
 const osTempDir = os.tmpdir();
+
+const { size: currentStoreSize } = storageStats(storeDir);
 
 // Use diskStorage so files are written to system temp during upload
 const storage = multer.diskStorage({
@@ -17,5 +20,5 @@ const storage = multer.diskStorage({
 
 module.exports = multer({
 	storage,
-	limits: { fileSize: maxFileSize }
+	limits: { fileSize: maxTotalSize - currentStoreSize } // Max size of file depends on how much storage is free
 }).array('file', maxFiles);

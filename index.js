@@ -15,11 +15,5 @@ server.listen(port, () => {
 
 /**
  * @ToDo
- * 1. New sharefile/api/v1/storage-stats path
- *    to fetch storage rules before uploading file.
- * 2. If file(s) doesn't comply with rules, reject
- *    those files only.
- * 3. If number of files exceed, upload first
- *    valid number of files.
- * 4. Same applies for direct api upload
+ * 1. Same applies for direct api upload
  */
