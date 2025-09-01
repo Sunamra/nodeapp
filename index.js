@@ -21,4 +21,5 @@ server.listen(port, () => {
  *    those files only.
  * 3. If number of files exceed, upload first
  *    valid number of files.
+ * 4. Same applies for direct api upload
  */

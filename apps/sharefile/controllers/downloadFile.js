@@ -22,7 +22,7 @@ const fileExists = async (path) => {
  * and the link of the file is returned.
  * The public storage folder will be deleted after some time.
  */
-const downloadFile = async (req, res) => {
+module.exports = async (req, res) => {
 
 	try {
 		// Basic error checkings
@@ -47,7 +47,7 @@ const downloadFile = async (req, res) => {
 				throw err;
 			}
 		} else {
-			const err = new Error(`No Origin/Referer header provided`);
+			const err = new Error('No Origin/Referer header provided');
 			err.code = 400;
 			throw err;
 		}
@@ -91,5 +91,3 @@ const downloadFile = async (req, res) => {
 		});
 	}
 };
-
-module.exports = downloadFile;

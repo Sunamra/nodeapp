@@ -1,5 +1,5 @@
 /**
- * Storing files after upload
+ * Files are stored here after upload
  */
 const storeDir = './apps/sharefile/storage';
 /**

@@ -1,11 +1,6 @@
 const DOMAIN = 'sunamra.in';
 
-const PROTOCOL = DOMAIN.startsWith('localhost') ||
-	DOMAIN.startsWith('192.168.0.') ||
-	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
-	'https://';
-
-const BASE_URI = `${PROTOCOL}${DOMAIN}`;
+const BASE_URI = `${window.location.protocol}//${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/paste/api/v1`;
 
 const toast = new ZephyrToast();

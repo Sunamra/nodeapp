@@ -5,7 +5,7 @@ const getTimestamp = require('../utils/getTimestamp.js');
 const getFilename = require('../utils/getFilename.js');
 
 
-const getFileList = async (_, res) => {
+module.exports = async (_, res) => {
 	try {
 		await fs.mkdir(storeDir, { recursive: true });
 
@@ -40,5 +40,3 @@ const getFileList = async (_, res) => {
 		});
 	}
 };
-
-module.exports = getFileList;

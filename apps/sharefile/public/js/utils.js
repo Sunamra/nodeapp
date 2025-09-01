@@ -12,6 +12,23 @@ function formatByte(bytes) {
 	return `${(bytes / Math.pow(1024, digitGroups)).toFixed(unit === 'B' ? 0 : 1)} ${unit}`;
 }
 
+/**
+ * Formats a given epoch timestamp into a human-readable date-time string.
+ *
+ * @param {number} epoch - The epoch timestamp in milliseconds.
+ * @param {Object} [options={}] - Formatting options.
+ * @param {boolean} [options.sec=true] - Whether to include seconds in the output.
+ * @returns {string} A formatted date-time string in the form "DD-MMM-YY  HH:mm[:ss]".
+ *
+ * @example
+ * formatTime(1700000000000); 
+ * // "14-Nov-23  12:53:20"
+ *
+ * @example
+ * formatTime(1700000000000, { sec: false }); 
+ * // "14-Nov-23  12:53"
+ */
+
 function formatTime(epoch, options = { sec: true }) {
 	const { sec } = options;
 
@@ -105,6 +122,9 @@ function hideRightTick() {
 		right_tick.style.visibility = 'hidden';
 	}, 4000);
 }
- 
 
-const filterFiles = (files) => {return files};
+const filterFiles = (files) => {
+	console.log(window.storageStats);
+
+	return files;
+};
