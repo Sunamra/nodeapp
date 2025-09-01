@@ -20,12 +20,12 @@ const cleanupTempFiles = async (files) => { // added
 			// ignore
 		}
 	}));
-}
+};
 
 /**
  * Saves posted file to disk storage
  */
-const uploadFile = async (req, res) => {
+module.exports = async (req, res) => {
 	try {
 
 		await fs.mkdir(storeDir, { recursive: true }); // Make the dir in case it was not uploaded by git for being empty
@@ -57,8 +57,7 @@ const uploadFile = async (req, res) => {
 				fileOriginalName = `${file.originalname}`;
 
 				/**
-				 * 13 digit timestamp + 1 dash = 14 character string
-				 * to be removed when fetching file in another function.
+				 * 13 digit timestamp + 1 dash = 14 character string.
 				 */
 				const fileSaveName = `${Date.now()}-${fileOriginalName}`;
 				const fileSavePath = path.join(storeDir, fileSaveName);
@@ -104,4 +103,3 @@ const uploadFile = async (req, res) => {
 	}
 };
 
-module.exports = uploadFile;

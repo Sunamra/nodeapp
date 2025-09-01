@@ -1,25 +1,21 @@
 const multer = require('multer');
-const os = require('os'); // added
-const path = require('path'); // added
+const os = require('os');
 const { maxFiles, maxFileSize } = require('../utils/constants');
 
-const osTempDir = os.tmpdir(); // added - system temp directory for uploads
+const osTempDir = os.tmpdir();
 
 // Use diskStorage so files are written to system temp during upload
-const storage = multer.diskStorage({ // modified
+const storage = multer.diskStorage({
 	destination: (_req, _file, cb) => {
-		cb(null, osTempDir); // added
+		cb(null, osTempDir);
 	},
 	filename: (_req, file, cb) => {
-		// keep a unique temporary name (we'll move/copy to final storeDir later)
-		const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`; // added
-		cb(null, `${uniqueSuffix}-${file.originalname}`); // added
+		const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+		cb(null, `${uniqueSuffix}-${file.originalname}`);
 	}
 });
 
-const upload = multer({
-	storage, // modified (was memoryStorage())
+module.exports = multer({
+	storage,
 	limits: { fileSize: maxFileSize }
 }).array('file', maxFiles);
-
-module.exports = upload;

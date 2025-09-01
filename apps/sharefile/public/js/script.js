@@ -1,15 +1,7 @@
-const DOMAIN = 'localhost:3000';
+const DOMAIN = 'sunamra.in';
 
-const PROTOCOL = DOMAIN.startsWith('localhost') ||
-	DOMAIN.startsWith('192.168.0.') ||
-	DOMAIN.startsWith('127.0.0.1') ? 'http://' :
-	'https://';
-
-const BASE_URI = `${PROTOCOL}${DOMAIN}`;
+const BASE_URI = `${window.location.protocol}//${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/sharefile/api/v1`;
-const PUBLIC_STORE = `${BASE_URI}/public/tempStore`;
-
-// console.log(`Base URL : ${BASE_URI}`);
 
 const toast = new ZephyrToast({
 	position: 'bottom-left',
@@ -116,7 +108,7 @@ const applyScrollingWrapToAll = (cells) => {
 // };
 
 const postFile = (files) => {
-	// Filter files based on size / total numbers
+	// Filter files based on server storage conditions
 	files = filterFiles(files);
 
 	showProgressBar();
@@ -153,7 +145,7 @@ const postFile = (files) => {
 		if (data.success) {
 			toast.success(data.message);
 
-			// Show and hide upload anmations
+			// Show and hide upload animations
 			hideProgressBar();
 			showRightTick();
 			hideRightTick();
@@ -175,24 +167,6 @@ const postFile = (files) => {
 
 	// fire it off
 	xhr.send(form);
-};
-
-const getFiles = () => {
-	fetch(API_BASE)
-		.then(res => res.json())
-		.then(data => {
-			if (data.success) {
-				window.fetchedFiles = data.files;
-				listFiles(data.files);
-			} else {
-				listFiles(null);
-				throw new Error(data.message);
-			}
-		})
-		.catch(error => {
-			console.error(error.message || error);
-			toast.error(error.message || error);
-		});
 };
 
 /**
@@ -249,6 +223,24 @@ const listFiles = (files) => {
 	applyScrollingWrapToAll(window.nameCellArray);
 };
 
+const getFiles = () => {
+	fetch(API_BASE)
+		.then(res => res.json())
+		.then(data => {
+			if (data.success) {
+				window.fetchedFiles = data.files;
+				listFiles(data.files);
+			} else {
+				listFiles(null);
+				throw new Error(data.message);
+			}
+		})
+		.catch(error => {
+			console.error(error.message || error);
+			toast.error(error.message || error);
+		});
+};
+
 const downloadFile = (filename) => {
 
 	fetch(`${API_BASE}/${filename}`)
@@ -277,14 +269,33 @@ const downloadFile = (filename) => {
 		});
 };
 
+const fetchStorageStats = () => {
+	fetch(`${API_BASE}/stats/storage`)
+		.then(res => res.json())
+		.then(data => {
+			console.log('Fetched:', Date.now());
+			// Used by utils/filterFiles()
+			window.storageStats = data.stats;
+		})
+		.catch(err => {
+			console.error(err);
+		});
+};
+
 // WebSocket receives message on changes in sharefile/storage/
 // It refreshes file list by calling getFiles()
 // whenever a change (e.g. Create, Delete) is detected.
 const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
 const ws = new WebSocket(`${wsProtocol}://${window.location.host}`);
 
-ws.onmessage = (message) => {
-	getFiles(); // Refresh file list on changes
+// On page load a 'init' message is received from server.
+// So the functions inside this `onmessage` block also executes at initiation.
+ws.onmessage = () => {
+	getFiles();
+	fetchStorageStats();
 	// console.log(JSON.parse(message.data));
 };
 
+window.onload = () => {
+	console.log('Loaded: ', Date.now());
+};

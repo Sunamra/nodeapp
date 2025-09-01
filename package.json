@@ -4,8 +4,7 @@
 	"main": "index.js",
 	"scripts": {
 		"start": "npm i && node index.js",
-		"preview": "vite preview",
-		"lint": "eslint . --ext .js",
+		"lint": "eslint --fix",
 		"push": "git add . && git commit && git push",
 		"pull": "pm2 stop 0 && git pull && pm2 start 0"
 	},

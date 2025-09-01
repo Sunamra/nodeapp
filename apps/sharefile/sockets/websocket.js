@@ -51,7 +51,7 @@ module.exports = (server) => {
 				ws.terminate();
 			}
 		}
-	}
+	};
 
 	// On new connection
 	wss.on('connection', (ws, req) => {
@@ -131,7 +131,7 @@ module.exports = (server) => {
 				}
 			});
 		}, HEARTBEAT_INTERVAL);
-	}
+	};
 
 	function stopHeartbeat() {
 		if (heartbeatInterval) {
