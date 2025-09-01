@@ -110,6 +110,9 @@ const applyScrollingWrapToAll = (cells) => {
 const postFile = (files) => {
 	// Filter files based on server storage conditions
 	files = filterFiles(files);
+	if (files.length == 0) {
+		return;
+	}
 
 	showProgressBar();
 
@@ -139,6 +142,9 @@ const postFile = (files) => {
 		} catch {
 			console.error('Invalid JSON', xhr.responseText);
 			toast.error('Unexpected server response');
+
+			// Hide if error occurs
+			hideProgressBar();
 			return;
 		}
 
@@ -154,9 +160,6 @@ const postFile = (files) => {
 			console.error(data.statusText || data.message || data);
 			toast.error(data.statusText || data.message || 'Error posting file');
 		}
-
-		// Hide if error occurs
-		hideProgressBar();
 	};
 
 	// network / transport errors
@@ -273,7 +276,7 @@ const fetchStorageStats = () => {
 	fetch(`${API_BASE}/stats/storage`)
 		.then(res => res.json())
 		.then(data => {
-			console.log('Fetched:', Date.now());
+			// console.log('Fetched:', Date.now());
 			// Used by utils/filterFiles()
 			window.storageStats = data.stats;
 		})
@@ -288,14 +291,21 @@ const fetchStorageStats = () => {
 const wsProtocol = window.location.protocol === 'https:' ? 'wss' : 'ws';
 const ws = new WebSocket(`${wsProtocol}://${window.location.host}`);
 
+let debounceTimer;
 // On page load a 'init' message is received from server.
 // So the functions inside this `onmessage` block also executes at initiation.
 ws.onmessage = () => {
-	getFiles();
-	fetchStorageStats();
+	// Debounce: wait until messages stop for 300ms before running
+	// Prevents getFiles() and fetchStorageStats() from firing too often
+	// when messages arrive too frequently.
+	clearTimeout(debounceTimer);
+	debounceTimer = setTimeout(() => {
+		getFiles();
+		fetchStorageStats();
+	}, 300);
 	// console.log(JSON.parse(message.data));
 };
 
-window.onload = () => {
-	console.log('Loaded: ', Date.now());
-};
+// window.onload = () => {
+// 	console.log('Loaded: ', Date.now());
+// };
