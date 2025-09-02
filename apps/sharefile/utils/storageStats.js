@@ -10,6 +10,10 @@ const path = require('path');
  *   - `size`: Combined size of all files in bytes.
  */
 const storageStats = (dirPath) => {
+
+	// Create the directory to avoid error in case it is absent
+	fs.mkdirSync(dirPath, { recursive: true });
+
 	const files = fs.readdirSync(dirPath, { withFileTypes: true });
 	let count = 0, totalSize = 0;
 
