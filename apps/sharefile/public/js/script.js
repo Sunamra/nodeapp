@@ -1,4 +1,4 @@
-const DOMAIN = 'sunamra.in';
+const DOMAIN = 'localhost:3000';
 
 const BASE_URI = `${window.location.protocol}//${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/sharefile/api/v1`;
@@ -19,7 +19,7 @@ window.nameCellArray = [];
  * Applies scrolling wrap animation to a table cell if its content overflows
  * @param {HTMLElement} cell The <td> element containing the filename
  */
-const applyScrollingWrap = (cell) => {
+window.applyScrollingWrap = (cell) => {
 
 	const addAnimation = (cellElem) => {
 		const text = cellElem.textContent;
@@ -76,7 +76,7 @@ const applyScrollingWrap = (cell) => {
 	}
 };
 
-const applyScrollingWrapToAll = (cells) => {
+window.applyScrollingWrapToAll = (cells) => {
 	cells.forEach(cell => applyScrollingWrap(cell));
 };
 
@@ -107,7 +107,7 @@ const applyScrollingWrapToAll = (cells) => {
 // 		});
 // };
 
-const postFile = (files) => {
+window.postFile = (files) => {
 	// Filter files based on server storage conditions
 	files = filterFiles(files);
 	if (files.length == 0) {
@@ -176,7 +176,7 @@ const postFile = (files) => {
  * Renders the list of files in the table
  * @param {Array|null} files Array of file objects or null on error
  */
-const listFiles = (files) => {
+window.listFiles = (files) => {
 	const tableBody = document.getElementById('fileTable').querySelector('tbody');
 	tableBody.innerHTML = ''; // Clear old data
 
@@ -226,7 +226,7 @@ const listFiles = (files) => {
 	applyScrollingWrapToAll(window.nameCellArray);
 };
 
-const getFiles = () => {
+window.getFiles = () => {
 	fetch(API_BASE)
 		.then(res => res.json())
 		.then(data => {
@@ -244,7 +244,7 @@ const getFiles = () => {
 		});
 };
 
-const downloadFile = (filename) => {
+window.downloadFile = (filename) => {
 
 	fetch(`${API_BASE}/${filename}`)
 		.then(res => {
@@ -272,7 +272,7 @@ const downloadFile = (filename) => {
 		});
 };
 
-const fetchStorageStats = () => {
+window.fetchStorageStats = () => {
 	fetch(`${API_BASE}/stats/storage`)
 		.then(res => res.json())
 		.then(data => {
