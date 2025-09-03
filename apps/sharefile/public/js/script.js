@@ -1,4 +1,4 @@
-const DOMAIN = 'localhost:3000';
+const DOMAIN = 'sunamra.in';
 
 const BASE_URI = `${window.location.protocol}//${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/sharefile/api/v1`;
