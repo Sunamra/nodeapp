@@ -107,14 +107,13 @@ window.applyScrollingWrapToAll = (cells) => {
 // 		});
 // };
 
+const uploadButton = document.getElementById('btn-upload');
 window.postFile = (files) => {
 	// Filter files based on server storage conditions
 	files = filterFiles(files);
 	if (files.length == 0) {
 		return;
 	}
-
-	showProgressBar();
 
 	// Build the form
 	const form = new FormData();
@@ -125,6 +124,9 @@ window.postFile = (files) => {
 	// xhr instead of fetch for upload progress
 	const xhr = new XMLHttpRequest();
 	xhr.open('POST', API_BASE);
+
+	showProgressBar();
+	uploadButton.disabled = true;
 
 	// progress handler
 	xhr.upload.onprogress = (e) => {
@@ -145,6 +147,8 @@ window.postFile = (files) => {
 
 			// Hide if error occurs
 			hideProgressBar();
+			uploadButton.disabled = false;
+
 			return;
 		}
 
@@ -155,13 +159,16 @@ window.postFile = (files) => {
 			hideProgressBar();
 			showRightTick();
 			hideRightTick();
-
+			
 		} else {
 			console.error(data.statusText || data.message || data);
 			toast.error(data.statusText || data.message || 'Error posting file');
+			hideProgressBar();
 		}
+		
+		uploadButton.disabled = false;
 	};
-
+	
 	// network / transport errors
 	xhr.onerror = () => {
 		console.error('Network error');
