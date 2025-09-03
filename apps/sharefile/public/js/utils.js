@@ -1,5 +1,5 @@
 // Formats File or Folder Sizes to a Human Readable Format
-function formatByte(bytes) {
+window.formatByte = function (bytes) {
 	if (bytes <= 0) {
 		return '0 B'; // Return 0 bytes if size is zero or negative
 	}
@@ -10,7 +10,7 @@ function formatByte(bytes) {
 	const unit = units[digitGroups];
 
 	return `${(bytes / Math.pow(1024, digitGroups)).toFixed(unit === 'B' ? 0 : 1)} ${unit}`;
-}
+};
 
 /**
  * Formats a given epoch timestamp into a human-readable date-time string.
@@ -29,7 +29,7 @@ function formatByte(bytes) {
  * // "14-Nov-23  12:53"
  */
 
-function formatTime(epoch, options = { sec: true }) {
+window.formatTime = function (epoch, options = { sec: true }) {
 	const { sec } = options;
 
 	const date = new Date(epoch);
@@ -46,9 +46,9 @@ function formatTime(epoch, options = { sec: true }) {
 	return day + '-' + month + '-' + year + '&nbsp;&nbsp;'
 		+ hours + ':' + minutes +
 		(sec === true ? ':' + seconds : '');
-}
+};
 
-const isFolder = (eventDataTransferItems) => {
+window.isFolder = function (eventDataTransferItems) {
 	const items = eventDataTransferItems;
 
 	for (let i = 0; i < items.length; i++) {
@@ -67,24 +67,24 @@ const isFolder = (eventDataTransferItems) => {
 * Updates the circular progress.
 * @param {number} value 0–100
 */
-function setUploadProgress(value) {
+window.setUploadProgress = function (value) {
 	const v = Math.max(0, Math.min(100, value));
 	const fg = document.getElementById('progress-fg');
 	const txt = document.getElementById('progress-text');
 	fg.style.strokeDashoffset = 100 - v;
 	txt.textContent = v + '%';
-}
+};
 
 // Upload progress bar controllers
 const progressBar = document.getElementById('progress-bar');
 
-function showProgressBar() {
+window.showProgressBar = function () {
 	progressBar.classList.remove('fade-out');
 	progressBar.classList.add('fade-in');
 	progressBar.style.visibility = 'visible';
-}
+};
 
-function hideProgressBar() {
+window.hideProgressBar = function () {
 	progressBar.classList.remove('fade-in');
 	progressBar.classList.add('fade-out');
 	// Optionally hide the element after the fade-out animation completes
@@ -95,12 +95,12 @@ function hideProgressBar() {
 	setTimeout(() => {
 		setUploadProgress(0);
 	}, 800);
-}
+};
 
 // Right tick controllers
 const right_tick = document.getElementById('right-tick');
 
-function showRightTick() {
+window.showRightTick = function () {
 
 	right_tick.classList.add('fade-in');
 	right_tick.style.visibility = 'visible';
@@ -109,9 +109,9 @@ function showRightTick() {
 	setTimeout(() => {
 		right_tick.play();
 	}, 200);
-}
+};
 
-function hideRightTick() {
+window.hideRightTick = function () {
 	setTimeout(() => {
 		right_tick.classList.add('fade-out');
 	}, 3000);
@@ -121,9 +121,9 @@ function hideRightTick() {
 		right_tick.classList.remove('fade-out');
 		right_tick.style.visibility = 'hidden';
 	}, 4000);
-}
+};
 
-const filterFiles = (files) => {
+window.filterFiles = function (files) {
 
 	const stats = window.storageStats;
 	let maxSingleFileSize = stats.rule.maxTotalSize - stats.current.totalSize;
@@ -136,7 +136,7 @@ const filterFiles = (files) => {
 		const file = files[i];
 		if (file.size > maxSingleFileSize) {
 			rejectedFiles.push(file);
-			continue
+			continue;
 		}
 
 		maxSingleFileSize -= file.size;
@@ -146,7 +146,7 @@ const filterFiles = (files) => {
 			if (modifiedFiles.length > 0) {
 				// info() declared first 'cuz new toast comes on top
 				toast.info(`Uploading first ${modifiedFiles.length} file${modifiedFiles.length > 1 ? 's' : ''}`, { duration: 0 });
-				toast.warning(`Total file size exceeded storage capacity`, { duration: 0 });
+				toast.warning('Total file size exceeded storage capacity', { duration: 0 });
 			}
 			return modifiedFiles;
 		}

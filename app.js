@@ -21,7 +21,7 @@ const pasteRouter = require('./apps/paste/routes');
 const sharefileRouter = require('./apps/sharefile/routes');
 const miscRouter = require('./apps/misc/routes');
 
-// Only express.static serve*
+// Assets that are used by multiple client modules
 app.use('/static-assets/', express.static(path.join(__dirname, './public')));
 
 // Defining routes
@@ -29,9 +29,18 @@ app.use('/', rootRouter);
 /**
  * No static serve for '/' as it is intended to work as API.
 */
+
+/**
+ * '/apps/paste' is still statocally served 'cuz doing so will need
+ * the client scripts to be vastly modified.
+ * This project was not initiated with the motive to serve
+ * client file(s) using sendFile().
+ * The '/apps/sharefile' client scripts were updated to be served
+ * via sendFile() and that modification caused several coding
+ * "rules to be broken".
+ */
 app.use('/apps/paste', express.static(path.join(__dirname, './apps/paste/public/')));
 app.use('/apps/paste', pasteRouter);
-app.use('/apps/sharefile', express.static(path.join(__dirname, './apps/sharefile/public/')));
 app.use('/apps/sharefile', sharefileRouter);
 
 // Miscellaneous APIs
