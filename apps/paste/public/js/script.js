@@ -1,4 +1,4 @@
-const DOMAIN = 'sunamra.in';
+const DOMAIN = window.location.host;
 
 const BASE_URI = `${window.location.protocol}//${DOMAIN}`;
 const API_BASE = `${BASE_URI}/apps/paste/api/v1`;

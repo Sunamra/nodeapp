@@ -1,5 +1,5 @@
 // This file is the entry point of the project
-require('dotenv').config({ quiet: true }); // load env before reading process.env
+require('dotenv').config({ quiet: true });
 
 const app = require('./app');
 
