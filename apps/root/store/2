@@ -1,24 +1,24 @@
-#@ All Prime Numbers in Range
+#@ Marks - Total, Aggregate, Grade
 
-read -p "Start : " start
-read -p "End   : " end
+print("Enter Marks -")
+sub1 = int(input("  Subject 1 Marks: "))
+sub2 = int(input("  Subject 2 Marks: "))
+sub3 = int(input("  Subject 3 Marks: "))
+sub4 = int(input("  Subject 4 Marks: "))
 
-echo -n "Prime numbers from $start to $end are : "
+full_marks = 100
 
-for ((i = "$start"; i <= "$end"; i++)); do
-    num="$i"
-    flag=0
+total_marks = sub1 + sub2 + sub3 + sub4
+print("Total marks: ", total_marks)
 
-    for ((j = 2; j <= num / 2; j++)); do
-        if (("$num" % $j == 0)); then
-            flag=1
-            break
-        fi
-    done
+percentage = (total_marks / (100 * 4)) * 100
+print("Percentage: ", percentage)
 
-    if [ "$flag" -eq 0 ] && [ "$num" -gt 1 ]; then
-        echo -n "$num "
-    fi
-done
-
-echo
+if percentage >= 60 and percentage <= 100:
+    print("1st Division")
+elif percentage >= 45 and percentage <= 59.99:
+    print("2nd Division")
+elif percentage >= 30 and percentage <= 44.99:
+    print("3rd Division")
+elif percentage < 30:
+    print("Failed")

@@ -1,19 +1,18 @@
-#@ First N Fibonacci Numbers
+#@ Number of digits
 
-a=0
-b=1
-count=1
-# n=${1:-10}
-read -p "How many Fibonacci Numbers : " n
+def sum_of_digits(num):
+    temp = num
+    total = 0
 
-echo -n "First $n Fibonacci Numbers : "
+    while temp > 0:
+        rem = temp % 10
+        total += rem
+        temp //= 10
 
-while ((count <= n)); do
-    echo -n "$a "
-    ((next = a + b))
-    a=$b
-    b=$next
-    ((count++))
-done
+    return total
 
-echo
+
+number = int(input("Enter a number: "))
+
+print("Sum of the digits: ", sum_of_digits(number))
+

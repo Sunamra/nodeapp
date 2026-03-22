@@ -1,15 +1,21 @@
-#@ Check Palindrome String
+#@ Check Palindrome
 
-read -p "Enter a string : " str
-rev_str=""
+def is_palindrome(num):
+    temp = num
+    rev = 0
 
-for ((i = ${#str} - 1; i >= 0; i--)); do
-    rev_str+="${str:i:1}"
-done
+    while temp > 0:
+        rem = temp % 10
+        rev = rev * 10 + rem
+        temp //= 10
 
-echo "Reversed string : $rev_str"
-if [ "$str" = "$rev_str" ]; then
-    echo "String '$str' is a palindrome"
-else
-    echo "String '$str' is not a palindrome"
-fi
+    return num == rev
+
+
+number = int(input("Enter a number: "))
+
+if is_palindrome(number):
+    print("Palindrome")
+else:
+    print("Not Palindrome")
+

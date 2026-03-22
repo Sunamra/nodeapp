@@ -27,13 +27,19 @@ module.exports = async (req, res) => {
 
 		let preparedContent = await prepareSingleFile(fileID);
 
-		if (preparedContent === null) {
-			return res.status(404).send('\nRequested file doesn\'t exist\n');
-		}
-
 		res.send(preparedContent);
 
 	} catch (error) {
-		res.status(500).send('Internal Server Error');
+		if (error.code == 'FILE_EMPTY') {
+			return res.status(200).send('\nRequested file is blank\n');
+		}
+		else if (error.code == 'ENOENT') {
+			return res.status(404).send('\nRequested file doesn\'t exist\n');
+		}
+		else if (error.code == 'EPERM') {
+			return res.status(404).send('\nRequested file can\'t be read\n');
+		}
+
+		res.status(500).send('Internal Server Error: getFile()');
 	}
 };

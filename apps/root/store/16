@@ -1,14 +1,20 @@
-#@ Maximum of Two
+#@ GCD of Multi Numbers
 
-echo -n "Enter first number  : "
-read a
-echo -n "Enter second number : "
-read b
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
 
-if [ $a -gt $b ]; then
-    echo "Maximum value is $a"
-elif [ $a -eq $b ]; then
-    echo "Both values are same"
-else
-    echo "Maximum value is $b"
-fi
+def gcd_multi(*args):
+    if len(args) < 2:
+        raise ValueError("At least two numbers are required")
+
+    result = args[0]
+    for num in args[1:]:
+        result = gcd(result, num)
+
+    return result
+
+print(gcd_multi(1, 2))        # 1
+print(gcd_multi(12, 18, 24))  # 6
+print(gcd_multi(8, 16, 32))   # 8

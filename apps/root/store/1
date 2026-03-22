@@ -1,24 +1,14 @@
-#@ Check Prime Number
+#@ Temperature Conversion
+def cel_to_fah(temp):
+    return (temp * (9 / 5)) + 32
 
-read -p "Enter a number to check : " num
 
-if [ $num -lt 2 ]; then
-    echo "$num is Not a Prime Number"
-    exit 0
-fi
+temperature = int(input("Enter temperature in Celsius: "))
+print(f"{temperature} Celsius is equivalent to {cel_to_fah(temperature)} Fahrenheit")
 
-flag=0
+def fah_to_cel(temp):
+    return (temp - 32) * (5 / 9)
 
-for ((i = 2; i <= num / 2; i++)); do
-    if (($num % $i == 0)); then
-        flag=1
-        break
-    fi
 
-done
-
-if [ $flag -eq 1 ]; then
-    echo "$num is Not a Prime Number"
-else
-    echo "$num is a Prime Number"
-fi
+temperature = int(input("Enter temperature in Celsius: "))
+print(f"{temperature} Fahrenheit is equivalent to {fah_to_cel(temperature)} Celsius")
