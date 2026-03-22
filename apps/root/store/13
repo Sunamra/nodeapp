@@ -1,15 +1,33 @@
-#@ Two numbers Add, Sub, Mul, Div, Rem
+#@ Check Special Number
 
-read -p "Enter first number  : " a
-read -p "Enter second number : " b
-sum=$(expr $a + $b)
-sub=$(expr $a - $b)
-mul=$(expr $a \* $b)
-div=$(expr $a / $b)
-rem=$(expr $a % $b)
-echo
-echo "Addition: $sum"
-echo "Subtraction: $sub"
-echo "Multiplication: $mul"
-echo "Division: $div"
-echo "Remainder: $rem"
+def factorial(n):
+    if n < 0:
+        raise ValueError
+    elif n == 0 or n == 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+
+
+def is_special(num):
+    if num <= 0:
+        return False
+
+    temp = num
+    total = 0
+
+    while temp > 0:
+        rem = temp % 10
+        total += factorial(rem)
+        temp //= 10
+
+    return total == num
+
+
+n = int(input("Enter a Number: "))
+
+if is_special(n):
+    print("Special Number")
+else:
+    print("Not a Special Number")
+

@@ -1,5 +1,5 @@
 let lineIndex = 0;
-const prefixChars = '#@';
+const prefixChars = '#@'; // This characters will indicate the title.
 
 const extractTitle = (lines) => {
 	lineIndex = 0;
@@ -38,14 +38,14 @@ const extractContent = (lines) => {
 	let lineWritten = 0;
 	for (let i = lineIndex; i < lines.length; i++) {
 
-		 // Remove trailing whitespace 
+		// Remove trailing whitespace
 		const line = lines[i].replace(/\s+$/, '');
 
 		if (line.startsWith(prefixChars)) {
 			continue;
 		}
 
-		// Precisely add `line`s to `content` with no blank(whitespce only) lines
+		// Precisely add `line`s to `content` with no blank(whitespace only) lines
 		if (line) {
 			if (lineWritten) {
 				content += '\n' + line;
@@ -64,7 +64,7 @@ const extractContent = (lines) => {
 module.exports = (data, filename = null) => {
 
 	if (!data) {
-		throw new Error('No content provided to getTitle()');
+		throw new Error('No data provided to extractTitleAndContent()');
 	}
 
 	const lines = data.split(/\r?\n/);
@@ -75,6 +75,6 @@ module.exports = (data, filename = null) => {
 	return ({
 		filename: filename,
 		title: title,
-		content: content
+		content: content.length === 0 ? '<BLANK>' : content		// Insert a placeholder when content is empty
 	});
 };

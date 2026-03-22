@@ -1,21 +1,20 @@
-#@ Maximum of Three
+#@ LCM of Two Numbers
 
-echo -n "Enter first number  : "
-read a
-echo -n "Enter second number : "
-read b
-echo -n "Enter third number  : "
-read c
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
 
-if [ $a -eq $b ] && [ $b -eq $c ] && [ $c -eq $a ]; then
-    echo "Error : Values must not be same"
-    exit 1
-fi
+def gcd_recur(a, b):
+    if b == 0:
+        return abs(a)
+    return gcd(b, a % b)
 
-if [ $a -gt $b ] && [ $a -gt $c ]; then
-    echo "Maximum value is $a"
-elif [ $b -gt $c ]; then
-    echo "Maximum value is $b"
-else
-    echo "Maximum value is $c"
-fi
+
+def lcm(p, q):
+    return abs(p * q) // gcd(p, q)
+
+
+x, y = int(input("Enter Number 1: ")), int(input("Enter Number 2: "))
+
+print("LCM: ", lcm(x, y))

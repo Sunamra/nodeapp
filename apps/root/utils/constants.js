@@ -1,4 +1,6 @@
 module.exports = {
-	storeDir: './apps/root/store',
-	rootLogDir:'./common/logs/root'
+	get storeDir() {
+		return process.env.CURRENT_STORE;
+	},
+	rootLogDir: './common/logs/root'
 };

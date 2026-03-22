@@ -1,15 +1,27 @@
-#@ Sum, Avg of 3 Numbers
+#@ LCM of Multi Numbers
 
-echo -n "Number 1 : "
-read n1
-echo -n "Number 2 : "
-read n2
-echo -n "Number 3 : "
-read n3
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
 
-sum=$(expr $n1 + $n2 + $n3)
-avg=$(expr $sum / 3)
 
-echo
-echo "Sum : $sum"
-echo "Average : $avg"
+def lcm(p, q):
+    return abs(p * q) // gcd(p, q)
+
+
+def lcm_multi(*args):
+    if len(args) < 2:
+        raise ValueError("At least two numbers are required")
+
+    result = args[0]
+    for num in args[1:]:
+        result = lcm(result, num)
+
+    return result
+
+
+# Examples
+print(lcm_multi(1, 2))        # 2
+print(lcm_multi(1, 2, 3))     # 6
+print(lcm_multi(4, 6, 8))     # 24

@@ -1,68 +1,18 @@
-#@ Basic Calculator using bc
+#@ Check Perfect Number
 
-while true; do
-    echo
-    echo "==== Calculator Menu ===="
-    echo "1. Addition"
-    echo "2. Subtraction"
-    echo "3. Multiplication"
-    echo "4. Division"
-    echo "5. Remainder"
-    echo "6. Square Root"
-    echo "7. Power"
-    echo "0. Exit"
-    echo "========================="
-    read -p "Enter your choice: " choice
+def is_perfect(num):
+    total = 0
 
-    case $choice in
-    1)
-        read -p "Enter first number: " a
-        read -p "Enter second number: " b
-        echo -e "\nResult: $(echo "$a + $b" | bc)\n"
-        ;;
-    2)
-        read -p "Enter first number: " a
-        read -p "Enter second number: " b
-        echo -e "\nResult: $(echo "$a - $b" | bc)\n"
-        ;;
-    3)
-        read -p "Enter first number: " a
-        read -p "Enter second number: " b
-        echo -e "\nResult: $(echo "$a * $b" | bc)\n"
-        ;;
-    4)
-        read -p "Enter dividend: " a
-        read -p "Enter divisor: " b
-        if [ "$b" == "0" ]; then
-            echo -e "\nError: Division by zero\n"
-        else
-            echo -e "\nResult: $(echo "scale=2; $a / $b" | bc)\n"
-        fi
-        ;;
-    5)
-        read -p "Enter first number: " a
-        read -p "Enter second number: " b
-        echo -e "\nResult: $(echo "$a % $b" | bc)\n"
-        ;;
-    6)
-        read -p "Enter number: " a
-        if (($(echo "$a < 0" | bc -l))); then
-            echo -e "\nError: Cannot compute square root of negative number\n"
-        else
-            echo -e "\nResult: $(echo "scale=4; sqrt($a)" | bc -l)\n"
-        fi
-        ;;
-    7)
-        read -p "Enter base: " a
-        read -p "Enter exponent: " b
-        echo -e "\nResult: $(echo "$a^$b" | bc)\n"
-        ;;
-    0)
-        echo -e "\nExited.\n"
-        break
-        ;;
-    *)
-        echo -e "\nInvalid choice\n"
-        ;;
-    esac
-done
+    for i in range(1, num):
+        if num % i == 0:
+            total += i
+
+    return total == num
+
+
+n = int(input("Enter a Number: "))
+
+if is_perfect(n):
+    print("Perfect Number")
+else:
+    print("Not a Perfect Number")

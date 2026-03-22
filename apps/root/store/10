@@ -1,29 +1,18 @@
-#@ Check Krishnamurthy Number
+#@ First n Fibonacci Series (Iteration)
 
-read -p "Enter a number : " num
-temp=$num
-sum=0
+def print_fib(n):
+    x, y = 0, 1
 
-# Function to calculate factorial
-factorial() {
-    local n=$1
-    local fact=1
-    for ((i = 1; i <= n; i++)); do
-        fact=$((fact * i))
-    done
-    echo $fact
-}
+    for _ in range(n):
+        print(x, end=" ")
+        x, y = y, x + y
 
-# Calculate sum of factorial of digits
-while ((temp > 0)); do
-    digit=$((temp % 10))
-    fact=$(factorial $digit)
-    sum=$((sum + fact))
-    temp=$((temp / 10))
-done
 
-if [ $num -gt 0 ] && [ $sum -eq $num ]; then
-    echo "$num is a Krishnamurthy number"
-else
-    echo "$num is not a Krishnamurthy number"
-fi
+def print_fib_recur(n, x=0, y=1):
+    if n <= 0:
+        return
+    print(x, end=" ")
+    print_fib_recur(n - 1, y, x + y)
+
+
+print_fib(int(input("Enter Range: ")))

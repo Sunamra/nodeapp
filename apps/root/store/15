@@ -1,9 +1,16 @@
-#@ Check Even Odd
+#@ GCD of Two Numbers
 
-read -p "Enter a number : " num
-rem=$(expr $num % 2)
-if [ $rem -eq 0 ]; then
-    echo "$num is Even"
-else
-    echo "$num is Odd"
-fi
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return abs(a)
+
+def gcd_recur(a, b):
+    if b == 0:
+        return abs(a)
+    return gcd(b, a % b)
+
+
+x, y = int(input("Enter Number 1: ")), int(input("Enter Number 2: "))
+
+print("GCD: ",gcd(x, y))
