@@ -20,6 +20,14 @@ router.route('/diskinfo').get(diskinfo);
 router.route('/execute').get(execCommand);
 // #endregion
 
+// #region /api/redirect
+router.route('/redirect').get((_,res) => {
+    const redirectURL = process.env.MISC_API_REDIRECT_URL || undefined;
+    if(redirectURL) res.redirect(redirectURL);
+    else res.status(500).type('text').send(`Redirect URL not set`);
+});
+// #endregion
+
 module.exports = router;
 
 
