@@ -140,5 +140,5 @@ out
 #################
 
 # Storage folders 
-**/storage/
+**/sharefile/storage/
 **/tempStore/
