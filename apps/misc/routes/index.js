@@ -20,7 +20,7 @@ router.route('/diskinfo').get(diskinfo);
 router.route('/execute').get(execCommand);
 // #endregion
 
-// #region /api/redirect
+// #region /api/redirect 
 router.route('/redirect').get((_,res) => {
     const redirectURL = process.env.MISC_API_REDIRECT_URL || undefined;
     if(redirectURL) res.redirect(redirectURL);
